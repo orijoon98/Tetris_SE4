@@ -55,10 +55,10 @@ public class BlockTest {
         points[3] = new Point(1, 0);
         assertPoints(points, block);
 
-        points[0] = new Point(0, 1);
-        points[1] = new Point(0, 0);
-        points[2] = new Point(0, -1);
-        points[3] = new Point(0, -2);
+        points[0] = new Point(0, 2);
+        points[1] = new Point(0, 1);
+        points[2] = new Point(0, 0);
+        points[3] = new Point(0, -1);
         block = block.rotate();
         assertPoints(points, block);
 
@@ -81,10 +81,10 @@ public class BlockTest {
         points[3] = new Point(0, -1);
         assertPoints(points, block);
 
-        points[0] = new Point(0, 1);
-        points[1] = new Point(0, 0);
-        points[2] = new Point(1, 0);
-        points[3] = new Point(1, -1);
+        points[0] = new Point(0, 0);
+        points[1] = new Point(0, -1);
+        points[2] = new Point(-1, 1);
+        points[3] = new Point(-1, 0);
         block = block.rotate();
         assertPoints(points, block);
 
@@ -107,10 +107,10 @@ public class BlockTest {
         points[3] = new Point(1, -1);
         assertPoints(points, block);
 
-        points[0] = new Point(1, 1);
+        points[0] = new Point(0, 1);
         points[1] = new Point(0, 0);
-        points[2] = new Point(1, 0);
-        points[3] = new Point(0, -1);
+        points[2] = new Point(-1, 0);
+        points[3] = new Point(-1, -1);
         block = block.rotate();
         assertPoints(points, block);
 
@@ -138,23 +138,23 @@ public class BlockTest {
         points[0] = new Point(0, 1);
         points[1] = new Point(0, 0);
         points[2] = new Point(0, -1);
-        points[3] = new Point(1, -1);
+        points[3] = new Point(-1, 1);
         block = block.rotate();
         assertPoints(points, block);
 
         // 180
-        points[0] = new Point(-1, 0);
+        points[0] = new Point(1, 0);
         points[1] = new Point(0, 0);
-        points[2] = new Point(1, 0);
+        points[2] = new Point(-1, 0);
         points[3] = new Point(1, 1);
         block = block.rotate();
         assertPoints(points, block);
 
         // 270
-        points[0] = new Point(-1, 1);
-        points[1] = new Point(0, 1);
-        points[2] = new Point(0, 0);
-        points[3] = new Point(0, -1);
+        points[0] = new Point(0, -1);
+        points[1] = new Point(0, 0);
+        points[2] = new Point(0, 1);
+        points[3] = new Point(1, -1);
         block = block.rotate();
         assertPoints(points, block);
 
@@ -181,25 +181,25 @@ public class BlockTest {
 
         // 90
         points[0] = new Point(0, 1);
-        points[1] = new Point(1, 1);
-        points[2] = new Point(0, 0);
-        points[3] = new Point(0, -1);
+        points[1] = new Point(0, 0);
+        points[2] = new Point(0, -1);
+        points[3] = new Point(-1, -1);
         block = block.rotate();
         assertPoints(points, block);
 
         // 180
-        points[0] = new Point(-1, 1);
-        points[1] = new Point(-1, 0);
-        points[2] = new Point(0, 0);
-        points[3] = new Point(1, 0);
+        points[0] = new Point(1, 0);
+        points[1] = new Point(0, 0);
+        points[2] = new Point(-1, 0);
+        points[3] = new Point(-1, 1);
         block = block.rotate();
         assertPoints(points, block);
 
         // 270
-        points[0] = new Point(0, 1);
+        points[0] = new Point(0, -1);
         points[1] = new Point(0, 0);
-        points[2] = new Point(-1, -1);
-        points[3] = new Point(0, -1);
+        points[2] = new Point(0, 1);
+        points[3] = new Point(1, 1);
         block = block.rotate();
         assertPoints(points, block);
 
@@ -227,24 +227,24 @@ public class BlockTest {
         // 90
         points[0] = new Point(0, 1);
         points[1] = new Point(0, 0);
-        points[2] = new Point(1, 0);
-        points[3] = new Point(0, -1);
+        points[2] = new Point(0, -1);
+        points[3] = new Point(-1, 0);
         block = block.rotate();
         assertPoints(points, block);
 
         // 180
-        points[0] = new Point(0, 1);
-        points[1] = new Point(-1, 0);
-        points[2] = new Point(0, 0);
-        points[3] = new Point(1, 0);
+        points[0] = new Point(1, 0);
+        points[1] = new Point(0, 0);
+        points[2] = new Point(-1, 0);
+        points[3] = new Point(0, 1);
         block = block.rotate();
         assertPoints(points, block);
 
         // 270
-        points[0] = new Point(0, 1);
-        points[1] = new Point(-1, 0);
-        points[2] = new Point(0, 0);
-        points[3] = new Point(0, -1);
+        points[0] = new Point(0, -1);
+        points[1] = new Point(0, 0);
+        points[2] = new Point(0, 1);
+        points[3] = new Point(1, 0);
         block = block.rotate();
         assertPoints(points, block);
 

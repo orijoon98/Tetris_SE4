@@ -44,11 +44,11 @@ public class Block {
         return new Block(type, rotateRight(points), true);
     }
 
-    private Point[] rotateLeft(Point toRotate[]) {
+    private Point[] rotateRight(Point toRotate[]) {
         return rotate(toRotate, 1, -1);
     }
 
-    private Point[] rotateRight(Point toRotate[]) {
+    private Point[] rotateLeft(Point toRotate[]) {
         return rotate(toRotate, -1, 1);
     }
 
