@@ -2,38 +2,64 @@ package blocks;
 
 import java.awt.*;
 
-public abstract class Block {
-		
-	protected int[][] shape;
-	protected Color color;
-	
-	public Block() {
-		shape = new int[][]{ 
-				{1, 1}, 
-				{1, 1}
-		};
-		color = Color.YELLOW;
-	}
-	
-	public int getShape(int x, int y) {
-		return shape[y][x];
-	}
-	
-	public Color getColor() {
-		return color;
-	}
-	
-	public void rotate() {
-		//Rotate the block 90 deg. clockwise.
-	}
-	
-	public int height() {
-		return shape.length;
-	}
-	
-	public int width() {
-		if(shape.length > 0)
-			return shape[0].length;
-		return 0;
-	}
+public class Block {
+
+    private final Point points[];
+    private final BlockType type;
+    private final boolean initialOrientation;
+
+    private Block(BlockType blockType, Point[] points, boolean initial) {
+        initialOrientation = initial;
+        this.points = points;
+        this.type = blockType;
+    }
+
+    public static Block getRandomPiece() {
+        BlockType blockType = BlockType.getRandomPiece();
+        return new Block(blockType, blockType.getPoints(), true);
+    }
+
+    public static Block getBlock(BlockType blockType) {
+        return new Block(blockType, blockType.getPoints(), true);
+    }
+
+    public BlockType getType() {
+        return type;
+    }
+
+    public Point[] getPoints() {
+        return points;
+    }
+
+    public Block rotate() {
+        if (type.getMaxOrientations() == 0) {
+            return this;
+        } else if (type.getMaxOrientations() == 2) {
+            if (initialOrientation) {
+                return new Block(type, rotateRight(points), false);
+            } else {
+                return new Block(type, rotateLeft(points), true);
+            }
+        }
+        return new Block(type, rotateRight(points), true);
+    }
+
+    private Point[] rotateRight(Point toRotate[]) {
+        return rotate(toRotate, 1, -1);
+    }
+
+    private Point[] rotateLeft(Point toRotate[]) {
+        return rotate(toRotate, -1, 1);
+    }
+
+    private Point[] rotate(Point toRotate[], int x, int y) {
+        Point rotated[] = new Point[4];
+
+        for (int i = 0; i < 4; i++) {
+            int temp = toRotate[i].x;
+            rotated[i] = new Point(x * toRotate[i].y, y * temp);
+        }
+
+        return rotated;
+    }
 }
