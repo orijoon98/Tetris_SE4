@@ -14,8 +14,8 @@ public class Block {
         this.type = blockType;
     }
 
-    public static Block getRandomPiece() {
-        BlockType blockType = BlockType.getRandomPiece();
+    public static Block getRandomBlock() {
+        BlockType blockType = BlockType.getRandomBlock();
         return new Block(blockType, blockType.getPoints(), true);
     }
 

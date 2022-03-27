@@ -23,7 +23,7 @@ public enum BlockType {
         this.points = points;
     }
 
-    public static BlockType getRandomPiece() {
+    public static BlockType getRandomBlock() {
         return BlockType.values()[random.nextInt(BlockType.values().length)];
     }
 
