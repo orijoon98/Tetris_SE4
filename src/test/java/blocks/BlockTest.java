@@ -27,7 +27,7 @@ public class BlockTest {
 
     @Test
     public void getRandomBlockReturnsValue() {
-        assertNotNull(Block.getRandomPiece());
+        assertNotNull(Block.getRandomBlock());
     }
 
     @Test
