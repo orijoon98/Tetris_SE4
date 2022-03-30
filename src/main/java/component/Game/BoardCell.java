@@ -1,4 +1,4 @@
-package tetris.model;
+package component.game;
 
 import java.util.Arrays;
 
