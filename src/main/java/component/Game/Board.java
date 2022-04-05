@@ -1,6 +1,7 @@
 package component.game;
 
 import java.awt.Point;
+import blocks.*;
 
 /**
  * 20 [ ][ ][ ][X][X][X][X][ ][ ][ ]
@@ -35,7 +36,7 @@ public class Board {
 
     private Point pieceCenter = new Point(DROP_X, DROP_Y);
 
-    private Piece currentPiece;
+    private Block currentPiece;
 
     private BoardCell[][] board = new BoardCell[WIDTH][HEIGHT];
 
@@ -102,7 +103,7 @@ public class Board {
     }
 
     public void rotate() {
-        Piece rot = currentPiece.rotate();
+        Block rot = currentPiece.rotate();
         if (fit(rot.getPoints(), 0, 0)) {
 
             currentPiece = rot;
@@ -178,7 +179,7 @@ public class Board {
         pieceCenter = new Point(pieceCenter.x + moveX, pieceCenter.y + moveY);
     }
 
-    public void setCurrentPiece(Piece piece) {
+    public void setCurrentPiece(Block piece) {
         if (currentPiece != null) {
             addPieceToBoard();
         }

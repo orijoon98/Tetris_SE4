@@ -1,16 +1,17 @@
 package component.game;
 
 import java.util.Arrays;
+import blocks.*;
 
 public class BoardCell {
 
-    private final PieceType pieceType;
+    private final BlockType pieceType;
 
     private BoardCell() {
         pieceType = null;
     }
 
-    private BoardCell(PieceType type) {
+    private BoardCell(BlockType type) {
         pieceType = type;
     }
 
@@ -18,11 +19,11 @@ public class BoardCell {
         return pieceType == null;
     }
 
-    public PieceType getPieceType() {
+    public BlockType getPieceType() {
         return pieceType;
     }
 
-    public static BoardCell getCell(PieceType pieceType) {
+    public static BoardCell getCell(BlockType pieceType) {
         return new BoardCell(pieceType);
     }
 
