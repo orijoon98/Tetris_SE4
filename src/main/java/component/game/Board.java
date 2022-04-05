@@ -34,9 +34,9 @@ public class Board {
     private static final int WIDTH = 10;
     private static final int HEIGHT = 20;
 
-    private Point pieceCenter = new Point(DROP_X, DROP_Y);
+    private Point blockCenter = new Point(DROP_X, DROP_Y);
 
-    private Block currentPiece;
+    private Block currentBlock;
 
     private BoardCell[][] board = new BoardCell[WIDTH][HEIGHT];
 
@@ -103,27 +103,27 @@ public class Board {
     }
 
     public void rotate() {
-        Block rot = currentPiece.rotate();
+        Block rot = currentBlock.rotate();
         if (fit(rot.getPoints(), 0, 0)) {
 
-            currentPiece = rot;
+            currentBlock = rot;
         }
     }
 
     public void moveLeft() {
-        if (fit(currentPiece.getPoints(), -1, 0)) {
+        if (fit(currentBlock.getPoints(), -1, 0)) {
             mv( -1, 0);
         }
     }
 
     public void moveRight() {
-        if (fit(currentPiece.getPoints(), 1, 0)) {
+        if (fit(currentBlock.getPoints(), 1, 0)) {
             mv(1, 0);
         }
     }
 
     public boolean canCurrentPieceMoveDown() {
-        return fit(currentPiece.getPoints(), 0, -1);
+        return fit(currentBlock.getPoints(), 0, -1);
     }
 
     public void moveDown() {
@@ -135,8 +135,8 @@ public class Board {
 
     public boolean fit(Point[] points, int moveX, int moveY) {
         for (Point point : points) {
-            int x = pieceCenter.x + point.x + moveX;
-            int y = pieceCenter.y + point.y + moveY;
+            int x = blockCenter.x + point.x + moveX;
+            int y = blockCenter.y + point.y + moveY;
 
             if (x < 0 || x >= getWidth() || y >= getHeight() || y < 0) {
                 return false;
@@ -150,46 +150,46 @@ public class Board {
         return true;
     }
 
-    public BoardCell[][] getBoardWithPiece() {
+    public BoardCell[][] getBoardWithBlock() {
         BoardCell[][] dest = new BoardCell[WIDTH][HEIGHT];
 
         for (int y = 0; y < WIDTH; y++) {
             System.arraycopy(board[y], 0, dest[y], 0, board[0].length);
         }
 
-        // add piece
-        for (Point point : currentPiece.getPoints()) {
-            int x = point.x + pieceCenter.x;
-            int y = point.y + pieceCenter.y;
-            dest[x][y] = BoardCell.getCell(currentPiece.getType());
+        // add block
+        for (Point point : currentBlock.getPoints()) {
+            int x = point.x + blockCenter.x;
+            int y = point.y + blockCenter.y;
+            dest[x][y] = BoardCell.getCell(currentBlock.getType());
         }
 
         return dest;
     }
 
-    private void addPieceToBoard() {
-        for (Point point : currentPiece.getPoints()) {
-            int x = pieceCenter.x + point.x;
-            int y = pieceCenter.y + point.y;
-            board[x][y] = BoardCell.getCell(currentPiece.getType());
+    private void addBlockToBoard() {
+        for (Point point : currentBlock.getPoints()) {
+            int x = blockCenter.x + point.x;
+            int y = blockCenter.y + point.y;
+            board[x][y] = BoardCell.getCell(currentBlock.getType());
         }
     }
 
     private void mv(int moveX, int moveY) {
-        pieceCenter = new Point(pieceCenter.x + moveX, pieceCenter.y + moveY);
+        blockCenter = new Point(blockCenter.x + moveX, blockCenter.y + moveY);
     }
 
-    public void setCurrentPiece(Block piece) {
-        if (currentPiece != null) {
-            addPieceToBoard();
+    public void setCurrentBlock(Block block) {
+        if (currentBlock != null) {
+            addBlockToBoard();
         }
-        currentPiece = piece;
-        resetPieceCenter();
+        currentBlock = block;
+        resetBlockCenter();
     }
 
-    private void resetPieceCenter() {
-        pieceCenter.x = DROP_X;
-        pieceCenter.y = DROP_Y;
+    private void resetBlockCenter() {
+        blockCenter.x = DROP_X;
+        blockCenter.y = DROP_Y;
     }
 
 }

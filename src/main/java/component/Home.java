@@ -3,7 +3,6 @@ package component;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import component.game.*;
 
 public class Home extends JFrame {
 
@@ -11,7 +10,7 @@ public class Home extends JFrame {
         super("SeoulTech SE4 Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        GameLoop gamestart = new GameLoop(this);
+        Game game = new Game(this);
         ScoreBoard scoreBoard = new ScoreBoard(this);
         Setting setting = new Setting(this);
 
@@ -27,13 +26,15 @@ public class Home extends JFrame {
         jPanel.add(exitButton);
 
         add(jPanel);
+        pack();
+        setResizable(false);
         setSize(1000, 800);
         setVisible(true);
 
         gameStartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamestart.setVisible(true);
+                game.setVisible(true);
                 setVisible(false);
             }
         });

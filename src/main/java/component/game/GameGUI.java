@@ -11,13 +11,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import input.GameInput;
-//import tetris.model.BoardCell;
-//import tetris.model.Game;
+
 import blocks.BlockType;
 
 public class GameGUI extends Canvas {
@@ -31,21 +28,19 @@ public class GameGUI extends Canvas {
     private final GameInput keyboard = new GameInput();
     private long lastIteration = System.currentTimeMillis();
 
-    private static final int PIECE_WIDTH = 20;
+    private static final int BLOCK_WIDTH = 20;
 
 
     public GameGUI() {
-        JFrame container = new JFrame("Tetris");
+        JFrame container = new JFrame("SeoulTech SE4 Tetris");
         
         JPanel panel = (JPanel) container.getContentPane();
-        //JButton homeButton = new JButton("홈으로");
         panel.setPreferredSize(new Dimension(800, 600));
         panel.setLayout(null);
 
         setBounds(0, 0, 800, 600);
         
         panel.add(this);
-        //panel.add(homeButton);
         
         setIgnoreRepaint(true);
 
@@ -73,7 +68,6 @@ public class GameGUI extends Canvas {
                 game.startGame();
             }
             if (game.isPlaying()) {
-
                 if (!game.isPaused()) {
                     tetrisLoop();
                 }
@@ -114,7 +108,7 @@ public class GameGUI extends Canvas {
 
         if (game.isPlaying()) {
             drawCells(g);
-            drawPiecePreview(g, game.getNextPiece().getType());
+            drawBlockPreview(g, game.getNextBlock().getType());
 
             if (game.isPaused()) {
                 drawGamePaused(g);
@@ -150,7 +144,7 @@ public class GameGUI extends Canvas {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, 800, 600);
         g.setColor(Color.GRAY);
-        g.drawRect(BOARD_CORNER_X - 1, BOARD_CORNER_Y - 1, 10 * PIECE_WIDTH + 2, 20 * PIECE_WIDTH + 2);
+        g.drawRect(BOARD_CORNER_X - 1, BOARD_CORNER_Y - 1, 10 * BLOCK_WIDTH + 2, 20 * BLOCK_WIDTH + 2);
     }
 
     private void drawStatus(Graphics2D g) {
@@ -212,9 +206,9 @@ public class GameGUI extends Canvas {
         g.drawString("SPACE: Drop", 10, 240);
     }
 
-    private void drawPiecePreview(Graphics2D g, BlockType type) {
+    private void drawBlockPreview(Graphics2D g, BlockType type) {
         for (Point p : type.getPoints()) {
-            drawBlock(g, 60 + p.x * PIECE_WIDTH, 380 + (3 - p.y) * 20, getPieceColor(type));
+            drawBlock(g, 60 + p.x * BLOCK_WIDTH, 380 + (3 - p.y) * 20, getBlockColor(type));
         }
     }
 
@@ -222,11 +216,11 @@ public class GameGUI extends Canvas {
         if (boardCell.isEmpty()) {
             return Color.BLACK;
         }
-        return getPieceColor(boardCell.getPieceType());
+        return getBlockColor(boardCell.getBlockType());
     }
 
-    private Color getPieceColor(BlockType pieceType) {
-        switch (pieceType) {
+    private Color getBlockColor(BlockType blockType) {
+        switch (blockType) {
             case I:
                 return Color.RED;
             case J:
@@ -244,7 +238,7 @@ public class GameGUI extends Canvas {
 
     private void drawBlock(Graphics g, int x, int y, Color color) {
         g.setColor(color);
-        g.fillRect(x, y, PIECE_WIDTH, PIECE_WIDTH);
-        g.drawRect(x, y, PIECE_WIDTH, PIECE_WIDTH);
+        g.fillRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH);
+        g.drawRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH);
     }
 }

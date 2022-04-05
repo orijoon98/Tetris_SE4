@@ -16,6 +16,8 @@ public class Setting extends JFrame {
         jPanel.add(homeButton);
 
         add(jPanel);
+        pack();
+        setResizable(false);
         setSize(1000, 800);
         setVisible(false);
 

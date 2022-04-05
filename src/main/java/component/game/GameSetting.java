@@ -1,13 +1,12 @@
 package component.game;
 
-//Game.java와 똑같은 코드임
 import blocks.*;
 
 public class GameSetting {
 
 
     private final Board board;
-    private Block nextPiece;
+    private Block nextBlock;
 
     private boolean playing = false;
     private boolean paused = false;
@@ -22,11 +21,11 @@ public class GameSetting {
     }
 
     public BoardCell[][] getBoardCells() {
-        return board.getBoardWithPiece();
+        return board.getBoardWithBlock();
     }
 
-    public Block getNextPiece() {
-        return nextPiece;
+    public Block getNextBlock() {
+        return nextBlock;
     }
 
     public long getIterationDelay() {
@@ -58,8 +57,8 @@ public class GameSetting {
     public void startGame() {
         paused = false;
         dropping = false;
-        nextPiece = Block.getRandomBlock();
-        board.setCurrentPiece(Block.getRandomBlock());
+        nextBlock = Block.getRandomBlock();
+        board.setCurrentBlock(Block.getRandomBlock());
         playing = true;
     }
 
@@ -95,8 +94,8 @@ public class GameSetting {
                 gameOver = true;
             } else {
                 dropping = false;
-                board.setCurrentPiece(nextPiece);
-                nextPiece = Block.getRandomBlock();
+                board.setCurrentBlock(nextBlock);
+                nextBlock = Block.getRandomBlock();
                 totalScore += getScore();
                 freeFallIterations = 0;
             }

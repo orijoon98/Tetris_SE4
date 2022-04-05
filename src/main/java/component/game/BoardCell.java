@@ -5,26 +5,26 @@ import blocks.*;
 
 public class BoardCell {
 
-    private final BlockType pieceType;
+    private final BlockType blockType;
 
     private BoardCell() {
-        pieceType = null;
+        blockType = null;
     }
 
     private BoardCell(BlockType type) {
-        pieceType = type;
+        blockType = type;
     }
 
     public boolean isEmpty() {
-        return pieceType == null;
+        return blockType == null;
     }
 
-    public BlockType getPieceType() {
-        return pieceType;
+    public BlockType getBlockType() {
+        return blockType;
     }
 
-    public static BoardCell getCell(BlockType pieceType) {
-        return new BoardCell(pieceType);
+    public static BoardCell getCell(BlockType blockType) {
+        return new BoardCell(blockType);
     }
 
     public static BoardCell[] getEmptyArray(int size) {
