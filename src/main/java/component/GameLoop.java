@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Game extends JFrame {
+public class GameLoop extends JFrame {
 	
-	public Game(Home home) {
+	public GameLoop(Home home) {
 		super("SeoulTech SE4 Tetris");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
