@@ -29,7 +29,7 @@ public class Home extends Canvas {
         homeFrame = new Frame("Seoultech SE4 Tetris");
         homeFrame.setSize(800, 600);
         homeFrame.setResizable(false);
-        homeFrame.setLayout(new GridLayout(1, 1));
+        homeFrame.setLayout(null);
         homeFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
@@ -37,32 +37,35 @@ public class Home extends Canvas {
         });
 
         homePanel = new Panel();
+        homePanel.setSize(800, 600);
         homePanel.setBackground(Color.black);
-        homePanel.setLayout(new GridLayout(2, 1));
+        homePanel.setLayout(null);
         homePanel.setFont(new Font("Dialog", Font.PLAIN, 16));
 
         titlePanel = new Panel();
-        Label title = new Label("소프트웨어공학 4팀 테트리스");
-        title.setForeground(Color.white);
+        titlePanel.setBounds(250, 100, 300, 80);
+        titlePanel.setFont(new Font("Dialog", Font.PLAIN, 50));
+
+        Label title = new Label("SE4 Tetris");
+        title.setForeground(Color.RED);
 
         titlePanel.add(title);
 
         buttonPanel = new Panel();
+        buttonPanel.setBounds(150, 220, 500, 300);
+        buttonPanel.setLayout(new GridLayout(5, 1));
 
-        Button normal = new Button("일반 모드");
-        Button item = new Button("아이템 모드");
-        Button scoreBoard = new Button("스코어보드");
-        Button setting = new Button("설정");
-        Button exit = new Button("프로그램 종료");
+        Button normal = new Button("Normal Mode");
+        Button item = new Button("Item Mode");
+        Button scoreBoard = new Button("Scoreboard");
+        Button setting = new Button("Setting");
+        Button exit = new Button("Exit");
 
         buttonPanel.add(normal);
         buttonPanel.add(item);
         buttonPanel.add(scoreBoard);
         buttonPanel.add(setting);
         buttonPanel.add(exit);
-
-        buttonPanel.setBackground(Color.WHITE);
-        buttonPanel.setLayout(new GridLayout(5, 1));
 
         homePanel.add(titlePanel);
         homePanel.add(buttonPanel);

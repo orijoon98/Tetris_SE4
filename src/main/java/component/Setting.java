@@ -19,7 +19,7 @@ public class Setting extends Canvas {
         settingFrame = new Frame("Seoultech SE4 Tetris");
         settingFrame.setSize(800, 600);
         settingFrame.setResizable(false);
-        settingFrame.setLayout(new GridLayout(1, 1));
+        settingFrame.setLayout(null);
         settingFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
@@ -27,8 +27,9 @@ public class Setting extends Canvas {
         });
 
         settingPanel = new Panel();
+        settingPanel.setSize(800, 600);
         settingPanel.setBackground(Color.black);
-        settingPanel.setLayout(new GridLayout(1, 1));
+        settingPanel.setLayout(null);
         settingPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
 
         buttonPanel = new Panel();
@@ -36,8 +37,7 @@ public class Setting extends Canvas {
         Button home = new Button("홈으로");
 
         buttonPanel.add(home);
-
-        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBounds(350, 220, 100, 50);
         buttonPanel.setLayout(new GridLayout(1, 1));
 
         settingPanel.add(buttonPanel);

@@ -19,7 +19,7 @@ public class ScoreBoard extends Canvas {
         scoreBoardFrame = new Frame("Seoultech SE4 Tetris");
         scoreBoardFrame.setSize(800, 600);
         scoreBoardFrame.setResizable(false);
-        scoreBoardFrame.setLayout(new GridLayout(1, 1));
+        scoreBoardFrame.setLayout(null);
         scoreBoardFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
@@ -27,8 +27,9 @@ public class ScoreBoard extends Canvas {
         });
 
         scoreBoardPanel = new Panel();
+        scoreBoardPanel.setSize(800, 600);
         scoreBoardPanel.setBackground(Color.black);
-        scoreBoardPanel.setLayout(new GridLayout(1, 1));
+        scoreBoardPanel.setLayout(null);
         scoreBoardPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
 
         buttonPanel = new Panel();
@@ -36,8 +37,7 @@ public class ScoreBoard extends Canvas {
         Button home = new Button("홈으로");
 
         buttonPanel.add(home);
-
-        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBounds(350, 220, 100, 50);
         buttonPanel.setLayout(new GridLayout(1, 1));
 
         scoreBoardPanel.add(buttonPanel);
