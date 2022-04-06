@@ -1,29 +1,23 @@
 package component;
 
+import component.game.GameGUI;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Game extends JFrame {
-	
-	public Game(Home home) {
-		super("SeoulTech SE4 Tetris");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel jPanel = new JPanel();
-		JButton homeButton = new JButton("홈으로");
-		jPanel.add(homeButton);
+    public Game(Home home) {
+    	super("SeoulTech SE4 Tetris");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        JPanel jPanel = new JPanel();
 
-		add(jPanel);
-		setSize(1000, 800);
-		setVisible(false);
+        new GameGUI().gameLoop();
 
-		homeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				home.setVisible(true);
-				setVisible(false);
-			}
-		});
-	}
+        add(jPanel);
+        pack();
+        setResizable(false);
+        setSize(1000, 800);
+        setVisible(false);
+    }
 }

@@ -1,3 +1,9 @@
 .gradle/
 .idea/
 build/
+src/.metadata/
+.settings/
+bin/
+.classpath
+.project
+local.properties

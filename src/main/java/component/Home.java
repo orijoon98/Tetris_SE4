@@ -26,6 +26,8 @@ public class Home extends JFrame {
         jPanel.add(exitButton);
 
         add(jPanel);
+        pack();
+        setResizable(false);
         setSize(1000, 800);
         setVisible(true);
 
