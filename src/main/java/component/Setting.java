@@ -1,31 +1,56 @@
 package component;
 
-import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class Setting extends JFrame {
+public class Setting extends Canvas {
 
-    public Setting(Home home) {
-        super("SeoulTech SE4 Tetris");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public Frame settingFrame;
+    private Panel settingPanel, buttonPanel;
 
-        JPanel jPanel = new JPanel();
-        JButton homeButton = new JButton("홈으로");
+    public Setting(Frame homeFrame) {
+        prepareSettingGUI(homeFrame);
+    }
 
-        jPanel.add(homeButton);
+    private void prepareSettingGUI(Frame homeFrame) {
+        settingFrame = new Frame("Seoultech SE4 Tetris");
+        settingFrame.setSize(800, 600);
+        settingFrame.setResizable(false);
+        settingFrame.setLayout(new GridLayout(1, 1));
+        settingFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent) {
+                System.exit(0);
+            }
+        });
 
-        add(jPanel);
-        pack();
-        setResizable(false);
-        setSize(1000, 800);
-        setVisible(false);
+        settingPanel = new Panel();
+        settingPanel.setBackground(Color.black);
+        settingPanel.setLayout(new GridLayout(1, 1));
+        settingPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
 
-        homeButton.addActionListener(new ActionListener() {
+        buttonPanel = new Panel();
+
+        Button home = new Button("홈으로");
+
+        buttonPanel.add(home);
+
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setLayout(new GridLayout(1, 1));
+
+        settingPanel.add(buttonPanel);
+
+        settingFrame.add(settingPanel);
+
+        settingFrame.setVisible(false);
+
+        home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                home.setVisible(true);
-                setVisible(false);
+                homeFrame.setVisible(true);
+                settingFrame.setVisible(false);
             }
         });
     }
