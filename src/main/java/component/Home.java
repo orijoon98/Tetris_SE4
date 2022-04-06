@@ -18,11 +18,11 @@ public class Home extends Canvas {
     public Home() {
         prepareHomeGUI();
 
-        gameGUI = new Game(homeFrame);
+        gameGUI = new Game();
         scoreBoardGUI = new ScoreBoard(homeFrame);
         settingGUI = new Setting(homeFrame);
 
-        gameGUI.gameLoop();
+        gameGUI.gameLoop(homeFrame);
     }
 
     private void prepareHomeGUI() {

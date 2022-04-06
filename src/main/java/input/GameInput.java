@@ -14,8 +14,9 @@ public class GameInput implements KeyListener {
         currentStates.put(KeyEvent.VK_RIGHT, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_UP, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_SPACE, Boolean.FALSE);
-        currentStates.put(KeyEvent.VK_F2, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_F1, Boolean.FALSE);
+        currentStates.put(KeyEvent.VK_ESCAPE, Boolean.FALSE);
+        currentStates.put(KeyEvent.VK_F2, Boolean.FALSE);
     }
 
     public boolean left() {
@@ -35,10 +36,14 @@ public class GameInput implements KeyListener {
     }
 
     public boolean pauseGame() {
-        return keyDown(KeyEvent.VK_F1);
+        return keyDown(KeyEvent.VK_ESCAPE);
     }
 
     public boolean newGame() {
+        return keyDown(KeyEvent.VK_F1);
+    }
+
+    public boolean home() {
         return keyDown(KeyEvent.VK_F2);
     }
 

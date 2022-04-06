@@ -27,7 +27,7 @@ public class Game extends Canvas {
 
     private static final int BLOCK_WIDTH = 20;
 
-    public Game(Frame homeFrame) {
+    public Game() {
         gameFrame = new JFrame("SeoulTech SE4 Tetris");
         
         JPanel panel = (JPanel) gameFrame.getContentPane();
@@ -57,7 +57,7 @@ public class Game extends Canvas {
         strategy = getBufferStrategy();
     }
 
-    public void gameLoop() {
+    public void gameLoop(Frame homeFrame) {
         while (true) {
             if (keyboard.newGame()) {
                 game = new GameSetting();
@@ -70,6 +70,11 @@ public class Game extends Canvas {
                 if (keyboard.pauseGame()) {
                     game.pauseGame();
                 }
+            }
+            if (keyboard.home()) {
+                game = new GameSetting();
+                homeFrame.setVisible(true);
+                gameFrame.setVisible(false);
             }
             try {
                 Thread.sleep(20);
@@ -195,11 +200,12 @@ public class Game extends Canvas {
         g.setFont(new Font("Dialog", Font.PLAIN, 16));
         g.setColor(Color.RED);
         g.drawString("H E L P", 50, 140);
-        g.drawString("F1: Pause Game", 10, 160);
-        g.drawString("F2: New Game", 10, 180);
+        g.drawString("F1: New Game", 10, 160);
+        g.drawString("ESC: Pause Game/Continue", 10, 180);
         g.drawString("UP: Rotate", 10, 200);
         g.drawString("ARROWS: Move left/right", 10, 220);
         g.drawString("SPACE: Drop", 10, 240);
+        g.drawString("F2: Home", 10, 260);
     }
 
     private void drawBlockPreview(Graphics2D g, BlockType type) {
