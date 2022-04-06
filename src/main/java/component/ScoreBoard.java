@@ -1,31 +1,56 @@
 package component;
 
-import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class ScoreBoard extends JFrame {
+public class ScoreBoard extends Canvas {
 
-    public ScoreBoard(Home home) {
-        super("SeoulTech SE4 Tetris");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public Frame scoreBoardFrame;
+    private Panel scoreBoardPanel, buttonPanel;
 
-        JPanel jPanel = new JPanel();
-        JButton homeButton = new JButton("홈으로");
+    public ScoreBoard(Frame homeFrame) {
+        prepareScoreBoardGUI(homeFrame);
+    }
 
-        jPanel.add(homeButton);
+    private void prepareScoreBoardGUI(Frame homeFrame) {
+        scoreBoardFrame = new Frame("Seoultech SE4 Tetris");
+        scoreBoardFrame.setSize(800, 600);
+        scoreBoardFrame.setResizable(false);
+        scoreBoardFrame.setLayout(new GridLayout(1, 1));
+        scoreBoardFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent) {
+                System.exit(0);
+            }
+        });
 
-        add(jPanel);
-        pack();
-        setResizable(false);
-        setSize(1000, 800);
-        setVisible(false);
+        scoreBoardPanel = new Panel();
+        scoreBoardPanel.setBackground(Color.black);
+        scoreBoardPanel.setLayout(new GridLayout(1, 1));
+        scoreBoardPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
 
-        homeButton.addActionListener(new ActionListener() {
+        buttonPanel = new Panel();
+
+        Button home = new Button("홈으로");
+
+        buttonPanel.add(home);
+
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setLayout(new GridLayout(1, 1));
+
+        scoreBoardPanel.add(buttonPanel);
+
+        scoreBoardFrame.add(scoreBoardPanel);
+
+        scoreBoardFrame.setVisible(false);
+
+        home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                home.setVisible(true);
-                setVisible(false);
+                homeFrame.setVisible(true);
+                scoreBoardFrame.setVisible(false);
             }
         });
     }
