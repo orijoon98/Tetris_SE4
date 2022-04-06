@@ -1,7 +1,5 @@
 package component;
 
-import input.HomeInput;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,8 +15,6 @@ public class Home extends Canvas {
     private ScoreBoard scoreBoardGUI;
     private Setting settingGUI;
 
-    private final HomeInput keyboard = new HomeInput();
-
     public Home() {
         prepareHomeGUI();
 
@@ -27,8 +23,6 @@ public class Home extends Canvas {
         settingGUI = new Setting(homeFrame);
 
         gameGUI.gameLoop();
-
-        addKeyListener(keyboard);
     }
 
     private void prepareHomeGUI() {
