@@ -1,5 +1,9 @@
 package component;
 
+import input.HomeInput;
+import thread.GameLoop;
+import thread.HomeLoop;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,12 +12,14 @@ import java.awt.event.WindowEvent;
 
 public class Home extends Canvas {
 
-    private Frame homeFrame;
+    public Frame homeFrame;
     private Panel homePanel, titlePanel, buttonPanel;
 
-    private Game gameGUI;
-    private ScoreBoard scoreBoardGUI;
-    private Setting settingGUI;
+    public Game gameGUI;
+    public ScoreBoard scoreBoardGUI;
+    public Setting settingGUI;
+
+    private final HomeInput keyboard = new HomeInput();
 
     public Home() {
         prepareHomeGUI();
@@ -22,7 +28,13 @@ public class Home extends Canvas {
         scoreBoardGUI = new ScoreBoard(homeFrame);
         settingGUI = new Setting(homeFrame);
 
-        gameGUI.gameLoop(homeFrame);
+        Runnable homeTask = new HomeLoop(this);
+        Thread homeThread = new Thread(homeTask);
+        homeThread.start();
+
+        Runnable gameTask = new GameLoop(this);
+        Thread gameThread = new Thread(gameTask);
+        gameThread.start();
     }
 
     private void prepareHomeGUI() {
@@ -74,6 +86,9 @@ public class Home extends Canvas {
 
         homeFrame.setVisible(true);
 
+        homeFrame.addKeyListener(keyboard);
+        homeFrame.requestFocus();
+
         normal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,5 +119,22 @@ public class Home extends Canvas {
                 System.exit(0);
             }
         });
+    }
+
+    public void homeLoop() {
+        while (true) {
+            if (keyboard.up()) {
+                System.out.println("up");
+            }
+            if (keyboard.down()) {
+                System.out.println("down");
+            }
+            if (keyboard.enter()) {
+                System.out.println("enter");
+            }
+            try {
+                Thread.sleep(20);
+            } catch (Exception e) { }
+        }
     }
 }
