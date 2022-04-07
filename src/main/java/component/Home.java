@@ -1,19 +1,31 @@
 package component;
 
+import input.HomeInput;
+import thread.GameLoop;
+import thread.HomeLoop;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Home extends Canvas {
 
-    private Frame homeFrame;
+    public Frame homeFrame;
     private Panel homePanel, titlePanel, buttonPanel;
 
-    private Game gameGUI;
-    private ScoreBoard scoreBoardGUI;
-    private Setting settingGUI;
+    public Game gameGUI;
+    public ScoreBoard scoreBoardGUI;
+    public Setting settingGUI;
+
+    private final HomeInput keyboard = new HomeInput();
+
+    private Button normal, item, scoreBoard, setting, exit;
+    private Button selected;
+    private List<Button> buttonList = new ArrayList<>();
 
     public Home() {
         prepareHomeGUI();
@@ -22,7 +34,13 @@ public class Home extends Canvas {
         scoreBoardGUI = new ScoreBoard(homeFrame);
         settingGUI = new Setting(homeFrame);
 
-        gameGUI.gameLoop(homeFrame);
+        Runnable homeTask = new HomeLoop(this);
+        Thread homeThread = new Thread(homeTask);
+        homeThread.start();
+
+        Runnable gameTask = new GameLoop(this);
+        Thread gameThread = new Thread(gameTask);
+        gameThread.start();
     }
 
     private void prepareHomeGUI() {
@@ -55,11 +73,19 @@ public class Home extends Canvas {
         buttonPanel.setBounds(150, 220, 500, 300);
         buttonPanel.setLayout(new GridLayout(5, 1));
 
-        Button normal = new Button("Normal Mode");
-        Button item = new Button("Item Mode");
-        Button scoreBoard = new Button("Scoreboard");
-        Button setting = new Button("Setting");
-        Button exit = new Button("Exit");
+        normal = new Button("Normal Mode");
+        item = new Button("Item Mode");
+        scoreBoard = new Button("Scoreboard");
+        setting = new Button("Setting");
+        exit = new Button("Exit");
+
+        selected = normal;
+        selected.setForeground(Color.gray);
+        buttonList.add(normal);
+        buttonList.add(item);
+        buttonList.add(scoreBoard);
+        buttonList.add(setting);
+        buttonList.add(exit);
 
         buttonPanel.add(normal);
         buttonPanel.add(item);
@@ -73,6 +99,9 @@ public class Home extends Canvas {
         homeFrame.add(homePanel);
 
         homeFrame.setVisible(true);
+
+        homeFrame.addKeyListener(keyboard);
+        homeFrame.requestFocus();
 
         normal.addActionListener(new ActionListener() {
             @Override
@@ -104,5 +133,51 @@ public class Home extends Canvas {
                 System.exit(0);
             }
         });
+    }
+
+    public void homeLoop() {
+        while (true) {
+            if (keyboard.up()) {
+                int cur = buttonList.indexOf(selected);
+                int next = (cur - 1 == -1 ) ? 4 : cur - 1;
+                selected.setForeground(Color.black);
+                selected = buttonList.get(next);
+                selected.setForeground(Color.gray);
+            }
+            if (keyboard.down()) {
+                int cur = buttonList.indexOf(selected);
+                int next = (cur + 1 == 5 ) ? 0 : cur + 1;
+                selected.setForeground(Color.black);
+                selected = buttonList.get(next);
+                selected.setForeground(Color.gray);
+            }
+            if (keyboard.enter()) {
+                int cur = buttonList.indexOf(selected);
+                switch (cur) {
+                    case 0:
+                        gameGUI.gameFrame.setVisible(true);
+                        homeFrame.setVisible(false);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        scoreBoardGUI.scoreBoardFrame.setVisible(true);
+                        homeFrame.setVisible(false);
+                        break;
+                    case 3:
+                        settingGUI.settingFrame.setVisible(true);
+                        homeFrame.setVisible(false);
+                        break;
+                    case 4:
+                        System.exit(0);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            try {
+                Thread.sleep(20);
+            } catch (Exception e) { }
+        }
     }
 }

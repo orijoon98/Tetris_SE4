@@ -75,6 +75,7 @@ public class Game extends Canvas {
                 game = new GameSetting();
                 homeFrame.setVisible(true);
                 gameFrame.setVisible(false);
+                homeFrame.requestFocus();
             }
             try {
                 Thread.sleep(20);
