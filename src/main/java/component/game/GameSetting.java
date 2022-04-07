@@ -4,7 +4,6 @@ import blocks.*;
 
 public class GameSetting {
 
-
     private final Board board;
     private Block nextBlock;
 
@@ -16,7 +15,7 @@ public class GameSetting {
     private int freeFallIterations;
     private int totalScore;
     private int level = 1;
-    private int lineCount=0;
+    private int lineCount = 0;
 
     public GameSetting() {
         board = new Board();
@@ -31,29 +30,33 @@ public class GameSetting {
     }
 
     public long getIterationDelay() {
-        return (long) (((11 - getLevel()) * 0.05) * 1000);
+        return (long)(((11 - getLevel()) * 0.05) * 1000);
     }
 
-    public int getLineCount(){return lineCount;}
+    public int getLineCount() {
+        return lineCount;
+    }
 
-    public void setLineCount(int lineCount){this.lineCount=lineCount;}
+    public void setLineCount(int lineCount) {
+        this.lineCount = lineCount;
+    }
 
     public int getScore() {
-        if (board.getFullLines()>getLineCount()) {
-            if (board.getFullLines()==getLineCount()+1){
+        if (board.getFullLines() > getLineCount()) {
+            if (board.getFullLines() == getLineCount() + 1) {
                 setLineCount(board.getFullLines());
-                return 100*getLevel();
-            } else if(board.getFullLines()==getLineCount()+2){
+                return 100 * getLevel();
+            } else if(board.getFullLines() == getLineCount() + 2) {
                 setLineCount(board.getFullLines());
-                return 100*getLevel()*2;
-            } else if(board.getFullLines()==getLineCount()+3){
+                return 100 * getLevel() * 2;
+            } else if (board.getFullLines() == getLineCount() + 3) {
                 setLineCount(board.getFullLines());
-                return 100*getLevel()*3;
-            } else{
+                return 100 * getLevel() * 3;
+            } else {
                 setLineCount(board.getFullLines());
-                return 100*getLevel()*4;
+                return 100 * getLevel() * 4;
             }
-        }else{
+        } else {
             return getLevel();
         }
     }
@@ -67,8 +70,8 @@ public class GameSetting {
     }
 
     public int getLevel() {
-        if (board.getFullLines() >= 10*level) {
-            level=level+1;
+        if (board.getFullLines() >= 10 * level) {
+            level = level + 1;
             return level;
         } else {
             return level;
@@ -110,7 +113,6 @@ public class GameSetting {
 
     public void moveDown() {
         if (!board.canCurrentPieceMoveDown()) {
-
             if (freeFallIterations == 0) {
                 playing = false;
                 gameOver = true;
