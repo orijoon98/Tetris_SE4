@@ -58,6 +58,8 @@ public class Board {
         return fullLines;
     }
 
+    public void setFullLines(int fullLines){this.fullLines = fullLines;}
+
     public BoardCell getBoardAt(int x, int y) {
         return board[x][y];
     }

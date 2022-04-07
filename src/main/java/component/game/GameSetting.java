@@ -40,10 +40,21 @@ public class GameSetting {
 
     public int getScore() {
         if (board.getFullLines()>getLineCount()) {
-            setLineCount(board.getFullLines());
-            return 100*getLevel();
+            if (board.getFullLines()==getLineCount()+1){
+                setLineCount(board.getFullLines());
+                return 100*getLevel();
+            } else if(board.getFullLines()==getLineCount()+2){
+                setLineCount(board.getFullLines());
+                return 100*getLevel()*2;
+            } else if(board.getFullLines()==getLineCount()+3){
+                setLineCount(board.getFullLines());
+                return 100*getLevel()*3;
+            } else{
+                setLineCount(board.getFullLines());
+                return 100*getLevel()*4;
+            }
         }else{
-            return (21 - freeFallIterations) * getLevel();
+            return getLevel();
         }
     }
 
@@ -107,11 +118,13 @@ public class GameSetting {
                 dropping = false;
                 board.setCurrentBlock(nextBlock);
                 nextBlock = Block.getRandomBlock();
+                board.setFullLines(board.getFullLines());
                 totalScore += getScore();
                 freeFallIterations = 0;
             }
         } else {
             board.moveDown();
+            totalScore += getScore();
             freeFallIterations++;
         }
     }
