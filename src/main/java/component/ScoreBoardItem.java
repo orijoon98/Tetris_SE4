@@ -11,7 +11,8 @@ import java.awt.event.WindowEvent;
 public class ScoreBoardItem extends Canvas {
 
     public Frame scoreBoardItemFrame;
-    private Panel scoreBoardItemPanel, titlePanel, tablePanel, buttonPanel;
+    private Panel scoreBoardItemPanel, titlePanel, buttonPanel;
+    public Panel tablePanel;
 
     private final ScoreBoardItemInput keyboard = new ScoreBoardItemInput();
 
@@ -44,6 +45,10 @@ public class ScoreBoardItem extends Canvas {
 
         titlePanel.add(title);
 
+        tablePanel = new Panel();
+        tablePanel.setBounds(150, 220, 500, 210);
+        tablePanel.setLayout(new GridLayout(11, 3));
+
         buttonPanel = new Panel();
         buttonPanel.setBounds(150, 470, 500, 50);
         buttonPanel.setLayout(new GridLayout(1, 2));
@@ -58,6 +63,7 @@ public class ScoreBoardItem extends Canvas {
         buttonPanel.add(home);
 
         scoreBoardItemPanel.add(titlePanel);
+        scoreBoardItemPanel.add(tablePanel);
         scoreBoardItemPanel.add(buttonPanel);
 
         scoreBoardItemFrame.add(scoreBoardItemPanel);
@@ -70,6 +76,7 @@ public class ScoreBoardItem extends Canvas {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                tablePanel.removeAll();
                 selected = back;
                 scoreBoardFrame.setVisible(true);
                 scoreBoardItemFrame.setVisible(false);
@@ -80,6 +87,7 @@ public class ScoreBoardItem extends Canvas {
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                tablePanel.removeAll();
                 selected = home;
                 homeFrame.setVisible(true);
                 scoreBoardItemFrame.setVisible(false);
@@ -106,11 +114,13 @@ public class ScoreBoardItem extends Canvas {
             }
             if (keyboard.enter()) {
                 if (selected == back) {
+                    tablePanel.removeAll();
                     selected = back;
                     scoreBoardFrame.setVisible(true);
                     scoreBoardItemFrame.setVisible(false);
                     scoreBoardFrame.requestFocus();
                 } else if (selected == home) {
+                    tablePanel.removeAll();
                     selected = home;
                     homeFrame.setVisible(true);
                     scoreBoardItemFrame.setVisible(false);

@@ -88,6 +88,8 @@ public class ScoreBoard extends Canvas {
         normal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                prepareScoreBoardNormalTable();
+
                 selected = normal;
                 scoreBoardNormalGUI.scoreBoardNormalFrame.setVisible(true);
                 scoreBoardFrame.setVisible(false);
@@ -98,6 +100,8 @@ public class ScoreBoard extends Canvas {
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                prepareScoreBoardItemTable();
+
                 selected = item;
                 scoreBoardItemGUI.scoreBoardItemFrame.setVisible(true);
                 scoreBoardFrame.setVisible(false);
@@ -136,12 +140,16 @@ public class ScoreBoard extends Canvas {
                 int cur = buttonList.indexOf(selected);
                 switch (cur) {
                     case 0:
+                        prepareScoreBoardNormalTable();
+
                         selected = normal;
                         scoreBoardNormalGUI.scoreBoardNormalFrame.setVisible(true);
                         scoreBoardFrame.setVisible(false);
                         scoreBoardNormalGUI.scoreBoardNormalFrame.requestFocus();
                         break;
                     case 1:
+                        prepareScoreBoardItemTable();
+
                         selected = item;
                         scoreBoardItemGUI.scoreBoardItemFrame.setVisible(true);
                         scoreBoardFrame.setVisible(false);
@@ -160,6 +168,24 @@ public class ScoreBoard extends Canvas {
             try {
                 Thread.sleep(20);
             } catch (Exception e) { }
+        }
+    }
+
+    private void prepareScoreBoardNormalTable() {
+        scoreBoardNormalGUI.tablePanel.add(new Button("Rank"));
+        scoreBoardNormalGUI.tablePanel.add(new Button("Name"));
+        scoreBoardNormalGUI.tablePanel.add(new Button("Score"));
+        for (int i = 0; i < 30; i++) {
+            scoreBoardNormalGUI.tablePanel.add(new Button(Integer.toString(i)));
+        }
+    }
+
+    private void prepareScoreBoardItemTable() {
+        scoreBoardItemGUI.tablePanel.add(new Button("Rank"));
+        scoreBoardItemGUI.tablePanel.add(new Button("Name"));
+        scoreBoardItemGUI.tablePanel.add(new Button("Score"));
+        for (int i = 0; i < 30; i++) {
+            scoreBoardItemGUI.tablePanel.add(new Button(Integer.toString(i)));
         }
     }
 }
