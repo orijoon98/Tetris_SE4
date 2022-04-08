@@ -77,7 +77,9 @@ public class ScoreBoardNormal extends Canvas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tablePanel.removeAll();
+                selected.setForeground(Color.black);
                 selected = back;
+                selected.setForeground(Color.gray);
                 scoreBoardFrame.setVisible(true);
                 scoreBoardNormalFrame.setVisible(false);
                 scoreBoardFrame.requestFocus();
@@ -88,7 +90,9 @@ public class ScoreBoardNormal extends Canvas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tablePanel.removeAll();
+                selected.setForeground(Color.black);
                 selected = home;
+                selected.setForeground(Color.gray);
                 homeFrame.setVisible(true);
                 scoreBoardNormalFrame.setVisible(false);
                 homeFrame.requestFocus();

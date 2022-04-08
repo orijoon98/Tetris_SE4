@@ -77,7 +77,9 @@ public class ScoreBoardItem extends Canvas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tablePanel.removeAll();
+                selected.setForeground(Color.black);
                 selected = back;
+                selected.setForeground(Color.gray);
                 scoreBoardFrame.setVisible(true);
                 scoreBoardItemFrame.setVisible(false);
                 scoreBoardFrame.requestFocus();
@@ -88,7 +90,9 @@ public class ScoreBoardItem extends Canvas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tablePanel.removeAll();
+                selected.setForeground(Color.black);
                 selected = home;
+                selected.setForeground(Color.gray);
                 homeFrame.setVisible(true);
                 scoreBoardItemFrame.setVisible(false);
                 homeFrame.requestFocus();

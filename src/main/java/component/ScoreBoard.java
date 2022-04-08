@@ -90,7 +90,9 @@ public class ScoreBoard extends Canvas {
             public void actionPerformed(ActionEvent e) {
                 prepareScoreBoardNormalTable();
 
+                selected.setForeground(Color.black);
                 selected = normal;
+                selected.setForeground(Color.gray);
                 scoreBoardNormalGUI.scoreBoardNormalFrame.setVisible(true);
                 scoreBoardFrame.setVisible(false);
                 scoreBoardNormalGUI.scoreBoardNormalFrame.requestFocus();
@@ -102,7 +104,9 @@ public class ScoreBoard extends Canvas {
             public void actionPerformed(ActionEvent e) {
                 prepareScoreBoardItemTable();
 
+                selected.setForeground(Color.black);
                 selected = item;
+                selected.setForeground(Color.gray);
                 scoreBoardItemGUI.scoreBoardItemFrame.setVisible(true);
                 scoreBoardFrame.setVisible(false);
                 scoreBoardItemGUI.scoreBoardItemFrame.requestFocus();
@@ -112,7 +116,9 @@ public class ScoreBoard extends Canvas {
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selected.setForeground(Color.black);
                 selected = home;
+                selected.setForeground(Color.gray);
                 homeFrame.setVisible(true);
                 scoreBoardFrame.setVisible(false);
                 homeFrame.requestFocus();
