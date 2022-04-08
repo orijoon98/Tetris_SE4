@@ -3,6 +3,7 @@ package component;
 import input.HomeInput;
 import thread.GameLoop;
 import thread.HomeLoop;
+import thread.ScoreBoardLoop;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,6 +42,10 @@ public class Home extends Canvas {
         Runnable gameTask = new GameLoop(this);
         Thread gameThread = new Thread(gameTask);
         gameThread.start();
+
+        Runnable scoreBoardTask = new ScoreBoardLoop(this);
+        Thread scoreBoardThread = new Thread(scoreBoardTask);
+        scoreBoardThread.start();
     }
 
     private void prepareHomeGUI() {
@@ -116,6 +121,7 @@ public class Home extends Canvas {
             public void actionPerformed(ActionEvent e) {
                 scoreBoardGUI.scoreBoardFrame.setVisible(true);
                 homeFrame.setVisible(false);
+                scoreBoardGUI.scoreBoardFrame.requestFocus();
             }
         });
 
@@ -163,6 +169,7 @@ public class Home extends Canvas {
                     case 2:
                         scoreBoardGUI.scoreBoardFrame.setVisible(true);
                         homeFrame.setVisible(false);
+                        scoreBoardGUI.scoreBoardFrame.requestFocus();
                         break;
                     case 3:
                         settingGUI.settingFrame.setVisible(true);
