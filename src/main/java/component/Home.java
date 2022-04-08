@@ -1,9 +1,7 @@
 package component;
 
 import input.HomeInput;
-import thread.GameLoop;
-import thread.HomeLoop;
-import thread.ScoreBoardLoop;
+import thread.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,6 +44,14 @@ public class Home extends Canvas {
         Runnable scoreBoardTask = new ScoreBoardLoop(this);
         Thread scoreBoardThread = new Thread(scoreBoardTask);
         scoreBoardThread.start();
+
+        Runnable scoreBoardNormalTask = new ScoreBoardNormalLoop(this);
+        Thread scoreBoardNormalThread = new Thread(scoreBoardNormalTask);
+        scoreBoardNormalThread.start();
+
+        Runnable scoreBoardItemTask = new ScoreBoardItemLoop(this);
+        Thread scoreBoardItemThread = new Thread(scoreBoardItemTask);
+        scoreBoardItemThread.start();
     }
 
     private void prepareHomeGUI() {
@@ -111,6 +117,7 @@ public class Home extends Canvas {
         normal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selected = normal;
                 gameGUI.gameFrame.setVisible(true);
                 homeFrame.setVisible(false);
             }
@@ -119,6 +126,7 @@ public class Home extends Canvas {
         scoreBoard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selected = scoreBoard;
                 scoreBoardGUI.scoreBoardFrame.setVisible(true);
                 homeFrame.setVisible(false);
                 scoreBoardGUI.scoreBoardFrame.requestFocus();
@@ -128,6 +136,7 @@ public class Home extends Canvas {
         setting.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selected = setting;
                 settingGUI.settingFrame.setVisible(true);
                 homeFrame.setVisible(false);
             }

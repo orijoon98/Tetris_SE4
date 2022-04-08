@@ -15,6 +15,9 @@ public class ScoreBoard extends Canvas {
     public Frame scoreBoardFrame;
     private Panel scoreBoardPanel, titlePanel, buttonPanel;
 
+    public ScoreBoardNormal scoreBoardNormalGUI;
+    public ScoreBoardItem scoreBoardItemGUI;
+
     private final ScoreBoardInput keyboard = new ScoreBoardInput();
 
     private Button normal, item, home;
@@ -23,6 +26,9 @@ public class ScoreBoard extends Canvas {
 
     public ScoreBoard(Frame homeFrame) {
         prepareScoreBoardGUI(homeFrame);
+
+        scoreBoardNormalGUI = new ScoreBoardNormal(homeFrame, scoreBoardFrame);
+        scoreBoardItemGUI = new ScoreBoardItem(homeFrame, scoreBoardFrame);
     }
 
     private void prepareScoreBoardGUI(Frame homeFrame) {
@@ -79,9 +85,30 @@ public class ScoreBoard extends Canvas {
         scoreBoardFrame.addKeyListener(keyboard);
         scoreBoardFrame.requestFocus();
 
+        normal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selected = normal;
+                scoreBoardNormalGUI.scoreBoardNormalFrame.setVisible(true);
+                scoreBoardFrame.setVisible(false);
+                scoreBoardNormalGUI.scoreBoardNormalFrame.requestFocus();
+            }
+        });
+
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selected = item;
+                scoreBoardItemGUI.scoreBoardItemFrame.setVisible(true);
+                scoreBoardFrame.setVisible(false);
+                scoreBoardItemGUI.scoreBoardItemFrame.requestFocus();
+            }
+        });
+
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selected = home;
                 homeFrame.setVisible(true);
                 scoreBoardFrame.setVisible(false);
                 homeFrame.requestFocus();
@@ -109,12 +136,19 @@ public class ScoreBoard extends Canvas {
                 int cur = buttonList.indexOf(selected);
                 switch (cur) {
                     case 0:
-//                        gameGUI.gameFrame.setVisible(true);
+                        selected = normal;
+                        scoreBoardNormalGUI.scoreBoardNormalFrame.setVisible(true);
                         scoreBoardFrame.setVisible(false);
+                        scoreBoardNormalGUI.scoreBoardNormalFrame.requestFocus();
                         break;
                     case 1:
+                        selected = item;
+                        scoreBoardItemGUI.scoreBoardItemFrame.setVisible(true);
+                        scoreBoardFrame.setVisible(false);
+                        scoreBoardItemGUI.scoreBoardItemFrame.requestFocus();
                         break;
                     case 2:
+                        selected = home;
                         homeFrame.setVisible(true);
                         scoreBoardFrame.setVisible(false);
                         homeFrame.requestFocus();
