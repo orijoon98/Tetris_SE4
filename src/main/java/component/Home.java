@@ -1,8 +1,7 @@
 package component;
 
 import input.HomeInput;
-import thread.GameLoop;
-import thread.HomeLoop;
+import thread.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,6 +40,18 @@ public class Home extends Canvas {
         Runnable gameTask = new GameLoop(this);
         Thread gameThread = new Thread(gameTask);
         gameThread.start();
+
+        Runnable scoreBoardTask = new ScoreBoardLoop(this);
+        Thread scoreBoardThread = new Thread(scoreBoardTask);
+        scoreBoardThread.start();
+
+        Runnable scoreBoardNormalTask = new ScoreBoardNormalLoop(this);
+        Thread scoreBoardNormalThread = new Thread(scoreBoardNormalTask);
+        scoreBoardNormalThread.start();
+
+        Runnable scoreBoardItemTask = new ScoreBoardItemLoop(this);
+        Thread scoreBoardItemThread = new Thread(scoreBoardItemTask);
+        scoreBoardItemThread.start();
     }
 
     private void prepareHomeGUI() {
@@ -106,6 +117,9 @@ public class Home extends Canvas {
         normal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selected.setForeground(Color.black);
+                selected = normal;
+                selected.setForeground(Color.gray);
                 gameGUI.gameFrame.setVisible(true);
                 homeFrame.setVisible(false);
             }
@@ -114,14 +128,21 @@ public class Home extends Canvas {
         scoreBoard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selected.setForeground(Color.black);
+                selected = scoreBoard;
+                selected.setForeground(Color.gray);
                 scoreBoardGUI.scoreBoardFrame.setVisible(true);
                 homeFrame.setVisible(false);
+                scoreBoardGUI.scoreBoardFrame.requestFocus();
             }
         });
 
         setting.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selected.setForeground(Color.black);
+                selected = setting;
+                selected.setForeground(Color.gray);
                 settingGUI.settingFrame.setVisible(true);
                 homeFrame.setVisible(false);
             }
@@ -163,6 +184,7 @@ public class Home extends Canvas {
                     case 2:
                         scoreBoardGUI.scoreBoardFrame.setVisible(true);
                         homeFrame.setVisible(false);
+                        scoreBoardGUI.scoreBoardFrame.requestFocus();
                         break;
                     case 3:
                         settingGUI.settingFrame.setVisible(true);
