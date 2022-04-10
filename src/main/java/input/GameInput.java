@@ -5,34 +5,43 @@ import java.awt.event.KeyListener;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import setting.InputSetting;
+
 public class GameInput implements KeyListener {
+	
+	private InputSetting InputSetting = new InputSetting();
+	private int left = InputSetting.leftKey();
+    private int right = InputSetting.rightKey();
+    private int rotate = InputSetting.rotateKey();
+    private int drop = InputSetting.dropKey();
+
 
     private final Map<Integer, Boolean> currentStates = new ConcurrentHashMap<Integer, Boolean>();
-
+    
     public GameInput() {
-        currentStates.put(KeyEvent.VK_LEFT, Boolean.FALSE);
-        currentStates.put(KeyEvent.VK_RIGHT, Boolean.FALSE);
-        currentStates.put(KeyEvent.VK_UP, Boolean.FALSE);
-        currentStates.put(KeyEvent.VK_SPACE, Boolean.FALSE);
+        currentStates.put(left, Boolean.FALSE);
+        currentStates.put(right, Boolean.FALSE);
+        currentStates.put(rotate, Boolean.FALSE);
+        currentStates.put(drop, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_F1, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_ESCAPE, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_F2, Boolean.FALSE);
     }
 
     public boolean left() {
-        return keyDown(KeyEvent.VK_LEFT);
+        return keyDown(left);
     }
 
     public boolean right() {
-        return keyDown(KeyEvent.VK_RIGHT);
+        return keyDown(right);
     }
 
     public boolean drop() {
-        return keyDown(KeyEvent.VK_SPACE);
+        return keyDown(drop);
     }
 
     public boolean rotate() {
-        return keyDown(KeyEvent.VK_UP);
+        return keyDown(rotate);
     }
 
     public boolean pauseGame() {
