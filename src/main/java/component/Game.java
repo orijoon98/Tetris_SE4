@@ -97,7 +97,10 @@ public class Game extends Canvas {
             game.moveLeft();
         } else if (keyboard.right()) {
             game.moveRight();
-        } else if (keyboard.drop()) {
+        } else if (keyboard.down()) {
+            game.moveDown();
+        }
+        else if (keyboard.drop()) {
             game.drop();
         }
     }
