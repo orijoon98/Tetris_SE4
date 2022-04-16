@@ -12,6 +12,7 @@ public class GameInput implements KeyListener {
     public GameInput() {
         currentStates.put(KeyEvent.VK_LEFT, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_RIGHT, Boolean.FALSE);
+        currentStates.put(KeyEvent.VK_DOWN, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_UP, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_SPACE, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_F1, Boolean.FALSE);
@@ -25,6 +26,10 @@ public class GameInput implements KeyListener {
 
     public boolean right() {
         return keyDown(KeyEvent.VK_RIGHT);
+    }
+
+    public boolean down() {
+        return keyDown(KeyEvent.VK_DOWN);
     }
 
     public boolean drop() {
