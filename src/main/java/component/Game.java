@@ -207,7 +207,7 @@ public class Game extends Canvas {
         g.drawString("F1: New Game", 10, 160);
         g.drawString("ESC: Pause Game/Continue", 10, 180);
         g.drawString("UP: Rotate", 10, 200);
-        g.drawString("ARROWS: Move left/right", 10, 220);
+        g.drawString("ARROWS: Move Left/Right/Down", 10, 220);
         g.drawString("SPACE: Drop", 10, 240);
         g.drawString("F2: Home", 10, 260);
     }
