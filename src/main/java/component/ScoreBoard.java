@@ -1,12 +1,21 @@
 package component;
 
 import input.ScoreBoardInput;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -178,6 +187,13 @@ public class ScoreBoard extends Canvas {
     }
 
     private void prepareScoreBoardNormalTable() {
+        List<Scores> scores = new ArrayList<>();
+        try {
+            scores = getNormalTopTen("normal");
+        }
+        catch (IOException e) {}
+        catch (ParseException e) {}
+
         scoreBoardNormalGUI.tablePanel.add(new Button("Rank"));
         scoreBoardNormalGUI.tablePanel.add(new Button("Name"));
         scoreBoardNormalGUI.tablePanel.add(new Button("Score"));
@@ -187,11 +203,80 @@ public class ScoreBoard extends Canvas {
     }
 
     private void prepareScoreBoardItemTable() {
+        List<Scores> scores = new ArrayList<>();
+        try {
+            scores = getNormalTopTen("item");
+        }
+        catch (IOException e) {}
+        catch (ParseException e) {}
+
         scoreBoardItemGUI.tablePanel.add(new Button("Rank"));
         scoreBoardItemGUI.tablePanel.add(new Button("Name"));
         scoreBoardItemGUI.tablePanel.add(new Button("Score"));
         for (int i = 0; i < 30; i++) {
             scoreBoardItemGUI.tablePanel.add(new Button(Integer.toString(i)));
+        }
+    }
+
+    private List<Scores> getNormalTopTen(String mode) throws IOException, ParseException {
+        URL url = (mode == "normal") ?
+                new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/normal/score")
+                : new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/item/score");
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+        int responseCode = connection.getResponseCode();
+
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        StringBuffer stringBuffer = new StringBuffer();
+        String inputLine;
+
+        while ((inputLine = bufferedReader.readLine()) != null)  {
+            stringBuffer.append(inputLine);
+        }
+        bufferedReader.close();
+
+        String response = stringBuffer.toString();
+        System.out.println(response);
+
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(response);
+        JSONArray arr = (JSONArray) jsonObject.get("data");
+
+        List<Scores> scores = new ArrayList<>();
+
+        for (int i = 0; i < arr.size(); i++) {
+            JSONObject tmp = (JSONObject) arr.get(i);
+            Scores score = new Scores();
+            score.setName((String) tmp.get("name"));
+            score.setScore(Integer.parseInt(String.valueOf(tmp.get("score"))));
+            scores.add(score);
+        }
+
+        return scores;
+    }
+
+    private class Scores {
+        private String name;
+        private int score;
+
+        public String getName() {
+            return name;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setScore(int score) {
+            this.score = score;
         }
     }
 }
