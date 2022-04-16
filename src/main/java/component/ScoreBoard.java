@@ -189,7 +189,7 @@ public class ScoreBoard extends Canvas {
     private void prepareScoreBoardNormalTable() {
         List<Scores> scores = new ArrayList<>();
         try {
-            scores = getNormalTopTen("normal");
+            scores = getTopTen("normal");
         }
         catch (IOException e) {}
         catch (ParseException e) {}
@@ -205,7 +205,7 @@ public class ScoreBoard extends Canvas {
     private void prepareScoreBoardItemTable() {
         List<Scores> scores = new ArrayList<>();
         try {
-            scores = getNormalTopTen("item");
+            scores = getTopTen("item");
         }
         catch (IOException e) {}
         catch (ParseException e) {}
@@ -218,7 +218,7 @@ public class ScoreBoard extends Canvas {
         }
     }
 
-    private List<Scores> getNormalTopTen(String mode) throws IOException, ParseException {
+    private List<Scores> getTopTen(String mode) throws IOException, ParseException {
         URL url = (mode == "normal") ?
                 new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/normal/score")
                 : new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/item/score");
@@ -240,7 +240,6 @@ public class ScoreBoard extends Canvas {
         bufferedReader.close();
 
         String response = stringBuffer.toString();
-        System.out.println(response);
 
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(response);
