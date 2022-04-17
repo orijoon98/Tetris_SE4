@@ -187,35 +187,116 @@ public class ScoreBoard extends Canvas {
     }
 
     private void prepareScoreBoardNormalTable() {
-        List<Scores> scores = new ArrayList<>();
+        prepareNormalTable();
         try {
-            scores = getTopTen("normal");
+            List<Scores> scoresList = getTopTen("normal");
+            if (scoresList.size() < 10) {
+                while (scoresList.size() != 10) {
+                    Scores score = new Scores();
+                    score.setName("");
+                    score.setScore(0);
+                    scoresList.add(score);
+                }
+            }
+            for (int i = 0; i < 30; i++) {
+                switch (i % 3) {
+                    case 0:
+                        Button rank = new Button(Integer.toString(i/3 + 1));
+                        setInactiveButton(rank);
+                        scoreBoardNormalGUI.tablePanel.add(rank);
+                        break;
+                    case 1:
+                        int index = i/3;
+                        Scores scores = scoresList.get(index);
+                        Button name = new Button(scores.getName());
+                        setInactiveButton(name);
+                        scoreBoardNormalGUI.tablePanel.add(name);
+                        break;
+                    case 2:
+                        index = i/3;
+                        scores = scoresList.get(index);
+                        Button score = new Button(Integer.toString(scores.getScore()));
+                        setInactiveButton(score);
+                        scoreBoardNormalGUI.tablePanel.add(score);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         catch (IOException e) {}
         catch (ParseException e) {}
-
-        scoreBoardNormalGUI.tablePanel.add(new Button("Rank"));
-        scoreBoardNormalGUI.tablePanel.add(new Button("Name"));
-        scoreBoardNormalGUI.tablePanel.add(new Button("Score"));
-        for (int i = 0; i < 30; i++) {
-            scoreBoardNormalGUI.tablePanel.add(new Button(Integer.toString(i)));
-        }
     }
 
     private void prepareScoreBoardItemTable() {
-        List<Scores> scores = new ArrayList<>();
+        prepareItemTable();
         try {
-            scores = getTopTen("item");
+            List<Scores> scoresList = getTopTen("item");
+            if (scoresList.size() < 10) {
+                while (scoresList.size() != 10) {
+                    Scores score = new Scores();
+                    score.setName("");
+                    score.setScore(0);
+                    scoresList.add(score);
+                }
+            }
+            for (int i = 0; i < 30; i++) {
+                switch (i % 3) {
+                    case 0:
+                        Button rank = new Button(Integer.toString(i/3 + 1));
+                        setInactiveButton(rank);
+                        scoreBoardItemGUI.tablePanel.add(rank);
+                        break;
+                    case 1:
+                        int index = i/3;
+                        Scores scores = scoresList.get(index);
+                        Button name = new Button(scores.getName());
+                        setInactiveButton(name);
+                        scoreBoardItemGUI.tablePanel.add(name);
+                        break;
+                    case 2:
+                        index = i/3;
+                        scores = scoresList.get(index);
+                        Button score = new Button(Integer.toString(scores.getScore()));
+                        setInactiveButton(score);
+                        scoreBoardItemGUI.tablePanel.add(score);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         catch (IOException e) {}
         catch (ParseException e) {}
+    }
 
-        scoreBoardItemGUI.tablePanel.add(new Button("Rank"));
-        scoreBoardItemGUI.tablePanel.add(new Button("Name"));
-        scoreBoardItemGUI.tablePanel.add(new Button("Score"));
-        for (int i = 0; i < 30; i++) {
-            scoreBoardItemGUI.tablePanel.add(new Button(Integer.toString(i)));
-        }
+    private void prepareNormalTable() {
+        Button rank = new Button("Rank");
+        Button name = new Button("Name");
+        Button score = new Button("Score");
+        setInactiveButton(rank);
+        setInactiveButton(name);
+        setInactiveButton(score);
+        scoreBoardNormalGUI.tablePanel.add(rank);
+        scoreBoardNormalGUI.tablePanel.add(name);
+        scoreBoardNormalGUI.tablePanel.add(score);
+    }
+
+    private void prepareItemTable() {
+        Button rank = new Button("Rank");
+        Button name = new Button("Name");
+        Button score = new Button("Score");
+        setInactiveButton(rank);
+        setInactiveButton(name);
+        setInactiveButton(score);
+        scoreBoardItemGUI.tablePanel.add(rank);
+        scoreBoardItemGUI.tablePanel.add(name);
+        scoreBoardItemGUI.tablePanel.add(score);
+    }
+
+    private void setInactiveButton(Button button) {
+        button.setBackground(Color.white);
+        button.setEnabled(false);
     }
 
     private List<Scores> getTopTen(String mode) throws IOException, ParseException {
@@ -226,7 +307,6 @@ public class ScoreBoard extends Canvas {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         connection.setRequestMethod("GET");
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 
         int responseCode = connection.getResponseCode();
 
