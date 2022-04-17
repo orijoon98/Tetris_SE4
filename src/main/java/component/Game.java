@@ -133,6 +133,7 @@ public class Game extends Canvas {
                 addGameOverPanel(home, game.getTotalScore());
             }
 
+            home.normalGameOverGUI.rank = 0;
             home.normalGameOverGUI.score = game.getTotalScore();
             home.normalGameOverGUI.normalGameOverFrame.setVisible(true);
             gameFrame.setVisible(false);
