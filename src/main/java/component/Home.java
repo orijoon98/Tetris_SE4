@@ -17,6 +17,7 @@ public class Home extends Canvas {
     private Panel homePanel, titlePanel, buttonPanel;
 
     public Game gameGUI;
+    public NormalGameOver normalGameOverGUI;
     public ScoreBoard scoreBoardGUI;
     public Setting settingGUI;
 
@@ -30,6 +31,7 @@ public class Home extends Canvas {
         prepareHomeGUI();
 
         gameGUI = new Game();
+        normalGameOverGUI = new NormalGameOver(this);
         scoreBoardGUI = new ScoreBoard(homeFrame);
         settingGUI = new Setting(homeFrame);
 

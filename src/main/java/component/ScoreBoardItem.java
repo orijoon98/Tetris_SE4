@@ -16,7 +16,7 @@ public class ScoreBoardItem extends Canvas {
 
     private final ScoreBoardItemInput keyboard = new ScoreBoardItemInput();
 
-    private Button back, home;
+    private Button exit, home;
     private Button selected;
 
     public ScoreBoardItem(Frame homeFrame, Frame scoreBoardFrame) {
@@ -53,14 +53,14 @@ public class ScoreBoardItem extends Canvas {
         buttonPanel.setBounds(150, 470, 500, 50);
         buttonPanel.setLayout(new GridLayout(1, 2));
 
-        back = new Button("Back");
+        exit = new Button("Exit");
         home = new Button("Home");
 
-        selected = back;
+        selected = home;
         selected.setForeground(Color.gray);
 
-        buttonPanel.add(back);
         buttonPanel.add(home);
+        buttonPanel.add(exit);
 
         scoreBoardItemPanel.add(titlePanel);
         scoreBoardItemPanel.add(tablePanel);
@@ -73,16 +73,10 @@ public class ScoreBoardItem extends Canvas {
         scoreBoardItemFrame.addKeyListener(keyboard);
         scoreBoardItemFrame.requestFocus();
 
-        back.addActionListener(new ActionListener() {
+        exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tablePanel.removeAll();
-                selected.setForeground(Color.black);
-                selected = back;
-                selected.setForeground(Color.gray);
-                scoreBoardFrame.setVisible(true);
-                scoreBoardItemFrame.setVisible(false);
-                scoreBoardFrame.requestFocus();
+                System.exit(0);
             }
         });
 
@@ -102,14 +96,14 @@ public class ScoreBoardItem extends Canvas {
 
     public void scoreBoardItemLoop(Frame homeFrame, Frame scoreBoardFrame) {
         while (true) {
-            if (keyboard.left()) {
-                if (selected != back) {
+            if (keyboard.right()) {
+                if (selected != exit) {
                     selected.setForeground(Color.black);
-                    selected = back;
+                    selected = exit;
                     selected.setForeground(Color.gray);
                 }
             }
-            if (keyboard.right()) {
+            if (keyboard.left()) {
                 if (selected != home) {
                     selected.setForeground(Color.black);
                     selected = home;
@@ -117,12 +111,8 @@ public class ScoreBoardItem extends Canvas {
                 }
             }
             if (keyboard.enter()) {
-                if (selected == back) {
-                    tablePanel.removeAll();
-                    selected = back;
-                    scoreBoardFrame.setVisible(true);
-                    scoreBoardItemFrame.setVisible(false);
-                    scoreBoardFrame.requestFocus();
+                if (selected == exit) {
+                    System.exit(0);
                 } else if (selected == home) {
                     tablePanel.removeAll();
                     selected = home;

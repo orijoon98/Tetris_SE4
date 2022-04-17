@@ -16,6 +16,8 @@ public class GameSetting {
     private int totalScore;
     private int level = 1;
     private int lineCount = 0;
+    private double speed = 1.0;
+    private int priorlevel = 1;
 
     public GameSetting() {
         board = new Board();
@@ -29,8 +31,21 @@ public class GameSetting {
         return nextBlock;
     }
 
+    public int getPriorlevel() {
+        return priorlevel;
+    }
+
+    public double getSpeed() {
+        if (getPriorlevel() < getLevel()) {
+            return speed / 5;
+        }
+        else {
+            return speed;
+        }
+    }
+
     public long getIterationDelay() {
-        return (long)(((11 - getLevel()) * 0.05) * 1000);
+        return (long)((getLevel() * getSpeed()) * 1000);
     }
 
     public int getLineCount() {
@@ -46,7 +61,7 @@ public class GameSetting {
             if (board.getFullLines() == getLineCount() + 1) {
                 setLineCount(board.getFullLines());
                 return 100 * getLevel();
-            } else if(board.getFullLines() == getLineCount() + 2) {
+            } else if (board.getFullLines() == getLineCount() + 2) {
                 setLineCount(board.getFullLines());
                 return 100 * getLevel() * 2;
             } else if (board.getFullLines() == getLineCount() + 3) {
@@ -142,5 +157,4 @@ public class GameSetting {
     public boolean isDropping() {
         return dropping;
     }
-
 }
