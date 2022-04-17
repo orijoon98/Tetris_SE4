@@ -35,11 +35,8 @@ public class GameSetting {
         return priorlevel;
     }
 
-    public void setPriorlevel(int level){priorlevel=level;}
-
     public double getSpeed() {
         if (getPriorlevel()< getLevel()){
-            setPriorlevel(getLevel());
             return speed/5;
         }
         else{
