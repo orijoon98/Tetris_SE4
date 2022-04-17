@@ -36,10 +36,10 @@ public class GameSetting {
     }
 
     public double getSpeed() {
-        if (getPriorlevel()< getLevel()){
-            return speed/5;
+        if (getPriorlevel() < getLevel()) {
+            return speed / 5;
         }
-        else{
+        else {
             return speed;
         }
     }
@@ -61,7 +61,7 @@ public class GameSetting {
             if (board.getFullLines() == getLineCount() + 1) {
                 setLineCount(board.getFullLines());
                 return 100 * getLevel();
-            } else if(board.getFullLines() == getLineCount() + 2) {
+            } else if (board.getFullLines() == getLineCount() + 2) {
                 setLineCount(board.getFullLines());
                 return 100 * getLevel() * 2;
             } else if (board.getFullLines() == getLineCount() + 3) {
@@ -157,5 +157,4 @@ public class GameSetting {
     public boolean isDropping() {
         return dropping;
     }
-
 }
