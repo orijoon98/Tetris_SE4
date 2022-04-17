@@ -1,12 +1,21 @@
 package component;
 
 import input.ScoreBoardInput;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -178,20 +187,175 @@ public class ScoreBoard extends Canvas {
     }
 
     private void prepareScoreBoardNormalTable() {
-        scoreBoardNormalGUI.tablePanel.add(new Button("Rank"));
-        scoreBoardNormalGUI.tablePanel.add(new Button("Name"));
-        scoreBoardNormalGUI.tablePanel.add(new Button("Score"));
-        for (int i = 0; i < 30; i++) {
-            scoreBoardNormalGUI.tablePanel.add(new Button(Integer.toString(i)));
+        prepareNormalTable();
+        try {
+            List<Scores> scoresList = getTopTen("normal");
+            if (scoresList.size() < 10) {
+                while (scoresList.size() != 10) {
+                    Scores score = new Scores();
+                    score.setName("");
+                    score.setScore(0);
+                    scoresList.add(score);
+                }
+            }
+            for (int i = 0; i < 30; i++) {
+                switch (i % 3) {
+                    case 0:
+                        Button rank = new Button(Integer.toString(i/3 + 1));
+                        setInactiveButton(rank);
+                        scoreBoardNormalGUI.tablePanel.add(rank);
+                        break;
+                    case 1:
+                        int index = i/3;
+                        Scores scores = scoresList.get(index);
+                        Button name = new Button(scores.getName());
+                        setInactiveButton(name);
+                        scoreBoardNormalGUI.tablePanel.add(name);
+                        break;
+                    case 2:
+                        index = i/3;
+                        scores = scoresList.get(index);
+                        Button score = new Button(Integer.toString(scores.getScore()));
+                        setInactiveButton(score);
+                        scoreBoardNormalGUI.tablePanel.add(score);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
+        catch (IOException e) {}
+        catch (ParseException e) {}
     }
 
     private void prepareScoreBoardItemTable() {
-        scoreBoardItemGUI.tablePanel.add(new Button("Rank"));
-        scoreBoardItemGUI.tablePanel.add(new Button("Name"));
-        scoreBoardItemGUI.tablePanel.add(new Button("Score"));
-        for (int i = 0; i < 30; i++) {
-            scoreBoardItemGUI.tablePanel.add(new Button(Integer.toString(i)));
+        prepareItemTable();
+        try {
+            List<Scores> scoresList = getTopTen("item");
+            if (scoresList.size() < 10) {
+                while (scoresList.size() != 10) {
+                    Scores score = new Scores();
+                    score.setName("");
+                    score.setScore(0);
+                    scoresList.add(score);
+                }
+            }
+            for (int i = 0; i < 30; i++) {
+                switch (i % 3) {
+                    case 0:
+                        Button rank = new Button(Integer.toString(i/3 + 1));
+                        setInactiveButton(rank);
+                        scoreBoardItemGUI.tablePanel.add(rank);
+                        break;
+                    case 1:
+                        int index = i/3;
+                        Scores scores = scoresList.get(index);
+                        Button name = new Button(scores.getName());
+                        setInactiveButton(name);
+                        scoreBoardItemGUI.tablePanel.add(name);
+                        break;
+                    case 2:
+                        index = i/3;
+                        scores = scoresList.get(index);
+                        Button score = new Button(Integer.toString(scores.getScore()));
+                        setInactiveButton(score);
+                        scoreBoardItemGUI.tablePanel.add(score);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        catch (IOException e) {}
+        catch (ParseException e) {}
+    }
+
+    private void prepareNormalTable() {
+        Button rank = new Button("Rank");
+        Button name = new Button("Name");
+        Button score = new Button("Score");
+        setInactiveButton(rank);
+        setInactiveButton(name);
+        setInactiveButton(score);
+        scoreBoardNormalGUI.tablePanel.add(rank);
+        scoreBoardNormalGUI.tablePanel.add(name);
+        scoreBoardNormalGUI.tablePanel.add(score);
+    }
+
+    private void prepareItemTable() {
+        Button rank = new Button("Rank");
+        Button name = new Button("Name");
+        Button score = new Button("Score");
+        setInactiveButton(rank);
+        setInactiveButton(name);
+        setInactiveButton(score);
+        scoreBoardItemGUI.tablePanel.add(rank);
+        scoreBoardItemGUI.tablePanel.add(name);
+        scoreBoardItemGUI.tablePanel.add(score);
+    }
+
+    private void setInactiveButton(Button button) {
+        button.setBackground(Color.white);
+        button.setEnabled(false);
+    }
+
+    private List<Scores> getTopTen(String mode) throws IOException, ParseException {
+        URL url = (mode == "normal") ?
+                new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/normal/score")
+                : new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/item/score");
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        connection.setRequestMethod("GET");
+
+        int responseCode = connection.getResponseCode();
+
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        StringBuffer stringBuffer = new StringBuffer();
+        String inputLine;
+
+        while ((inputLine = bufferedReader.readLine()) != null)  {
+            stringBuffer.append(inputLine);
+        }
+        bufferedReader.close();
+
+        String response = stringBuffer.toString();
+
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(response);
+        JSONArray arr = (JSONArray) jsonObject.get("data");
+
+        List<Scores> scores = new ArrayList<>();
+
+        for (int i = 0; i < arr.size(); i++) {
+            JSONObject tmp = (JSONObject) arr.get(i);
+            Scores score = new Scores();
+            score.setName((String) tmp.get("name"));
+            score.setScore(Integer.parseInt(String.valueOf(tmp.get("score"))));
+            scores.add(score);
+        }
+
+        return scores;
+    }
+
+    private class Scores {
+        private String name;
+        private int score;
+
+        public String getName() {
+            return name;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setScore(int score) {
+            this.score = score;
         }
     }
 }
