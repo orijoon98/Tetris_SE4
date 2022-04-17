@@ -8,6 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DefaultSetting {
 	
+	
+	
 	private int defaultKey(String Key) {
 	    final Map<String, Integer> defaultKey = new ConcurrentHashMap<String, Integer>(); 
 	    
@@ -15,6 +17,7 @@ public class DefaultSetting {
 	    defaultKey.put("RIGHT", KeyEvent.VK_RIGHT);
 	    defaultKey.put("ROTATE", KeyEvent.VK_UP);
 	    defaultKey.put("DROP", KeyEvent.VK_SPACE);
+	    defaultKey.put("DOWN", KeyEvent.VK_DOWN);
 	    
 	    int keyCode;
 	    

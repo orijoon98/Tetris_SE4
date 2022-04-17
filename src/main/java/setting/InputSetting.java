@@ -6,80 +6,64 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import setting.DefaultSetting;
+import setting.UserSetting;
+
+/*
+ * [x] userSetting에서 가져오기
+ * [] userSetting의 Key가 정상적인지 확인하기
+ * [x] user의 input 받고 값 바꾸기
+ */
 
 
 public class InputSetting {
-	
-    private boolean userSetted = Boolean.FALSE;
-    
-    
+       
     DefaultSetting defaultKey = new DefaultSetting();
-    
-
-    private Map<String, Integer> currentKey = new ConcurrentHashMap<>();
-    
-    public InputSetting()	{
-    	if (userSetted == Boolean.FALSE) {
-        	currentKey.put("LEFT", defaultKey.getDefaultKey("LEFT"));
-        	currentKey.put("RIGHT", defaultKey.getDefaultKey("RIGHT"));
-        	currentKey.put("ROTATE", defaultKey.getDefaultKey("ROTATE"));
-        	currentKey.put("DROP", defaultKey.getDefaultKey("DROP"));
-    	}
-
-    }
-    
+    UserSetting userKey = new UserSetting();        
  
     public void setLeft(int keyCode) {
-    	if(userSetted == Boolean.FALSE) {
-    		userSetted = Boolean.TRUE;
-    	}
-    	currentKey.replace("LEFT", keyCode);
+    	userKey.changeKey("LEFT", keyCode);
     }
     
     public void setRight(int keyCode) {
-    	if(userSetted == Boolean.FALSE) {
-    		userSetted = Boolean.TRUE;
-    	}
-    	currentKey.replace("RIGHT", keyCode);
+    	userKey.changeKey("RIGHT", keyCode);
     }
 
     public void setRotate(int keyCode) {
-    	if(userSetted == Boolean.FALSE) {
-    		userSetted = Boolean.TRUE;
-    	}
-    	currentKey.replace("ROTATE", keyCode);
+    	userKey.changeKey("ROTATE", keyCode);
     }
 
     public void setDrop(int keyCode) {
-    	if(userSetted == Boolean.FALSE) {
-    		userSetted = Boolean.TRUE;
-    	}
-    	currentKey.replace("DROP", keyCode);
-    }
+    	userKey.changeKey("DROP", keyCode);
+    }    
+    
+    public void setDown(int keyCode) {
+    	userKey.changeKey("Down", keyCode);
+    }    
+
     
     
     public void resetKey() {
-    	currentKey.replace("LEFT", defaultKey.getDefaultKey("LEFT"));
-    	currentKey.replace("RIGHT", defaultKey.getDefaultKey("RIGHT"));
-    	currentKey.replace("ROTATE", defaultKey.getDefaultKey("ROTATE"));
-    	currentKey.replace("DROP", defaultKey.getDefaultKey("DROP"));
+    	userKey.userSettedKey = Boolean.FALSE;
     }
-
-
+    
+    
     
     public int leftKey()	{
-    	return currentKey.get("LEFT");
+    	return userKey.getUserKey("LEFT");
     }
     
     public int rightKey()	{
-    	return currentKey.get("RIGHT");
+    	return userKey.getUserKey("RIGHT");
     }
     
     public int rotateKey()	{
-    	return currentKey.get("ROTATE");
+    	return userKey.getUserKey("ROTATE");
     }
     public int dropKey()	{
-    	return currentKey.get("DROP");
+    	return userKey.getUserKey("DROP");
+    }
+    public int downKey() {
+    	return userKey.getUserKey("DOWN");
     }
     
 }
