@@ -13,7 +13,7 @@ public class GameLoop implements Runnable {
     @Override
     public void run() {
         while(true) {
-            home.gameGUI.gameLoop(home.homeFrame);
+            home.gameGUI.gameLoop(home.homeFrame, home);
         }
     }
 }

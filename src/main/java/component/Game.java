@@ -57,7 +57,7 @@ public class Game extends Canvas {
         strategy = getBufferStrategy();
     }
 
-    public void gameLoop(Frame homeFrame) {
+    public void gameLoop(Frame homeFrame, Home home) {
         while (true) {
             if (keyboard.newGame()) {
                 game = new GameSetting();
@@ -80,7 +80,7 @@ public class Game extends Canvas {
             try {
                 Thread.sleep(20);
             } catch (Exception e) { }
-            draw();
+            draw(homeFrame, home);
         }
     }
 
@@ -105,7 +105,7 @@ public class Game extends Canvas {
         }
     }
 
-    public void draw() {
+    public void draw(Frame homeFrame, Home home) {
         Graphics2D g = getGameGraphics();
         drawEmptyBoard(g);
         drawHelpBox(g);
@@ -123,6 +123,21 @@ public class Game extends Canvas {
         if (game.isGameOver()) {
             drawCells(g);
             drawGameOver(g);
+
+            ScoreBoard scoreBoard = home.scoreBoardGUI;
+
+            int min = scoreBoard.min("normal");
+            if (min < game.getTotalScore()) {
+                addNewRecordPanel(home, game.getTotalScore());
+            } else {
+                addGameOverPanel(home, game.getTotalScore());
+            }
+
+            home.normalGameOverGUI.rank = 0;
+            home.normalGameOverGUI.score = game.getTotalScore();
+            home.normalGameOverGUI.normalGameOverFrame.setVisible(true);
+            gameFrame.setVisible(false);
+            game = new GameSetting();
         }
 
         drawStatus(g);
@@ -130,6 +145,43 @@ public class Game extends Canvas {
 
         g.dispose();
         strategy.show();
+    }
+
+    private void addNewRecordPanel(Home home, int score) {
+        home.normalGameOverGUI.contentPanel = new Panel();
+        home.normalGameOverGUI.contentPanel.setBounds(150, 220, 500, 210);
+        home.normalGameOverGUI.contentPanel.setLayout(new GridLayout(2, 1));
+        home.normalGameOverGUI.contentPanel.setFont(new Font("Dialog", Font.PLAIN, 50));
+        home.normalGameOverGUI.contentPanel.setForeground(Color.white);
+
+        Label textLabel = new Label("New Record " + Integer.toString(score));
+        textLabel.setAlignment(Label.CENTER);
+
+        home.normalGameOverGUI.textField = new TextField("Your Name");
+        home.normalGameOverGUI.textField.setForeground(Color.black);
+
+        home.normalGameOverGUI.contentPanel.add(textLabel);
+        home.normalGameOverGUI.contentPanel.add(home.normalGameOverGUI.textField);
+
+        home.normalGameOverGUI.normalGameOverPanel.add(home.normalGameOverGUI.contentPanel);
+    }
+
+    private void addGameOverPanel(Home home, int score) {
+        home.normalGameOverGUI.contentPanel = new Panel();
+        home.normalGameOverGUI.contentPanel.setBounds(150, 220, 500, 210);
+        home.normalGameOverGUI.contentPanel.setLayout(new GridLayout(2, 1));
+        home.normalGameOverGUI.contentPanel.setFont(new Font("Dialog", Font.PLAIN, 50));
+        home.normalGameOverGUI.contentPanel.setForeground(Color.white);
+
+        Label textLabel = new Label("Your Score");
+        Label scoreLabel = new Label(Integer.toString(score));
+        textLabel.setAlignment(Label.CENTER);
+        scoreLabel.setAlignment(Label.CENTER);
+
+        home.normalGameOverGUI.contentPanel.add(textLabel);
+        home.normalGameOverGUI.contentPanel.add(scoreLabel);
+
+        home.normalGameOverGUI.normalGameOverPanel.add(home.normalGameOverGUI.contentPanel);
     }
 
     private Graphics2D getGameGraphics() {

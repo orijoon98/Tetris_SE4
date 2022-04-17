@@ -11,9 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -97,7 +95,7 @@ public class ScoreBoard extends Canvas {
         normal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                prepareScoreBoardNormalTable();
+                prepareScoreBoardNormalTable(0);
 
                 selected.setForeground(Color.black);
                 selected = normal;
@@ -111,7 +109,7 @@ public class ScoreBoard extends Canvas {
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                prepareScoreBoardItemTable();
+                prepareScoreBoardItemTable(0);
 
                 selected.setForeground(Color.black);
                 selected = item;
@@ -155,7 +153,7 @@ public class ScoreBoard extends Canvas {
                 int cur = buttonList.indexOf(selected);
                 switch (cur) {
                     case 0:
-                        prepareScoreBoardNormalTable();
+                        prepareScoreBoardNormalTable(0);
 
                         selected = normal;
                         scoreBoardNormalGUI.scoreBoardNormalFrame.setVisible(true);
@@ -163,7 +161,7 @@ public class ScoreBoard extends Canvas {
                         scoreBoardNormalGUI.scoreBoardNormalFrame.requestFocus();
                         break;
                     case 1:
-                        prepareScoreBoardItemTable();
+                        prepareScoreBoardItemTable(0);
 
                         selected = item;
                         scoreBoardItemGUI.scoreBoardItemFrame.setVisible(true);
@@ -186,7 +184,7 @@ public class ScoreBoard extends Canvas {
         }
     }
 
-    private void prepareScoreBoardNormalTable() {
+    public void prepareScoreBoardNormalTable(int n) {
         prepareNormalTable();
         try {
             List<Scores> scoresList = getTopTen("normal");
@@ -203,6 +201,7 @@ public class ScoreBoard extends Canvas {
                     case 0:
                         Button rank = new Button(Integer.toString(i/3 + 1));
                         setInactiveButton(rank);
+                        if (n != 0 && i / 3 + 1 == n) rank.setBackground(Color.yellow);
                         scoreBoardNormalGUI.tablePanel.add(rank);
                         break;
                     case 1:
@@ -210,6 +209,7 @@ public class ScoreBoard extends Canvas {
                         Scores scores = scoresList.get(index);
                         Button name = new Button(scores.getName());
                         setInactiveButton(name);
+                        if (n != 0 && i / 3 + 1 == n) name.setBackground(Color.yellow);
                         scoreBoardNormalGUI.tablePanel.add(name);
                         break;
                     case 2:
@@ -217,6 +217,7 @@ public class ScoreBoard extends Canvas {
                         scores = scoresList.get(index);
                         Button score = new Button(Integer.toString(scores.getScore()));
                         setInactiveButton(score);
+                        if (n != 0 && i / 3 + 1 == n) score.setBackground(Color.yellow);
                         scoreBoardNormalGUI.tablePanel.add(score);
                         break;
                     default:
@@ -228,7 +229,7 @@ public class ScoreBoard extends Canvas {
         catch (ParseException e) {}
     }
 
-    private void prepareScoreBoardItemTable() {
+    public void prepareScoreBoardItemTable(int n) {
         prepareItemTable();
         try {
             List<Scores> scoresList = getTopTen("item");
@@ -245,6 +246,7 @@ public class ScoreBoard extends Canvas {
                     case 0:
                         Button rank = new Button(Integer.toString(i/3 + 1));
                         setInactiveButton(rank);
+                        if (n != 0 && i / 3 + 1 == n) rank.setBackground(Color.yellow);
                         scoreBoardItemGUI.tablePanel.add(rank);
                         break;
                     case 1:
@@ -252,6 +254,7 @@ public class ScoreBoard extends Canvas {
                         Scores scores = scoresList.get(index);
                         Button name = new Button(scores.getName());
                         setInactiveButton(name);
+                        if (n != 0 && i / 3 + 1 == n) name.setBackground(Color.yellow);
                         scoreBoardItemGUI.tablePanel.add(name);
                         break;
                     case 2:
@@ -259,6 +262,7 @@ public class ScoreBoard extends Canvas {
                         scores = scoresList.get(index);
                         Button score = new Button(Integer.toString(scores.getScore()));
                         setInactiveButton(score);
+                        if (n != 0 && i / 3 + 1 == n) score.setBackground(Color.yellow);
                         scoreBoardItemGUI.tablePanel.add(score);
                         break;
                     default:
@@ -299,7 +303,18 @@ public class ScoreBoard extends Canvas {
         button.setEnabled(false);
     }
 
-    private List<Scores> getTopTen(String mode) throws IOException, ParseException {
+    public int min(String mode) {
+        try {
+            List<Scores> scores = getTopTen(mode);
+            if (scores.size() < 10) return 0;
+            else {
+                return scores.get(9).getScore();
+            }
+        } catch (Exception e) {}
+        return 0;
+    }
+
+    public List<Scores> getTopTen(String mode) throws IOException, ParseException {
         URL url = (mode == "normal") ?
                 new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/normal/score")
                 : new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/item/score");
@@ -338,7 +353,28 @@ public class ScoreBoard extends Canvas {
         return scores;
     }
 
-    private class Scores {
+    public void postTopTen(String mode, JSONObject jsonObject) throws IOException, ParseException {
+        URL url = (mode == "normal") ?
+                new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/normal")
+                : new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/item");
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json");
+
+        connection.setDoOutput(true);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+
+        bw.write(jsonObject.toString());
+        bw.flush();
+        bw.close();
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String returnMsg = in.readLine();
+    }
+
+    public class Scores {
         private String name;
         private int score;
 
