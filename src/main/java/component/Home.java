@@ -17,7 +17,9 @@ public class Home extends Canvas {
     private Panel homePanel, titlePanel, buttonPanel;
 
     public Game gameGUI;
+    public Item itemGUI;
     public NormalGameOver normalGameOverGUI;
+    public ItemGameOver itemGameOverGUI;
     public ScoreBoard scoreBoardGUI;
     public Setting settingGUI;
 
@@ -31,7 +33,9 @@ public class Home extends Canvas {
         prepareHomeGUI();
 
         gameGUI = new Game();
+        itemGUI = new Item();
         normalGameOverGUI = new NormalGameOver(this);
+        itemGameOverGUI = new ItemGameOver(this);
         scoreBoardGUI = new ScoreBoard(homeFrame);
         settingGUI = new Setting(homeFrame);
 
@@ -42,6 +46,10 @@ public class Home extends Canvas {
         Runnable gameTask = new GameLoop(this);
         Thread gameThread = new Thread(gameTask);
         gameThread.start();
+
+        Runnable itemTask = new ItemLoop(this);
+        Thread itemThread = new Thread(itemTask);
+        itemThread.start();
 
         Runnable scoreBoardTask = new ScoreBoardLoop(this);
         Thread scoreBoardThread = new Thread(scoreBoardTask);
@@ -127,6 +135,17 @@ public class Home extends Canvas {
             }
         });
 
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selected.setForeground(Color.black);
+                selected = item;
+                selected.setForeground(Color.gray);
+                itemGUI.itemFrame.setVisible(true);
+                homeFrame.setVisible(false);
+            }
+        });
+
         scoreBoard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -182,6 +201,8 @@ public class Home extends Canvas {
                         homeFrame.setVisible(false);
                         break;
                     case 1:
+                        itemGUI.itemFrame.setVisible(true);
+                        homeFrame.setVisible(false);
                         break;
                     case 2:
                         scoreBoardGUI.scoreBoardFrame.setVisible(true);
