@@ -15,15 +15,16 @@ public class Setting extends Canvas {
     private Panel settingPanel, buttonPanel, titlePanel;
     
     public KeySetting keySettingGUI;
-    
-    private Button home, keySetting;
+
+// 버튼 목록    
+    private Button home, keySetting, scoreBoard, color, level, size, reSetting;
     private Button selected;
+
     private List<Button> buttonList = new ArrayList<>();
     
 
     public Setting(Frame homeFrame) {
-        prepareSettingGUI(homeFrame);
-        
+        prepareSettingGUI(homeFrame);        
         keySettingGUI = new KeySetting(settingFrame);
     }
 
@@ -43,36 +44,38 @@ public class Setting extends Canvas {
         settingPanel.setBackground(Color.black);
         settingPanel.setLayout(null);
         settingPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
-        
+
+// 세팅 창에 "Setting" 타이틀로 띄우기 
         titlePanel = new Panel();
         titlePanel.setBounds(250, 100, 300, 80);
         titlePanel.setFont(new Font("Dialog", Font.PLAIN, 50));
-        
         Label title = new Label("Setting");
         title.setForeground(Color.RED);
         
         titlePanel.add(title);
 
+// 버튼 등록 : 
         buttonPanel = new Panel();
         buttonPanel.setBounds(250, 220, 300, 250);       
         buttonPanel.setLayout(new GridLayout(4, 2));
 
-        home = new Button("home");
         keySetting = new Button("Key");
-        Button ScoreBoard = new Button("Scoreboard");
-        Button color = new Button("Color");
-        Button Level = new Button("Level");
-        Button Size = new Button("Size");
-        Button ReSetting = new Button("ReSetting");        
-        
+        scoreBoard = new Button("Scoreboard");
+        color = new Button("Color");
+        level = new Button("Level");
+        size = new Button("Size");
+        reSetting = new Button("ReSetting");        
+        home = new Button("home");
+
+// 기본적으로 맨 앞에 있는 걸 selected        
         selected = keySetting;
         
         buttonPanel.add(keySetting);
-        buttonPanel.add(ScoreBoard);
+        buttonPanel.add(scoreBoard);
         buttonPanel.add(color);
-        buttonPanel.add(Level);
-        buttonPanel.add(Size);
-        buttonPanel.add(ReSetting);
+        buttonPanel.add(level);
+        buttonPanel.add(size);
+        buttonPanel.add(reSetting);
         buttonPanel.add(home);
 
         settingPanel.add(buttonPanel);
@@ -81,6 +84,7 @@ public class Setting extends Canvas {
 
         settingFrame.setVisible(false);
 
+//home 버튼 home화면과 연결        
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,7 +92,7 @@ public class Setting extends Canvas {
                 settingFrame.setVisible(false);
             }
         });
-        
+//KeySetting 버튼 keySetting 화면으로 연결        
         keySetting.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		selected.setForeground(Color.black);

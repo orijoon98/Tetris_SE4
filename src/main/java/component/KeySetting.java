@@ -3,6 +3,7 @@ package component;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
@@ -15,7 +16,9 @@ public class KeySetting extends Canvas {
 	public Frame keySettingFrame;
 	private Panel keySettingPanel, buttonPanel, titlePanel;
 	
-	private Button left, right, down, drop, rotate, backToSetting, leftKey, rightKey, downKey, dropKey, rotateKey;
+//	private Button left, right, down, drop, rotate, backToSetting, leftKey, rightKey, downKey, dropKey, rotateKey;
+	private Button left, right, down, drop, rotate, backToSetting;
+
 	private Button selected;
 
 	
@@ -53,30 +56,32 @@ public class KeySetting extends Canvas {
         buttonPanel.setBounds(250, 220, 300, 250);       
         buttonPanel.setLayout(new GridLayout(6, 2));
         
-        left = new Button("Left");
-        leftKey = new Button(" ");
-        right = new Button("Right");
-        rightKey = new Button(" ");
+        UserSetting userKey = new UserSetting();
+        
+        left = new Button("Left : " + ((char)KeyEvent.VK_LEFT) );
+//        leftKey = new Button(" ");
+        right = new Button("Right : " + ((char)userKey.getUserKey("RIGHT")));
+  //      rightKey = new Button(" ");
         down = new Button("Down");
-        downKey = new Button(" ");
+    //    downKey = new Button(" ");
         rotate = new Button("Rotate");
-        rotateKey = new Button(" ");
+      //  rotateKey = new Button(" ");
         drop = new Button("Drop");
-        dropKey = new Button(" ");                
+        //dropKey = new Button(" ");                
         backToSetting = new Button("Back to Setting");
         
 //		selected =        ;
         
         buttonPanel.add(left);
-        buttonPanel.add(leftKey);
+ //       buttonPanel.add(leftKey);
         buttonPanel.add(right);
-        buttonPanel.add(rightKey);
+   //     buttonPanel.add(rightKey);
         buttonPanel.add(down);
-        buttonPanel.add(downKey);
+     //   buttonPanel.add(downKey);
         buttonPanel.add(drop);
-        buttonPanel.add(dropKey);
+       // buttonPanel.add(dropKey);
         buttonPanel.add(rotate);
-        buttonPanel.add(rotateKey);        
+       // buttonPanel.add(rotateKey);        
         buttonPanel.add(backToSetting);
         
         
@@ -94,8 +99,9 @@ public class KeySetting extends Canvas {
         });
         
 // 누르고 키를 입력하면 바뀜
-        leftKey.addMouseListener(new MouseListener() {
+        left.addMouseListener(new MouseListener() {
 
+        	// left버튼 누룰시 왼쪽 키 바꾸기 가능
         	public void mouseClicked(MouseEvent e) {        		
         		settingFrame.setVisible(true);
         		keySettingFrame.setVisible(false);
