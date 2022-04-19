@@ -112,8 +112,12 @@ public class KeySetting extends Canvas {
 	private void changeKey(Button button, String buttonName) {
 		UserSetting userKey = new UserSetting();
 		if (selected == button) {
+			left.setLabel("Left : " + userKey.getStringKey("LEFT"));
+		    right.setLabel("Right : " + userKey.getStringKey("RIGHT"));
+		    down.setLabel("Down : " + userKey.getStringKey("DOWN") );
+		    rotate.setLabel("Rotate : " + userKey.getStringKey("ROTATE"));
+		    drop.setLabel("Drop : "+ userKey.getStringKey("DROP"));
 			button.setLabel("Press Key for " + buttonName);			
-			
 			button.addKeyListener(new KeyListener() {
 	//불안한 점! : 클릭할때마다 키 리스너가 늘어나서 여러번 수행됨 (일단 정상 작동함)
 				@Override
