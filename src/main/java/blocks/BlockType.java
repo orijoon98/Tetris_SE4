@@ -28,7 +28,7 @@ public enum BlockType {
     }
 
     public static BlockType getRandomBlock() {
-    	BlockProbabilty prob = new BlockProbabilty(14, 14, 14, 14, 14, 14, 16);
+    	BlockProbabilty prob = new BlockProbabilty();
     	
     	return BlockType.values()[prob.randomProb()];
     }
