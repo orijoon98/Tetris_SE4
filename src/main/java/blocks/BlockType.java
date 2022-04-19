@@ -1,7 +1,9 @@
 package blocks;
 
 import java.awt.*;
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public enum BlockType {
 
@@ -24,8 +26,9 @@ public enum BlockType {
     }
 
     public static BlockType getRandomBlock() {
-        return BlockType.values()[random.nextInt(BlockType.values().length)];
+    	return BlockType.values()[random.nextInt(BlockType.values().length)];
     }
+    
 
     public Point[] getPoints() {
         return points;
@@ -38,4 +41,5 @@ public enum BlockType {
     private static Point p(int x, int y) {
         return new Point(x, y);
     }
+
 }
