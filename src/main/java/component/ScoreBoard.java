@@ -316,8 +316,8 @@ public class ScoreBoard extends Canvas {
 
     public List<Scores> getTopTen(String mode) throws IOException, ParseException {
         URL url = (mode == "normal") ?
-                new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/normal/score")
-                : new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/item/score");
+                new URL("http://ec2-13-124-44-172.ap-northeast-2.compute.amazonaws.com:8080/api/normal/score")
+                : new URL("http://ec2-13-124-44-172.ap-northeast-2.compute.amazonaws.com:8080/api/item/score");
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -355,8 +355,8 @@ public class ScoreBoard extends Canvas {
 
     public void postTopTen(String mode, JSONObject jsonObject) throws IOException, ParseException {
         URL url = (mode == "normal") ?
-                new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/normal")
-                : new URL("http://ec2-3-38-185-14.ap-northeast-2.compute.amazonaws.com:8080/api/item");
+                new URL("http://ec2-13-124-44-172.ap-northeast-2.compute.amazonaws.com:8080/api/normal")
+                : new URL("http://ec2-13-124-44-172.ap-northeast-2.compute.amazonaws.com:8080/api/item");
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
