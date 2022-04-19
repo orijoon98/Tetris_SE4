@@ -56,15 +56,14 @@ public class KeySetting extends Canvas {
         titlePanel.add(title);
         
         discriptionPanel = new Panel();
-        discriptionPanel.setBounds(250, 150, 300, 80);
-        discriptionPanel.setFont(new Font("Dialog", Font.PLAIN, 30));
-        Label discription = new Label("Please Click and Enter key");
+        discriptionPanel.setBounds(0, 170, 800, 80);
+        discriptionPanel.setFont(new Font("Dialog", Font.PLAIN, 20));
+// !! 영어 고쳐놓기 !!
+        Label discription = new Label("Please Click the botton and press the key you'd like to modify");
         discription.setForeground(Color.WHITE); 
         
         discriptionPanel.add(discription);
 
-
-        
         buttonPanel = new Panel();
         buttonPanel.setBounds(250, 220, 300, 250);       
         buttonPanel.setLayout(new GridLayout(6, 2));
@@ -79,7 +78,6 @@ public class KeySetting extends Canvas {
         drop = new Button("Drop : "+ InputSetting.getStringKey("DROP"));
         backToSetting = new Button("Back to Setting");
         
-//		selected =        ;
         
         buttonPanel.add(left);
         buttonPanel.add(right);
@@ -106,88 +104,221 @@ public class KeySetting extends Canvas {
 // 누르고 키를 입력하면 바뀜
         
         
+    	// left버튼 누룰시 왼쪽 키 바꾸기 가능
         left.addMouseListener(new MouseListener() {
-
-        	// left버튼 누룰시 왼쪽 키 바꾸기 가능
         	public void mouseClicked(MouseEvent e) {
-        		System.out.println("you clicked");
-        		left.setLabel("you clicked left!");
+        		left.setLabel("Press Key for LEFT");
+        		System.out.println("Mouse Clicked Activated");
         		
-        		
-        			left.addKeyListener(new KeyListener() {
-    					@Override
-    					public void keyTyped(KeyEvent e) {
-    		        		System.out.println(e.getKeyCode());
-    		        		char j = e.getKeyChar();
-    		        		System.out.println();
-    		        		
-    		        		
-    						//int keyCode = e.getExtendedKeyCode();
-    						//InputSetting.setLeft(keyCode);
-    						left.setLabel("Left : " + j + e.getKeyCode() + userKey.getUserKey("LEFT"));    		        	
-    					}
-    					@Override
-    					public void keyPressed(KeyEvent e) {
-    					}
-    					@Override
-    					public void keyReleased(KeyEvent e) {    						
-    					}
+        		left.addKeyListener(new KeyListener() {
+// 불안한 점! : 클릭할때마다 키 리스너가 늘어나서 여러번 수행됨 (일단 정상 작동함)
+        			@Override
+    				public void keyTyped(KeyEvent e) {
+    		        }
+    				@Override
+    				public void keyPressed(KeyEvent e) {
+    			
+    					userKey.changeKey("LEFT", e.getKeyCode());
+    					System.out.println(e.getKeyCode());
+    					left.setLabel("Left : " + userKey.getStringKey("LEFT"));    
+    					System.out.println(userKey.getStringKey("LEFT")+" is "+userKey.getUserKey("LEFT"));
+    					
+    				}
+    				@Override
+    				public void keyReleased(KeyEvent e) {    						
+    				}
             			
-            		});
-	
+            	});
         		
-        		/*        		left.addKeyListener(new KeyListener() {
-
-					@Override
-					public void keyTyped(KeyEvent e) {
-						int keyCode = e.getKeyCode();
-						InputSetting.setLeft(keyCode);
-						
-//						keyListener.close();
-					}
-
-					@Override
-					public void keyPressed(KeyEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void keyReleased(KeyEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-        			
-        		});
- */       		
-//        		settingFrame.setVisible(true);
-  //      		keySettingFrame.setVisible(false);
         	}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub				
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub				
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub				
 			}
         });
+        
+        right.addMouseListener(new MouseListener() {
+        	public void mouseClicked(MouseEvent e) {
+        		right.setLabel("Press Key for RIGHT");
+        		
+        		right.addKeyListener(new KeyListener() {
+        			@Override
+    				public void keyTyped(KeyEvent e) {
+    		        }
+    				@Override
+    				public void keyPressed(KeyEvent e) {
+    					userKey.changeKey("RIGHT", e.getKeyCode());
+    					right.setLabel("Right : " + userKey.getStringKey("RIGHT"));    
+    				}
+    				@Override
+    				public void keyReleased(KeyEvent e) {    						
+    				}
+            			
+            	});
+        		
+        	}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+        });
+
+        rotate.addMouseListener(new MouseListener() {
+        	public void mouseClicked(MouseEvent e) {
+        		rotate.setLabel("Press Key for ROTATE");
+        		
+        		rotate.addKeyListener(new KeyListener() {
+        			@Override
+    				public void keyTyped(KeyEvent e) {
+    		        }
+    				@Override
+    				public void keyPressed(KeyEvent e) {
+    					userKey.changeKey("ROTATE", e.getKeyCode());
+    					rotate.setLabel("Rotate : " + userKey.getStringKey("ROTATE"));    
+    				}
+    				@Override
+    				public void keyReleased(KeyEvent e) {    						
+    				}
+            			
+            	});
+        		
+        	}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+        });
+        
+        down.addMouseListener(new MouseListener() {
+        	public void mouseClicked(MouseEvent e) {
+        		down.setLabel("Press Key for DOWN");
+        		
+        		down.addKeyListener(new KeyListener() {
+        			@Override
+    				public void keyTyped(KeyEvent e) {
+    		        }
+    				@Override
+    				public void keyPressed(KeyEvent e) {
+    					userKey.changeKey("DOWN", e.getKeyCode());
+    					down.setLabel("Down : " + userKey.getStringKey("DOWN"));    
+    				}
+    				@Override
+    				public void keyReleased(KeyEvent e) {    						
+    				}
+            			
+            	});
+        		
+        	}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+        });
+
+        drop.addMouseListener(new MouseListener() {
+        	public void mouseClicked(MouseEvent e) {
+        		drop.setLabel("Press Key for DROP");
+        		
+        		drop.addKeyListener(new KeyListener() {
+        			@Override
+    				public void keyTyped(KeyEvent e) {
+    		        }
+    				@Override
+    				public void keyPressed(KeyEvent e) {
+    					userKey.changeKey("DROP", e.getKeyCode());
+    					drop.setLabel("Drop : " + userKey.getStringKey("DROP"));    
+    				}
+    				@Override
+    				public void keyReleased(KeyEvent e) {    						
+    				}
+            			
+            	});
+        		
+        	}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+        });
+
+
+
 
 
 		

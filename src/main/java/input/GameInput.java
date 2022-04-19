@@ -9,7 +9,7 @@ import setting.UserSetting;
 
 public class GameInput implements KeyListener {
 
-    private final Map<Integer, Boolean> currentStates = new ConcurrentHashMap<Integer, Boolean>();
+    private static final Map<Integer, Boolean> currentStates = new ConcurrentHashMap<Integer, Boolean>();
 
     UserSetting input = new UserSetting();
     
@@ -22,6 +22,8 @@ public class GameInput implements KeyListener {
         currentStates.put(KeyEvent.VK_F1, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_ESCAPE, Boolean.FALSE);
         currentStates.put(KeyEvent.VK_F2, Boolean.FALSE);
+        
+    	System.out.println(currentStates.keySet());
     }
 
     public boolean left() {

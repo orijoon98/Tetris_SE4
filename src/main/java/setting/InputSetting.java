@@ -10,7 +10,7 @@ import setting.UserSetting;
 
 /*
  * [x] userSetting���� ��������
- * [] userSetting�� Key�� ���������� Ȯ���ϱ�
+ * [] userSetting�� Key�� ��������� Ȯ���ϱ�
  * [x] user�� input �ް� �� �ٲٱ�
  */
 
@@ -105,13 +105,13 @@ public class InputSetting {
     		    case KeyEvent.VK_HOME:
     		      return "HOME";
     		    case KeyEvent.VK_LEFT:
-    		      return "��";
+    		      return "Left Arrow";
     		    case KeyEvent.VK_UP:
-    		      return "��";
+    		      return "Up Arrow";
     		    case KeyEvent.VK_RIGHT:
-    		      return "��";
+    		      return "Right Arrow";
     		    case KeyEvent.VK_DOWN:
-    		      return "��";
+    		      return "Down Arrow";
     		    case KeyEvent.VK_MULTIPLY:
     		      return "MULTIPLY";
     		    case KeyEvent.VK_ADD:
