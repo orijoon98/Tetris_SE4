@@ -102,13 +102,14 @@ public class KeySetting extends Canvas {
         });
         
 // 누르고 키를 입력하면 바뀜
+        // 시간나면 하나로 정리하자
         
         
     	// left버튼 누룰시 왼쪽 키 바꾸기 가능
         left.addMouseListener(new MouseListener() {
         	public void mouseClicked(MouseEvent e) {
         		left.setLabel("Press Key for LEFT");
-        		System.out.println("Mouse Clicked Activated");
+        		//System.out.println("Mouse Clicked Activated");
         		
         		left.addKeyListener(new KeyListener() {
 // 불안한 점! : 클릭할때마다 키 리스너가 늘어나서 여러번 수행됨 (일단 정상 작동함)
@@ -119,9 +120,9 @@ public class KeySetting extends Canvas {
     				public void keyPressed(KeyEvent e) {
     			
     					userKey.changeKey("LEFT", e.getKeyCode());
-    					System.out.println(e.getKeyCode());
+    					//System.out.println(e.getKeyCode());
     					left.setLabel("Left : " + userKey.getStringKey("LEFT"));    
-    					System.out.println(userKey.getStringKey("LEFT")+" is "+userKey.getUserKey("LEFT"));
+    					//System.out.println(userKey.getStringKey("LEFT")+" is "+userKey.getUserKey("LEFT"));
     					
     				}
     				@Override

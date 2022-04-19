@@ -16,7 +16,7 @@ public class Setting extends Canvas {
     
     public KeySetting keySettingGUI;
 
-// 버튼 목록    
+
     private Button home, keySetting, scoreBoard, color, level, size, reSetting;
     private Button selected;
 
@@ -45,7 +45,6 @@ public class Setting extends Canvas {
         settingPanel.setLayout(null);
         settingPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
 
-// 세팅 창에 "Setting" 타이틀로 띄우기 
         titlePanel = new Panel();
         titlePanel.setBounds(250, 100, 300, 80);
         titlePanel.setFont(new Font("Dialog", Font.PLAIN, 50));
@@ -54,7 +53,6 @@ public class Setting extends Canvas {
         
         titlePanel.add(title);
 
-// 버튼 등록 : 
         buttonPanel = new Panel();
         buttonPanel.setBounds(250, 220, 300, 250);       
         buttonPanel.setLayout(new GridLayout(4, 2));
@@ -67,7 +65,6 @@ public class Setting extends Canvas {
         reSetting = new Button("ReSetting");        
         home = new Button("home");
 
-// 기본적으로 맨 앞에 있는 걸 selected        
         selected = keySetting;
         
         buttonPanel.add(keySetting);
@@ -84,7 +81,6 @@ public class Setting extends Canvas {
 
         settingFrame.setVisible(false);
 
-//home 버튼 home화면과 연결        
         home.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,7 +88,6 @@ public class Setting extends Canvas {
                 settingFrame.setVisible(false);
             }
         });
-//KeySetting 버튼 keySetting 화면으로 연결        
         keySetting.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		selected.setForeground(Color.black);
