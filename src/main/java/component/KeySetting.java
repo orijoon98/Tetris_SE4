@@ -18,7 +18,6 @@ public class KeySetting extends Canvas {
 	public Frame keySettingFrame;
 	private Panel keySettingPanel, buttonPanel, titlePanel, discriptionPanel;
 	
-//	private Button left, right, down, drop, rotate, backToSetting, leftKey, rightKey, downKey, dropKey, rotateKey;
 	private Button left, right, down, drop, rotate, backToSetting;
 
 	private Button selected;
@@ -26,66 +25,6 @@ public class KeySetting extends Canvas {
 	
 	public KeySetting(Frame settingFrame) {
 		prepareKeySettingGUI(settingFrame);
-	}
-	
-	private void clickChangeKey(Button button, String buttonName) {
-		UserSetting userKey = new UserSetting();
-		button.addMouseListener(new MouseListener() {
-        	public void mouseClicked(MouseEvent e) {
-        		button.setLabel("Press Key for " + buttonName);
-        		button.addKeyListener(new KeyListener() {
-// 불안한 점! : 클릭할때마다 키 리스너가 늘어나서 여러번 수행됨 (일단 정상 작동함)
-        			@Override
-    				public void keyTyped(KeyEvent e) {
-    		        }
-    				@Override
-    				public void keyPressed(KeyEvent e) {
-    					if (userKey.overlapCheck(e)) {
-    						if(e.getKeyCode() == userKey.getUserKey(buttonName)) {
-        						userKey.changeKey(buttonName, e.getKeyCode());
-            					//System.out.println(e.getKeyCode());
-            					button.setLabel(buttonName + " : " + userKey.getStringKey(buttonName));    
-    						}
-    						else {
-        						System.out.println("OVERLAPED!");
-    						}
-    					}
-    					else {
-    						userKey.changeKey(buttonName, e.getKeyCode());
-    						button.setLabel(buttonName + " : " + userKey.getStringKey(buttonName));    
-    					}
-    					
-    				}
-    				@Override
-    				public void keyReleased(KeyEvent e) {    						
-    				}
-            			
-            	});
-        		
-        	}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub				
-			}
-        });
-        
-		
 	}
 	
 	private void prepareKeySettingGUI(Frame settingFrame) {
@@ -168,17 +107,75 @@ public class KeySetting extends Canvas {
         clickChangeKey(rotate, "ROTATE");
         clickChangeKey(down, "DOWN");
         clickChangeKey(drop, "DROP");
-        
-/*      
-// 불안한 점! : 클릭할때마다 키 리스너가 늘어나서 여러번 수행됨 (일단 정상 작동함)
-
-*/ 
-
-
-
-
 		
 	}
+	private void changeKey(Button button, String buttonName) {
+		UserSetting userKey = new UserSetting();
+		if (selected == button) {
+			button.setLabel("Press Key for " + buttonName);			
+			
+			button.addKeyListener(new KeyListener() {
+	//불안한 점! : 클릭할때마다 키 리스너가 늘어나서 여러번 수행됨 (일단 정상 작동함)
+				@Override
+				public void keyTyped(KeyEvent e) {}
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if (userKey.overlapCheck(e)) {
+						if(e.getKeyCode() == userKey.getUserKey(buttonName)) {
+							userKey.changeKey(buttonName, e.getKeyCode());
+	    					//System.out.println("heres another one?" + e.getKeyCode());
+	    					button.setLabel(buttonName + " : " + userKey.getStringKey(buttonName)); 
+						}
+						else {
+							System.out.println("OVERLAPED!");
+							button.setLabel(buttonName + " : " + userKey.getStringKey(buttonName));    
+						}
+					}
+					else {
+						userKey.changeKey(buttonName, e.getKeyCode());
+						button.setLabel(buttonName + " : " + userKey.getStringKey(buttonName));    
+					}
+					
+				}
+				
+				@Override
+				public void keyReleased(KeyEvent e) {}
+	    			
+	    	});
+
+		}
+		else {
+			button.setLabel(buttonName + " : " + userKey.getStringKey(buttonName)); 			
+		}
+
+	}
+	
+	private void clickChangeKey(Button button, String buttonName) {
+		button.addMouseListener(new MouseListener() {
+        	public void mouseClicked(MouseEvent e) {
+        		selected = button;
+        		changeKey(button, buttonName);
+        	}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub				
+			}
+        });
+        
+		
+	}
+
 	
 
 }
