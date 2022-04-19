@@ -30,7 +30,11 @@ public class DefaultSetting {
 	}
 	
 	
-	private boolean defaultColor = Boolean.FALSE;
+	private boolean defaultColorBlindMode = Boolean.FALSE;
+	
+	public boolean getDefaultColorBlindMode(){
+		return defaultColorBlindMode;
+	}
 	
 	
 }

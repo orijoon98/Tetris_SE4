@@ -13,14 +13,21 @@ public class UserSetting {
 	DefaultSetting defaultKey = new DefaultSetting();
 
 	private static Map<String, Integer> userKey = new ConcurrentHashMap<String, Integer>(); 
-
+	private static boolean colorBlindMode;
+	private static Map<String, Boolean> level = new  ConcurrentHashMap<String, Boolean>(); 
+	private static Map<String, Boolean> size = new  ConcurrentHashMap<String, Boolean>(); 
 	
     public boolean userSettedKey;
     public boolean exist = ( userKey.containsKey("LEFT") && userKey.containsKey("RIGHT") && userKey.containsKey("ROTATE") && userKey.containsKey("DOWN") && userKey.containsKey("DROP"));
 	
 	public UserSetting() {
-		UserKey();		
+		UserKey();
+		colorBlindMode();
+		level();
+		size();
     }
+	
+	
 	
 	private void UserKey() {
 		if (exist) {
@@ -35,8 +42,7 @@ public class UserSetting {
 			userKey.containsValue(defaultKey);
     	}
 	}
-		
-	
+			
 	public int getUserKey(String KEY) {
 		return userKey.get(KEY);
 	}
@@ -52,7 +58,7 @@ public class UserSetting {
 		GameInput input = new GameInput();
 		ItemInput itemInput = new ItemInput();
 	}
-
+	
 	public void checkKey() {
 		boolean exist = ( userKey.containsKey("LEFT") && userKey.containsKey("RIGHT") && userKey.containsKey("ROTATE") && userKey.containsKey("DOWN") && userKey.containsKey("DROP"));
 		if (exist) {
@@ -60,7 +66,8 @@ public class UserSetting {
 		}
 		
 	}
-    public String getStringKey(String KEY) {
+
+	public String getStringKey(String KEY) {
     	
     	int keyCode = getUserKey(KEY);
     	
@@ -357,7 +364,86 @@ public class UserSetting {
     		    return "unknown(0x" + Integer.toString(keyCode, 16) + ")";
     		  }
 
+    
+	
+	private void colorBlindMode() {
+		colorBlindMode= defaultKey.getDefaultColorBlindMode();
+	}
+	
+	public boolean getColorBlindMode() {
+		return colorBlindMode;
+	}
+	
+	public void changeColorBlindMode() {
+		if (colorBlindMode == false) {
+			colorBlindMode = true;
+		}
+		else {
+			colorBlindMode = false;
+		}
+	}
 
+	
+
+	private void level() {
+		level.put("EASY", Boolean.TRUE);
+		level.put("NORMAL", Boolean.FALSE);
+		level.put("HARD", Boolean.FALSE);
+	}
+	
+	public String getLevel() {
+		if(level.get("EASY")){
+			return "EASY";
+		}
+		else if(level.get("NORMAL")){
+			return "NORMAL";
+		}
+		else if(level.get("HARD")){
+			return "HARD";
+		}
+		else {
+			return "ERROR";
+		}
+	}
+	
+	public void changeLevel(String LEVEL) {
+		level.replace("EASY", Boolean.FALSE);
+		level.replace("NORMAL", Boolean.FALSE);
+		level.replace("HARD", Boolean.FALSE);
+		
+		level.replace(LEVEL, Boolean.TRUE);
+	}
+
+
+	
+	private void size() {
+		size.put("SMALL", Boolean.TRUE);
+		size.put("MIDDLE", Boolean.FALSE);
+		size.put("BIG", Boolean.FALSE);
+	}
+	
+	public String getSize() {
+		if(size.get("SMALL")){
+			return "SMALL";
+		}
+		else if(size.get("MIDDLE")){
+			return "MIDDLE";
+		}
+		else if(size.get("BIG")){
+			return "BIG";
+		}
+		else {
+			return "ERROR";
+		}
+	}
+
+	public void changeSize(String SIZE) {
+		size.replace("SMALL", Boolean.FALSE);
+		size.replace("MIDDLE", Boolean.FALSE);
+		size.replace("BIG", Boolean.FALSE);
+		
+		size.replace(SIZE, Boolean.TRUE);
+	}
 	
 
 }
