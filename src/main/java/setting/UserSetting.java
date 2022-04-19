@@ -17,7 +17,6 @@ public class UserSetting {
 	
     public boolean userSettedKey;
     public boolean exist = ( userKey.containsKey("LEFT") && userKey.containsKey("RIGHT") && userKey.containsKey("ROTATE") && userKey.containsKey("DOWN") && userKey.containsKey("DROP"));
-//    private final Map<String, Integer> userKey = new ConcurrentHashMap<String, Integer>(); 
 	
 	public UserSetting() {
 		UserKey();		
@@ -49,7 +48,7 @@ public class UserSetting {
 	public void changeKey(String Key, int keyCode) {
 		userSettedKey = Boolean.TRUE;
 		userKey.replace(Key, keyCode);
-// 불안한 점! : 기존에 있던 키셋이 사라지진 않음 (일단은 정상 작동함)
+
 		GameInput input = new GameInput();
 		ItemInput itemInput = new ItemInput();
 	}

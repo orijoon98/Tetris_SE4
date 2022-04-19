@@ -119,7 +119,6 @@ public class KeySetting extends Canvas {
 		    drop.setLabel("Drop : "+ userKey.getStringKey("DROP"));
 			button.setLabel("Press Key for " + buttonName);			
 			button.addKeyListener(new KeyListener() {
-	//불안한 점! : 클릭할때마다 키 리스너가 늘어나서 여러번 수행됨 (일단 정상 작동함)
 				@Override
 				public void keyTyped(KeyEvent e) {}
 				

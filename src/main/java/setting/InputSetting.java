@@ -1,5 +1,5 @@
 package setting;
-//인코딩 설정 변경 성공?????????/
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Map;
@@ -8,11 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import setting.DefaultSetting;
 import setting.UserSetting;
 
-/*
- * [x] userSetting���� ��������
- * [] userSetting�� Key�� ��������� Ȯ���ϱ�
- * [x] user�� input �ް� �� �ٲٱ�
- */
 
 
 public class InputSetting {
