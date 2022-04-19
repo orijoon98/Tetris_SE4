@@ -1,5 +1,5 @@
 package setting;
-
+//ì¸ì½”ë”© ì„¤ì • ë³€ê²½ ì„±ê³µ?????????/
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Map;
@@ -9,9 +9,9 @@ import setting.DefaultSetting;
 import setting.UserSetting;
 
 /*
- * [x] userSetting¿¡¼­ °¡Á®¿À±â
- * [] userSettingÀÇ Key°¡ Á¤»óÀûÀÎÁö È®ÀÎÇÏ±â
- * [x] userÀÇ input ¹Ş°í °ª ¹Ù²Ù±â
+ * [x] userSettingï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * [] userSettingï¿½ï¿½ Keyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï±ï¿½
+ * [x] userï¿½ï¿½ input ï¿½Ş°ï¿½ ï¿½ï¿½ ï¿½Ù²Ù±ï¿½
  */
 
 
@@ -105,13 +105,13 @@ public class InputSetting {
     		    case KeyEvent.VK_HOME:
     		      return "HOME";
     		    case KeyEvent.VK_LEFT:
-    		      return "¡ç";
+    		      return "ï¿½ï¿½";
     		    case KeyEvent.VK_UP:
-    		      return "¡è";
+    		      return "ï¿½ï¿½";
     		    case KeyEvent.VK_RIGHT:
-    		      return "¡æ";
+    		      return "ï¿½ï¿½";
     		    case KeyEvent.VK_DOWN:
-    		      return "¡é";
+    		      return "ï¿½ï¿½";
     		    case KeyEvent.VK_MULTIPLY:
     		      return "MULTIPLY";
     		    case KeyEvent.VK_ADD:

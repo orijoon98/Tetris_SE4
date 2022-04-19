@@ -103,14 +103,13 @@ public class KeySetting extends Canvas {
         	}
         });
         
-// ´©¸£°í Å°¸¦ ÀÔ·ÂÇÏ¸é ¹Ù²ñ
+// ëˆ„ë¥´ê³  í‚¤ë¥¼ ìž…ë ¥í•˜ë©´ ë°”ë€œ
         
         
         left.addMouseListener(new MouseListener() {
 
-        	// left¹öÆ° ´©·ê½Ã ¿ÞÂÊ Å° ¹Ù²Ù±â °¡´É
+        	// leftë²„íŠ¼ ëˆ„ë£°ì‹œ ì™¼ìª½ í‚¤ ë°”ê¾¸ê¸° ê°€ëŠ¥
         	public void mouseClicked(MouseEvent e) {
-        		int a = 0;
         		System.out.println("you clicked");
         		left.setLabel("you clicked left!");
         		
