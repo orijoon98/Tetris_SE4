@@ -1,14 +1,13 @@
 package setting;
-/* 
- * [] �� Ű�� �ٲ� �� �ִ� �Լ�
- * [] �� Ű�� �ٲ���� �� setted true�� �ٲٱ�
-*/
+
+
 import java.awt.event.KeyEvent;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import setting.DefaultSetting;
 import input.GameInput;
+import input.ItemInput;
 
 public class UserSetting {
 	DefaultSetting defaultKey = new DefaultSetting();
@@ -28,7 +27,7 @@ public class UserSetting {
 		if (exist) {
     	}
 		else{
-			userKey.put("LEFT", KeyEvent.VK_A);
+			userKey.put("LEFT", defaultKey.getDefaultKey("LEFT"));
 			userKey.put("RIGHT", defaultKey.getDefaultKey("RIGHT"));
 			userKey.put("ROTATE", defaultKey.getDefaultKey("ROTATE"));
 			userKey.put("DROP", defaultKey.getDefaultKey("DROP"));
@@ -52,6 +51,7 @@ public class UserSetting {
 		userKey.replace(Key, keyCode);
 // 불안한 점! : 기존에 있던 키셋이 사라지진 않음 (일단은 정상 작동함)
 		GameInput input = new GameInput();
+		ItemInput itemInput = new ItemInput();
 	}
 
 	public void checkKey() {
