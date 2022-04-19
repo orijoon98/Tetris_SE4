@@ -12,34 +12,42 @@ import setting.DefaultSetting;
 public class UserSetting {
 	DefaultSetting defaultKey = new DefaultSetting();
 
+	private final Map<String, Integer> userKey = new ConcurrentHashMap<String, Integer>(); 
+
+	
     public boolean userSettedKey = Boolean.FALSE;
 //    private final Map<String, Integer> userKey = new ConcurrentHashMap<String, Integer>(); 
 	
-	private int userKey(String Key) {
-		final Map<String, Integer> userKey = new ConcurrentHashMap<String, Integer>(); 
-		
-        	userKey.put("LEFT", defaultKey.getDefaultKey("LEFT"));
-        	userKey.put("RIGHT", defaultKey.getDefaultKey("RIGHT"));
-        	userKey.put("ROTATE", defaultKey.getDefaultKey("ROTATE"));
-        	userKey.put("DROP", defaultKey.getDefaultKey("DROP"));
-        	userKey.put("DOWN", defaultKey.getDefaultKey("DOWN"));
-        	userSettedKey = Boolean.TRUE;
-        	
-        	
-        	int keyCode;
-    	    
-    		keyCode = userKey.get(Key);
-    	    
-    		return keyCode;
+	public UserSetting() {
+		UserKey();		
     }
 	
+	private void UserKey() {		
+    	userKey.put("LEFT", defaultKey.getDefaultKey("LEFT"));
+    	userKey.put("RIGHT", defaultKey.getDefaultKey("RIGHT"));
+    	userKey.put("ROTATE", defaultKey.getDefaultKey("ROTATE"));
+    	userKey.put("DROP", defaultKey.getDefaultKey("DROP"));
+    	userKey.put("DOWN", defaultKey.getDefaultKey("DOWN"));
+    	userSettedKey = Boolean.TRUE;
+	}
+		
+	
 	public int getUserKey(String KEY) {
-		return userKey(KEY);
+		return userKey.get(KEY);
 	}
 	
 	public void changeKey(String Key, int keyCode) {
 		userSettedKey = Boolean.TRUE;
-		userKey.userKey.replace(Key, keyCode);
+		userKey.replace(Key, keyCode);
+	}
+	
+	//¸¶¹«¸®!!!!!!!
+	public void checkKey() {
+		boolean exist = ( userKey.containsKey("LEFT") && userKey.containsKey("RIGHT") && userKey.containsKey("ROTATE") && userKey.containsKey("DOWN") && userKey.containsKey("DROP"));
+		if (exist) {
+			
+		}
+		
 	}
 
 	
