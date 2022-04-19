@@ -33,12 +33,18 @@ public class UserSetting {
 			userKey.put("ROTATE", defaultKey.getDefaultKey("ROTATE"));
 			userKey.put("DROP", defaultKey.getDefaultKey("DROP"));
 			userKey.put("DOWN", defaultKey.getDefaultKey("DOWN"));
+			
+			userKey.containsValue(defaultKey);
     	}
 	}
 		
 	
 	public int getUserKey(String KEY) {
 		return userKey.get(KEY);
+	}
+	
+	public boolean overlapCheck(KeyEvent e) {
+		return userKey.containsValue(e.getKeyCode());
 	}
 	
 	public void changeKey(String Key, int keyCode) {

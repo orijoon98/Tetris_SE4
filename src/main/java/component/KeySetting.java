@@ -103,6 +103,7 @@ public class KeySetting extends Canvas {
         
 // 누르고 키를 입력하면 바뀜
         // 시간나면 하나로 정리하자
+        // selected 넣어서 클릭 중복 안나게 
         
         
     	// left버튼 누룰시 왼쪽 키 바꾸기 가능
@@ -118,11 +119,22 @@ public class KeySetting extends Canvas {
     		        }
     				@Override
     				public void keyPressed(KeyEvent e) {
-    			
-    					userKey.changeKey("LEFT", e.getKeyCode());
+    					if (userKey.overlapCheck(e)) {
+    						if(e.getKeyCode() == userKey.getUserKey("LEFT")) {
+        						userKey.changeKey("LEFT", e.getKeyCode());
+            					//System.out.println(e.getKeyCode());
+            					left.setLabel("Left : " + userKey.getStringKey("LEFT"));    
+    						}
+    						else {
+        						System.out.println("OVERLAPED!");
+    						}
+    					}
+    					else {
+    						userKey.changeKey("LEFT", e.getKeyCode());
     					//System.out.println(e.getKeyCode());
-    					left.setLabel("Left : " + userKey.getStringKey("LEFT"));    
-    					//System.out.println(userKey.getStringKey("LEFT")+" is "+userKey.getUserKey("LEFT"));
+    						left.setLabel("Left : " + userKey.getStringKey("LEFT"));    
+    					//System.out.println(userKey.getStringKey("LEFT")+" is "+userKey.getUserKey("LEFT"));   					
+    					}    			
     					
     				}
     				@Override
@@ -164,8 +176,19 @@ public class KeySetting extends Canvas {
     		        }
     				@Override
     				public void keyPressed(KeyEvent e) {
-    					userKey.changeKey("RIGHT", e.getKeyCode());
-    					right.setLabel("Right : " + userKey.getStringKey("RIGHT"));    
+    					if (userKey.overlapCheck(e)) {
+    						if(e.getKeyCode() == userKey.getUserKey("RIGHT")) {
+        						userKey.changeKey("RIGHT", e.getKeyCode());
+            					right.setLabel("Right : " + userKey.getStringKey("RIGHT"));    
+    						}
+    						else {
+        						System.out.println("OVERLAPED!");
+    						}
+    					}
+    					else {
+    						userKey.changeKey("RIGHT", e.getKeyCode());
+    						left.setLabel("Right : " + userKey.getStringKey("RIGHT"));    
+    					}    	
     				}
     				@Override
     				public void keyReleased(KeyEvent e) {    						
@@ -205,8 +228,19 @@ public class KeySetting extends Canvas {
     		        }
     				@Override
     				public void keyPressed(KeyEvent e) {
-    					userKey.changeKey("ROTATE", e.getKeyCode());
-    					rotate.setLabel("Rotate : " + userKey.getStringKey("ROTATE"));    
+    					if (userKey.overlapCheck(e)) {
+    						if(e.getKeyCode() == userKey.getUserKey("ROTATE")) {
+        						userKey.changeKey("ROTATE", e.getKeyCode());
+            					rotate.setLabel("Rotate : " + userKey.getStringKey("ROTATE"));    
+    						}
+    						else {
+        						System.out.println("OVERLAPED!");
+    						}
+    					}
+    					else {
+    						userKey.changeKey("ROTATE", e.getKeyCode());
+    						rotate.setLabel("Rotate : " + userKey.getStringKey("ROTATE"));    
+    					}
     				}
     				@Override
     				public void keyReleased(KeyEvent e) {    						
@@ -246,9 +280,19 @@ public class KeySetting extends Canvas {
     		        }
     				@Override
     				public void keyPressed(KeyEvent e) {
-    					userKey.changeKey("DOWN", e.getKeyCode());
-    					down.setLabel("Down : " + userKey.getStringKey("DOWN"));    
-    				}
+    					if (userKey.overlapCheck(e)) {
+    						if(e.getKeyCode() == userKey.getUserKey("DOWN")) {
+        						userKey.changeKey("DOWN", e.getKeyCode());
+            					down.setLabel("Down : " + userKey.getStringKey("DOWN"));    
+    						}
+    						else {
+        						System.out.println("OVERLAPED!");
+    						}
+    					}
+    					else {
+    						userKey.changeKey("DOWN", e.getKeyCode());
+    						down.setLabel("Down : " + userKey.getStringKey("DOWN"));    
+    					}    				}
     				@Override
     				public void keyReleased(KeyEvent e) {    						
     				}
@@ -287,9 +331,19 @@ public class KeySetting extends Canvas {
     		        }
     				@Override
     				public void keyPressed(KeyEvent e) {
-    					userKey.changeKey("DROP", e.getKeyCode());
-    					drop.setLabel("Drop : " + userKey.getStringKey("DROP"));    
-    				}
+    					if (userKey.overlapCheck(e)) {
+    						if(e.getKeyCode() == userKey.getUserKey("DROP")) {
+        						userKey.changeKey("DROP", e.getKeyCode());
+            					drop.setLabel("Drop : " + userKey.getStringKey("DROP"));    
+    						}
+    						else {
+        						System.out.println("OVERLAPED!");
+    						}
+    					}
+    					else {
+    						userKey.changeKey("DROP", e.getKeyCode());
+    						drop.setLabel("Drop: " + userKey.getStringKey("DROP"));    
+    					}    				}
     				@Override
     				public void keyReleased(KeyEvent e) {    						
     				}
