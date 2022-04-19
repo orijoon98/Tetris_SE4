@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import blocks.BlockProbabilty;
+
 public enum BlockType {
 
     O(0, p(-1, 0), p(0, 0),  p(-1, -1), p(0, -1)),
@@ -26,7 +28,9 @@ public enum BlockType {
     }
 
     public static BlockType getRandomBlock() {
-    	return BlockType.values()[random.nextInt(BlockType.values().length)];
+    	BlockProbabilty prob = new BlockProbabilty(14, 14, 14, 14, 14, 14, 16);
+    	
+    	return BlockType.values()[prob.randomProb()];
     }
     
 
