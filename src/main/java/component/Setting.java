@@ -86,6 +86,7 @@ public class Setting extends Canvas {
             public void actionPerformed(ActionEvent e) {
                 homeFrame.setVisible(true);
                 settingFrame.setVisible(false);
+                homeFrame.requestFocus();
             }
         });
         keySetting.addActionListener(new ActionListener() {
