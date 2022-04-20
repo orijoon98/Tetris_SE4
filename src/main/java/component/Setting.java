@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import setting.UserSetting;
 
 public class Setting extends Canvas {
 
@@ -54,12 +55,14 @@ public class Setting extends Canvas {
         titlePanel.add(title);
 
         buttonPanel = new Panel();
-        buttonPanel.setBounds(250, 220, 300, 250);       
+        buttonPanel.setBounds(200, 220, 400, 250);       
         buttonPanel.setLayout(new GridLayout(4, 2));
+        
+        UserSetting userSetting = new UserSetting();
 
         keySetting = new Button("Key");
-        scoreBoard = new Button("Scoreboard");
-        color = new Button("Color");
+        scoreBoard = new Button("Reset Scoreboard");
+        color = new Button("Color Blind Mode");
         level = new Button("Level");
         size = new Button("Size");
         reSetting = new Button("ReSetting");        
@@ -80,6 +83,21 @@ public class Setting extends Canvas {
         settingPanel.add(titlePanel);
 
         settingFrame.setVisible(false);
+        
+        
+        
+        if (userSetting.getColorBlindMode()) {
+        	color.setLabel("Color Blind Mode : ON");
+        }
+        else {
+        	color.setLabel("Color Blind Mode : OFF");            	
+        }
+        
+        level.setLabel("Level : " + userSetting.getLevel());
+		size.setLabel("Size : " + userSetting.getSize());
+        
+        
+        
 
         home.addActionListener(new ActionListener() {
             @Override
@@ -89,6 +107,7 @@ public class Setting extends Canvas {
                 homeFrame.requestFocus();
             }
         });
+        
         keySetting.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		selected.setForeground(Color.black);
@@ -98,6 +117,64 @@ public class Setting extends Canvas {
                 settingFrame.setVisible(false);
             	
         	}
+        	
+        });
+        
+        color.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				userSetting.changeColorBlindMode();
+				if (userSetting.getColorBlindMode()) {
+		        	color.setLabel("Color Blind Mode : ON");
+		        }
+		        else {
+		        	color.setLabel("Color Blind Mode : OFF");            	
+		        }
+				
+			}
+        	
+        });
+        
+        level.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (userSetting.getLevel() == "EASY") {
+					userSetting.changeLevel("NORMAL");
+				}
+				else if (userSetting.getLevel() == "NORMAL") {
+					userSetting.changeLevel("HARD");
+				}
+				else if (userSetting.getLevel() == "HARD") {
+					userSetting.changeLevel("EASY");
+				}
+				level.setLabel("Level : " + userSetting.getLevel());
+
+				
+				
+			}
+        	
+        });
+        
+        size.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (userSetting.getSize() == "SMALL") {
+					userSetting.changeSize("MIDDLE");
+				}
+				else if (userSetting.getSize() == "MIDDLE") {
+					userSetting.changeSize("BIG");
+				}
+				else if (userSetting.getSize() == "BIG") {
+					userSetting.changeSize("SMALL");
+				}
+				size.setLabel("Size : " + userSetting.getSize());
+
+
+				
+			}
         	
         });
    
