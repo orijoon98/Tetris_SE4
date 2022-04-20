@@ -120,6 +120,7 @@ public class Setting extends Canvas {
         
         keySetting.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		reSetting.setLabel("Reset Setting");
         		selected.setForeground(Color.black);
         		selected = keySetting;
         		selected.setForeground(Color.gray);
@@ -134,6 +135,7 @@ public class Setting extends Canvas {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				reSetting.setLabel("Reset Setting");
 				userSetting.changeColorBlindMode();
 				if (userSetting.getColorBlindMode()) {
 		        	color.setLabel("Color Blind Mode : ON");
@@ -150,6 +152,7 @@ public class Setting extends Canvas {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				reSetting.setLabel("Reset Setting");
 				if (userSetting.getDifficultyLevel() == "EASY") {
 					userSetting.changeLevel("NORMAL");
 				}
@@ -171,6 +174,8 @@ public class Setting extends Canvas {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+                reSetting.setLabel("Reset Setting");
+
 				if (userSetting.getSize() == "SMALL") {
 					userSetting.changeSize("MIDDLE");
 				}
@@ -193,6 +198,7 @@ public class Setting extends Canvas {
             public void actionPerformed(ActionEvent e) {
                 try {
                     resetScoreBoard();
+                    
                 } catch (IOException exception) {}
                 scoreBoard.setLabel("Reset Completed");
             }

@@ -490,6 +490,9 @@ public class UserSetting {
 	public void resetSetting() {
 		userKey.clear();
 		UserKey();
+		colorBlindMode();
+		difficulty_level();
+		size();
 	}
 
 }
