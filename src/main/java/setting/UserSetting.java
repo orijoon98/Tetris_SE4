@@ -442,8 +442,8 @@ public class UserSetting {
 	private void size() {
 		if(exist) {}
 		else {
-		size.put("SMALL", Boolean.TRUE);
-		size.put("MIDDLE", Boolean.FALSE);
+		size.put("SMALL", Boolean.FALSE);
+		size.put("MIDDLE", Boolean.TRUE);
 		size.put("BIG", Boolean.FALSE);}
 	}
 	
@@ -464,13 +464,13 @@ public class UserSetting {
 
 	public int getSizeInt() {
 		if(size.get("SMALL")){
-			return 2;
+			return 1;
 		}
 		else if(size.get("MIDDLE")){
-			return 3;
+			return 2;
 		}
 		else if(size.get("BIG")){
-			return 4;
+			return 3;
 		}
 		else {
 			return 2;
