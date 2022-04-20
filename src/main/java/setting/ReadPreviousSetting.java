@@ -13,6 +13,8 @@ public class ReadPreviousSetting {
 	private static int LEFT, RIGHT, DOWN, ROTATE, DROP = 0;
 	private static int Level, Size, ColorBlindMode = 0;
 	private static Map<String, String> setting = new  ConcurrentHashMap<String, String>();//파일-설정값
+
+	
 	
 	DefaultSetting defaultSetting = new DefaultSetting();
 
@@ -26,8 +28,48 @@ public class ReadPreviousSetting {
 		return setting.get(word);
 	}
 	
-	public void changeFileSetting(String key, String value) {
+	public void changeFileSetting(String key, String value) throws IOException {
+		setting.replace(key, value);
+		String path = ReadPreviousSetting.class.getResource("").getPath();
+		File inSamePackage = new File (path + "userSetted.txt");
 		
+		PrintWriter pw = new PrintWriter(inSamePackage);
+
+		pw.println("LEFT");
+        pw.println(setting.get("LEFT"));
+        pw.println("RIGHT");
+        pw.println(setting.get("RIGHT"));
+        pw.println("DOWN");
+        pw.println(setting.get("DOWN"));
+        pw.println("DROP");
+        pw.println(setting.get("DROP"));
+        pw.println("ROTATE");
+        pw.println(setting.get("ROTATE"));
+        pw.println("Level");
+        pw.println(setting.get("Level"));
+        pw.println("Size");
+        pw.println(setting.get("Size"));
+        pw.println("ColorBlindMode");
+        pw.println(setting.get("ColorBlindMode"));
+        
+        pw.close();
+        
+        array.clear();
+        
+        BufferedReader br = new BufferedReader (new FileReader(inSamePackage));
+		
+		int nth = 1;
+		
+		while(true) {
+			String line = br.readLine();
+			if (line==null) break;
+			array.add(line);
+			isItThere(line,nth);
+			nth ++;
+		}
+		br.close();
+
+	
 	}
 
 //지나면 무조건 파일 있음 + array에 내용 저장됨 + setting 맵 생김	
@@ -179,12 +221,6 @@ public class ReadPreviousSetting {
 		if (ColorBlindMode != 0) setting.replace("ColorBlindMode", array.get(ColorBlindMode));
 		
 	}
-
-	private void checkFileValue() {
-		
-	}
-
-	
 
 
 }
