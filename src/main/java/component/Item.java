@@ -301,7 +301,19 @@ public class Item extends Canvas {
 
     private void drawBlock(Graphics g, int x, int y, Color color) {
         g.setColor(color);
-        g.fillRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH);
+
+        UserSetting UserSetting = new UserSetting();
+
+        if(UserSetting.getColorBlindMode()) {        	
+            g.fill3DRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH, true);
+            if(color == getBlockColor(BlockType.J) || color == getBlockColor(BlockType.S)) {
+            	g.fill3DRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH, false);                	
+            }
+        }
+        else {
+            g.fillRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH);        	
+        }
+        
         g.drawRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH);
     }
 }

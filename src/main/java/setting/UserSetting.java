@@ -382,11 +382,11 @@ public class UserSetting {
 	}
 	
 	public void changeColorBlindMode() {
-		if (colorBlindMode == false) {
-			colorBlindMode = true;
+		if (colorBlindMode) {
+			colorBlindMode = false;
 		}
 		else {
-			colorBlindMode = false;
+			colorBlindMode = true;
 		}
 	}
 
