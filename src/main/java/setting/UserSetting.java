@@ -2,12 +2,14 @@ package setting;
 
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import setting.DefaultSetting;
 import input.GameInput;
 import input.ItemInput;
+import setting.ReadPreviousSetting;
 
 public class UserSetting {
 	DefaultSetting defaultKey = new DefaultSetting();
@@ -19,12 +21,13 @@ public class UserSetting {
 	
     public boolean userSettedKey;
     public boolean exist = ( userKey.containsKey("LEFT") && userKey.containsKey("RIGHT") && userKey.containsKey("ROTATE") && userKey.containsKey("DOWN") && userKey.containsKey("DROP"));
-	
+	    
 	public UserSetting() {
 		UserKey();
 		colorBlindMode();
 		level();
 		size();
+
     }
 	
 	
