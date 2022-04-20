@@ -65,8 +65,8 @@ public class Setting extends Canvas {
         color = new Button("Color Blind Mode");
         level = new Button("Level");
         size = new Button("Size");
-        reSetting = new Button("ReSetting");        
-        home = new Button("home");
+        reSetting = new Button("Reset Setting");
+        home = new Button("Home");
 
         selected = keySetting;
         
