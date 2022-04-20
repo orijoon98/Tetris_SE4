@@ -372,7 +372,9 @@ public class UserSetting {
     
 	
 	private void colorBlindMode() {
-		colorBlindMode= defaultKey.getDefaultColorBlindMode();
+		if(exist) {}
+		else {
+		colorBlindMode= defaultKey.getDefaultColorBlindMode();}
 	}
 	
 	public boolean getColorBlindMode() {
@@ -393,8 +395,6 @@ public class UserSetting {
 	private void difficulty_level() {
 		if (exist) {}
 		else {
-		
-		
 		difficulty_level.put("EASY", Boolean.TRUE);
 		difficulty_level.put("NORMAL", Boolean.FALSE);
 		difficulty_level.put("HARD", Boolean.FALSE);}
@@ -440,9 +440,11 @@ public class UserSetting {
 
 	
 	private void size() {
+		if(exist) {}
+		else {
 		size.put("SMALL", Boolean.TRUE);
 		size.put("MIDDLE", Boolean.FALSE);
-		size.put("BIG", Boolean.FALSE);
+		size.put("BIG", Boolean.FALSE);}
 	}
 	
 	public String getSize() {
