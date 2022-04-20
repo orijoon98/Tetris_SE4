@@ -22,6 +22,8 @@ public class UserSetting {
     public boolean userSettedKey;
     public boolean exist = ( userKey.containsKey("LEFT") && userKey.containsKey("RIGHT") && userKey.containsKey("ROTATE") && userKey.containsKey("DOWN") && userKey.containsKey("DROP"));
 	    
+    private static int difficultySetted = 0;
+    
 	public UserSetting() {
 		UserKey();
 		colorBlindMode();
@@ -389,9 +391,13 @@ public class UserSetting {
 	
 
 	private void difficulty_level() {
+		if (exist) {}
+		else {
+		
+		
 		difficulty_level.put("EASY", Boolean.TRUE);
 		difficulty_level.put("NORMAL", Boolean.FALSE);
-		difficulty_level.put("HARD", Boolean.FALSE);
+		difficulty_level.put("HARD", Boolean.FALSE);}
 	}
 	
 	public static String getDifficultyLevel() {
