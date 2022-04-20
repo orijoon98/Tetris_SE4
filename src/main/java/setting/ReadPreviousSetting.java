@@ -56,19 +56,7 @@ public class ReadPreviousSetting {
         
         array.clear();
         
-        BufferedReader br = new BufferedReader (new FileReader(inSamePackage));
-		
-		int nth = 1;
-		
-		while(true) {
-			String line = br.readLine();
-			if (line==null) break;
-			array.add(line);
-			isItThere(line,nth);
-			nth ++;
-		}
-		br.close();
-
+        readWriteFile();
 	
 	}
 
