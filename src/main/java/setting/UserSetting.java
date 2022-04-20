@@ -16,7 +16,7 @@ public class UserSetting {
 
 	private static Map<String, Integer> userKey = new ConcurrentHashMap<String, Integer>(); 
 	private static boolean colorBlindMode;
-	private static Map<String, Boolean> level = new  ConcurrentHashMap<String, Boolean>(); 
+	private static Map<String, Boolean> difficulty_level = new  ConcurrentHashMap<String, Boolean>();
 	private static Map<String, Boolean> size = new  ConcurrentHashMap<String, Boolean>(); 
 	
     public boolean userSettedKey;
@@ -25,7 +25,7 @@ public class UserSetting {
 	public UserSetting() {
 		UserKey();
 		colorBlindMode();
-		level();
+		difficulty_level();
 		size();
 
     }
@@ -388,20 +388,20 @@ public class UserSetting {
 
 	
 
-	private void level() {
-		level.put("EASY", Boolean.TRUE);
-		level.put("NORMAL", Boolean.FALSE);
-		level.put("HARD", Boolean.FALSE);
+	private void difficulty_level() {
+		difficulty_level.put("EASY", Boolean.TRUE);
+		difficulty_level.put("NORMAL", Boolean.FALSE);
+		difficulty_level.put("HARD", Boolean.FALSE);
 	}
 	
-	public String getLevel() {
-		if(level.get("EASY")){
+	public static String getDifficultyLevel() {
+		if(difficulty_level.get("EASY")){
 			return "EASY";
 		}
-		else if(level.get("NORMAL")){
+		else if(difficulty_level.get("NORMAL")){
 			return "NORMAL";
 		}
-		else if(level.get("HARD")){
+		else if(difficulty_level.get("HARD")){
 			return "HARD";
 		}
 		else {
@@ -410,11 +410,25 @@ public class UserSetting {
 	}
 	
 	public void changeLevel(String LEVEL) {
-		level.replace("EASY", Boolean.FALSE);
-		level.replace("NORMAL", Boolean.FALSE);
-		level.replace("HARD", Boolean.FALSE);
-		
-		level.replace(LEVEL, Boolean.TRUE);
+		difficulty_level.replace("EASY", Boolean.FALSE);
+		difficulty_level.replace("NORMAL", Boolean.FALSE);
+		difficulty_level.replace("HARD", Boolean.FALSE);
+
+		difficulty_level.replace(LEVEL, Boolean.TRUE);
+	}
+
+	public static int getDifficultyIntLevel(){
+		if (getDifficultyLevel() == "EASY"){
+			return 3;
+		}
+		else if(getDifficultyLevel() == "NORMAL"){
+			return 5;
+		}
+		else if(getDifficultyLevel() == "HARD"){
+			return 7;
+		} else {
+			return 5;
+		}
 	}
 
 

@@ -1,6 +1,7 @@
 package component.game;
 
 import blocks.*;
+import setting.UserSetting;
 
 public class GameSetting {
 
@@ -36,8 +37,8 @@ public class GameSetting {
     }
 
     public double getSpeed() {
-        if (getPriorlevel() < getLevel()) {
-            return speed / 5;
+        if (getPriorlevel() < getLevel()) {;
+            return speed/UserSetting.getDifficultyIntLevel();
         }
         else {
             return speed;
@@ -60,19 +61,19 @@ public class GameSetting {
         if (board.getFullLines() > getLineCount()) {
             if (board.getFullLines() == getLineCount() + 1) {
                 setLineCount(board.getFullLines());
-                return 100 * getLevel();
+                return 100 * getLevel() * UserSetting.getDifficultyIntLevel();
             } else if (board.getFullLines() == getLineCount() + 2) {
                 setLineCount(board.getFullLines());
-                return 100 * getLevel() * 2;
+                return 100 * getLevel() * 2 * UserSetting.getDifficultyIntLevel();
             } else if (board.getFullLines() == getLineCount() + 3) {
                 setLineCount(board.getFullLines());
-                return 100 * getLevel() * 3;
+                return 100 * getLevel() * 3 * UserSetting.getDifficultyIntLevel();
             } else {
                 setLineCount(board.getFullLines());
-                return 100 * getLevel() * 4;
+                return 100 * getLevel() * 4 * UserSetting.getDifficultyIntLevel();
             }
         } else {
-            return getLevel();
+            return getLevel() * UserSetting.getDifficultyIntLevel();
         }
     }
 

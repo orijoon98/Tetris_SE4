@@ -23,7 +23,7 @@ public class Setting extends Canvas {
     public KeySetting keySettingGUI;
 
 
-    private Button home, keySetting, scoreBoard, color, level, size, reSetting;
+    private Button home, keySetting, scoreBoard, color, difficulty_level, size, reSetting;
     private Button selected;
 
     private List<Button> buttonList = new ArrayList<>();
@@ -68,7 +68,7 @@ public class Setting extends Canvas {
         keySetting = new Button("Key");
         scoreBoard = new Button("Reset Scoreboard");
         color = new Button("Color Blind Mode");
-        level = new Button("Level");
+        difficulty_level = new Button("Level");
         size = new Button("Size");
         reSetting = new Button("Reset Setting");
         home = new Button("Home");
@@ -78,7 +78,7 @@ public class Setting extends Canvas {
         buttonPanel.add(keySetting);
         buttonPanel.add(scoreBoard);
         buttonPanel.add(color);
-        buttonPanel.add(level);
+        buttonPanel.add(difficulty_level);
         buttonPanel.add(size);
         buttonPanel.add(reSetting);
         buttonPanel.add(home);
@@ -97,8 +97,8 @@ public class Setting extends Canvas {
         else {
         	color.setLabel("Color Blind Mode : OFF");            	
         }
-        
-        level.setLabel("Level : " + userSetting.getLevel());
+
+        difficulty_level.setLabel("Level : " + userSetting.getDifficultyLevel());
 		size.setLabel("Size : " + userSetting.getSize());
         
         
@@ -141,21 +141,21 @@ public class Setting extends Canvas {
 			}
         	
         });
-        
-        level.addActionListener(new ActionListener(){
+
+        difficulty_level.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (userSetting.getLevel() == "EASY") {
+				if (userSetting.getDifficultyLevel() == "EASY") {
 					userSetting.changeLevel("NORMAL");
 				}
-				else if (userSetting.getLevel() == "NORMAL") {
+				else if (userSetting.getDifficultyLevel() == "NORMAL") {
 					userSetting.changeLevel("HARD");
 				}
-				else if (userSetting.getLevel() == "HARD") {
+				else if (userSetting.getDifficultyLevel() == "HARD") {
 					userSetting.changeLevel("EASY");
 				}
-				level.setLabel("Level : " + userSetting.getLevel());
+                difficulty_level.setLabel("Level : " + userSetting.getDifficultyLevel());
 
 				
 				

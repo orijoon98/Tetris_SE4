@@ -12,6 +12,7 @@ import component.game.GameSetting;
 import input.GameInput;
 
 import blocks.BlockType;
+import setting.UserSetting;
 
 public class Game extends Canvas {
 
@@ -210,6 +211,7 @@ public class Game extends Canvas {
         g.drawString("Mode: Normal", 10, 20);
         g.drawString(getLevel(), 10, 40);
         g.drawString(getLines(), 10, 60);
+        g.drawString(getDifficultyLevl(),10,80);
         g.drawString(getScore(), 20, 100);
     }
 
@@ -246,6 +248,8 @@ public class Game extends Canvas {
     private String getScore() {
         return String.format("Score     %1s", game.getTotalScore());
     }
+
+    private String getDifficultyLevl(){return String.format("Difficulty Level: %1s", UserSetting.getDifficultyLevel());}
 
     private void drawPiecePreviewBox(Graphics2D g) {
         g.setFont(new Font("Dialog", Font.PLAIN, 16));
