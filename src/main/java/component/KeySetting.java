@@ -14,6 +14,9 @@ import setting.UserSetting;
 import setting.InputSetting;
 
 public class KeySetting extends Canvas {
+	static UserSetting UserSetting = new UserSetting();	
+	private static int sizeInt = UserSetting.getSizeInt();
+
 	
 	public Frame keySettingFrame;
 	private Panel keySettingPanel, buttonPanel, titlePanel, discriptionPanel;
@@ -29,7 +32,7 @@ public class KeySetting extends Canvas {
 	
 	private void prepareKeySettingGUI(Frame settingFrame) {
         keySettingFrame = new Frame("Seoultech SE4 Tetris");
-        keySettingFrame.setSize(800, 600);
+        keySettingFrame.setSize(sizeInt * 400, sizeInt * 300);
         keySettingFrame.setResizable(false);
         keySettingFrame.setLayout(null);
         keySettingFrame.addWindowListener(new WindowAdapter() {
@@ -39,15 +42,15 @@ public class KeySetting extends Canvas {
         });
 
         keySettingPanel = new Panel();
-        keySettingPanel.setSize(800, 600);
+        keySettingPanel.setSize(sizeInt * 400, sizeInt * 300);
         keySettingPanel.setBackground(Color.black);
         keySettingPanel.setLayout(null);
-        keySettingPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
+        keySettingPanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 8));
        
         
         titlePanel = new Panel();
-        titlePanel.setBounds(250, 100, 300, 80);
-        titlePanel.setFont(new Font("Dialog", Font.PLAIN, 50));              
+        titlePanel.setBounds(sizeInt * 125, sizeInt * 50, sizeInt * 150, sizeInt * 40);
+        titlePanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 25));              
         
         Label title = new Label("KeySetting");
         title.setForeground(Color.BLUE); 
@@ -55,8 +58,8 @@ public class KeySetting extends Canvas {
         titlePanel.add(title);
         
         discriptionPanel = new Panel();
-        discriptionPanel.setBounds(0, 170, 800, 80);
-        discriptionPanel.setFont(new Font("Dialog", Font.PLAIN, 20));
+        discriptionPanel.setBounds(sizeInt * 0, sizeInt * 85, sizeInt * 400, sizeInt * 40);
+        discriptionPanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 10));
 // !! 영어 고쳐놓기 !!
         Label discription = new Label("Please Click the botton and press the key you'd like to modify");
         discription.setForeground(Color.WHITE); 
@@ -64,7 +67,7 @@ public class KeySetting extends Canvas {
         discriptionPanel.add(discription);
 
         buttonPanel = new Panel();
-        buttonPanel.setBounds(250, 220, 300, 250);       
+        buttonPanel.setBounds(sizeInt * 125, sizeInt * 110, sizeInt * 150, sizeInt * 125);       
         buttonPanel.setLayout(new GridLayout(6, 2));
         
         UserSetting userKey = new UserSetting();

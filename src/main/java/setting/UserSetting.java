@@ -462,6 +462,23 @@ public class UserSetting {
 		}
 	}
 
+	public int getSizeInt() {
+		if(size.get("SMALL")){
+			return 2;
+		}
+		else if(size.get("MIDDLE")){
+			return 3;
+		}
+		else if(size.get("BIG")){
+			return 4;
+		}
+		else {
+			return 2;
+		}
+	
+		
+	}
+
 	public void changeSize(String SIZE) {
 		size.replace("SMALL", Boolean.FALSE);
 		size.replace("MIDDLE", Boolean.FALSE);

@@ -1,6 +1,8 @@
 package component;
 
 import input.ScoreBoardInput;
+import setting.UserSetting;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,6 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreBoard extends Canvas {
+	static UserSetting UserSetting = new UserSetting();	
+	private static int sizeInt = UserSetting.getSizeInt();
+
+	
 
     public Frame scoreBoardFrame;
     private Panel scoreBoardPanel, titlePanel, buttonPanel;
@@ -40,7 +46,7 @@ public class ScoreBoard extends Canvas {
 
     private void prepareScoreBoardGUI(Frame homeFrame) {
         scoreBoardFrame = new Frame("Seoultech SE4 Tetris");
-        scoreBoardFrame.setSize(800, 600);
+        scoreBoardFrame.setSize(sizeInt * 400, sizeInt * 300);
         scoreBoardFrame.setResizable(false);
         scoreBoardFrame.setLayout(null);
         scoreBoardFrame.addWindowListener(new WindowAdapter() {
@@ -50,14 +56,14 @@ public class ScoreBoard extends Canvas {
         });
 
         scoreBoardPanel = new Panel();
-        scoreBoardPanel.setSize(800, 600);
+        scoreBoardPanel.setSize(sizeInt * 400, sizeInt * 300);
         scoreBoardPanel.setBackground(Color.black);
         scoreBoardPanel.setLayout(null);
-        scoreBoardPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
+        scoreBoardPanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 8));
 
         titlePanel = new Panel();
-        titlePanel.setBounds(250, 100, 300, 80);
-        titlePanel.setFont(new Font("Dialog", Font.PLAIN, 50));
+        titlePanel.setBounds(sizeInt * 125, sizeInt * 50, sizeInt * 150, sizeInt * 40);
+        titlePanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 25));
 
         Label title = new Label("Scoreboard");
         title.setForeground(Color.RED);
@@ -65,7 +71,7 @@ public class ScoreBoard extends Canvas {
         titlePanel.add(title);
 
         buttonPanel = new Panel();
-        buttonPanel.setBounds(150, 220, 500, 300);
+        buttonPanel.setBounds(sizeInt * 75, sizeInt * 110, sizeInt * 250, sizeInt * 150);
         buttonPanel.setLayout(new GridLayout(3, 1));
 
         normal = new Button("Normal Mode");

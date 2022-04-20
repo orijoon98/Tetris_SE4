@@ -1,6 +1,7 @@
 package component;
 
 import input.ScoreBoardNormalInput;
+import setting.UserSetting;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ScoreBoardNormal extends Canvas {
+	static UserSetting UserSetting = new UserSetting();	
+	private static int sizeInt = UserSetting.getSizeInt();
+
 
     public Frame scoreBoardNormalFrame;
     private Panel scoreBoardNormalPanel, titlePanel, buttonPanel;
@@ -21,7 +25,7 @@ public class ScoreBoardNormal extends Canvas {
 
     public ScoreBoardNormal(Frame homeFrame, Frame scoreBoardFrame) {
         scoreBoardNormalFrame = new Frame("Seoultech SE4 Tetris");
-        scoreBoardNormalFrame.setSize(800, 600);
+        scoreBoardNormalFrame.setSize(sizeInt * 400, sizeInt * 300);
         scoreBoardNormalFrame.setResizable(false);
         scoreBoardNormalFrame.setLayout(null);
         scoreBoardNormalFrame.addWindowListener(new WindowAdapter() {
@@ -31,14 +35,14 @@ public class ScoreBoardNormal extends Canvas {
         });
 
         scoreBoardNormalPanel = new Panel();
-        scoreBoardNormalPanel.setSize(800, 600);
+        scoreBoardNormalPanel.setSize(sizeInt * 400, sizeInt * 300);
         scoreBoardNormalPanel.setBackground(Color.black);
         scoreBoardNormalPanel.setLayout(null);
-        scoreBoardNormalPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
+        scoreBoardNormalPanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 8));
 
         titlePanel = new Panel();
-        titlePanel.setBounds(250, 100, 300, 80);
-        titlePanel.setFont(new Font("Dialog", Font.PLAIN, 50));
+        titlePanel.setBounds(sizeInt * 125, sizeInt * 50, sizeInt * 150, sizeInt * 40);
+        titlePanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 25));
 
         Label title = new Label("Normal");
         title.setForeground(Color.RED);
@@ -46,11 +50,11 @@ public class ScoreBoardNormal extends Canvas {
         titlePanel.add(title);
 
         tablePanel = new Panel();
-        tablePanel.setBounds(150, 220, 500, 210);
+        tablePanel.setBounds(sizeInt * 75, sizeInt * 110, sizeInt * 250, sizeInt * 105);
         tablePanel.setLayout(new GridLayout(11, 3));
 
         buttonPanel = new Panel();
-        buttonPanel.setBounds(150, 470, 500, 50);
+        buttonPanel.setBounds(sizeInt * 75, sizeInt * 235, sizeInt * 250, sizeInt * 25);
         buttonPanel.setLayout(new GridLayout(1, 2));
 
         home = new Button("Home");
