@@ -50,7 +50,7 @@ public class BlockProbabilty {
     	
     	UserSetting userSetting = new UserSetting();
     	
-    	if (userSetting.getLevel() == "EASY") {
+    	if (userSetting.getDifficultyLevel() == "EASY") {
         	blockProbArray[O] = 10;
         	blockProbArray[I] = 12;
         	blockProbArray[S] = 10;
@@ -59,7 +59,7 @@ public class BlockProbabilty {
         	blockProbArray[J] = 10;
         	blockProbArray[T] = 10;    		
     	}
-    	else if (userSetting.getLevel() == "NORMAL") {
+    	else if (userSetting.getDifficultyLevel() == "NORMAL") {
         	blockProbArray[O] = 10;
         	blockProbArray[I] = 10;
         	blockProbArray[S] = 10;
@@ -68,7 +68,7 @@ public class BlockProbabilty {
         	blockProbArray[J] = 10;
         	blockProbArray[T] = 10;    		
     	}
-    	else if (userSetting.getLevel() == "HARD") {
+    	else if (userSetting.getDifficultyLevel() == "HARD") {
         	blockProbArray[O] = 10;
         	blockProbArray[I] = 8;
         	blockProbArray[S] = 10;
