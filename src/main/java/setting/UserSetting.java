@@ -31,8 +31,7 @@ public class UserSetting {
 		size();
 
     }
-	
-	
+		
 	
 	private void UserKey() {
 		if (exist) {
@@ -487,5 +486,10 @@ public class UserSetting {
 		size.replace(SIZE, Boolean.TRUE);
 	}
 	
+	
+	public void resetSetting() {
+		userKey.clear();
+		UserKey();
+	}
 
 }

@@ -197,6 +197,19 @@ public class Setting extends Canvas {
                 scoreBoard.setLabel("Reset Completed");
             }
         });
+        
+        reSetting.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 디폴트값이 바뀔경우 같이 바꿔줘야한다.
+                userSetting.resetSetting();
+                reSetting.setLabel("Reset Completed");
+                color.setLabel("Color Blind Mode : OFF");            	
+                difficulty_level.setLabel("Level : EASY" );
+        		size.setLabel("Size : MIDDLE");
+                
+            }
+        });
    
     }
 
