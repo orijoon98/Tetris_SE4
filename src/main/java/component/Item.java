@@ -4,6 +4,7 @@ import blocks.BlockType;
 import component.game.BoardCell;
 import component.game.GameSetting;
 import input.ItemInput;
+import setting.UserSetting;
 
 import javax.swing.*;
 import java.awt.*;
@@ -252,15 +253,18 @@ public class Item extends Canvas {
     }
 
     private void drawHelpBox(Graphics2D g) {
-        g.setFont(new Font("Dialog", Font.PLAIN, 16));
+    	UserSetting UserSetting = new UserSetting();
+    	g.setFont(new Font("Dialog", Font.PLAIN, 16));
         g.setColor(Color.RED);
         g.drawString("H E L P", 50, 140);
         g.drawString("F1: New Game", 10, 160);
         g.drawString("ESC: Pause Game/Continue", 10, 180);
-        g.drawString("UP: Rotate", 10, 200);
-        g.drawString("ARROWS: Move Left/Right/Down", 10, 220);
-        g.drawString("SPACE: Drop", 10, 240);
-        g.drawString("F2: Home", 10, 260);
+        g.drawString(UserSetting.getStringKey("ROTATE") +" : Rotate", 10, 200);
+        g.drawString(UserSetting.getStringKey("LEFT") + " : Move Left", 10, 220);
+        g.drawString(UserSetting.getStringKey("RIGHT") + " : Move Right", 10, 240);
+        g.drawString(UserSetting.getStringKey("DOWN")+ " : Move Down", 10, 260);
+        g.drawString(UserSetting.getStringKey("DROP") + " : Drop", 10, 280);
+        g.drawString("F2: Home", 10, 300);
     }
 
     private void drawBlockPreview(Graphics2D g, BlockType type) {
