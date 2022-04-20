@@ -7,7 +7,7 @@ public class GameSetting {
 
     private final Board board;
     private Block nextBlock;
-
+    
     private boolean playing = false;
     private boolean paused = false;
     private boolean dropping = false;
