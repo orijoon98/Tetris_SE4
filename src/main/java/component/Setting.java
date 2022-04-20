@@ -5,9 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import setting.UserSetting;
 
 public class Setting extends Canvas {
@@ -105,6 +110,7 @@ public class Setting extends Canvas {
                 homeFrame.setVisible(true);
                 settingFrame.setVisible(false);
                 homeFrame.requestFocus();
+                scoreBoard.setLabel("Reset Scoreboard");
             }
         });
         
@@ -177,6 +183,28 @@ public class Setting extends Canvas {
 			}
         	
         });
+
+        scoreBoard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    resetScoreBoard();
+                } catch (IOException exception) {}
+                scoreBoard.setLabel("Reset Completed");
+            }
+        });
    
+    }
+
+    private void resetScoreBoard() throws IOException {
+        URL url = new URL("http://ec2-13-124-44-172.ap-northeast-2.compute.amazonaws.com:8080/api/reset");
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        connection.setRequestMethod("DELETE");
+        connection.setDoOutput(true);
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String returnMsg = in.readLine();
     }
 }
