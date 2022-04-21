@@ -25,12 +25,11 @@ public class UserSetting {
     private static int difficultySetted = 0;
     
 	public UserSetting() {
+		UserSetted.read();
 		UserKey();
 		colorBlindMode();
 		difficulty_level();
 		size();
-
-
     }
 
 	private void UserKey() {
