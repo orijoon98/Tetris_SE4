@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import setting.DefaultSetting;
 import input.GameInput;
 import input.ItemInput;
-import setting.ReadPreviousSetting;
+import setting.UserSetted;
 
 public class UserSetting {
 	DefaultSetting defaultKey = new DefaultSetting();
@@ -30,20 +30,18 @@ public class UserSetting {
 		difficulty_level();
 		size();
 
+
     }
 
 	private void UserKey() {
-		if (exist) {
-    	}
-		else{
-			userKey.put("LEFT", defaultKey.getDefaultKey("LEFT"));
-			userKey.put("RIGHT", defaultKey.getDefaultKey("RIGHT"));
-			userKey.put("ROTATE", defaultKey.getDefaultKey("ROTATE"));
-			userKey.put("DROP", defaultKey.getDefaultKey("DROP"));
-			userKey.put("DOWN", defaultKey.getDefaultKey("DOWN"));
-			
-			userKey.containsValue(defaultKey);
-    	}
+		if(exist) {}
+		else {
+			userKey.put("LEFT", Integer.parseInt(UserSetted.getSetted("LEFT")));
+			userKey.put("RIGHT", Integer.parseInt(UserSetted.getSetted("RIGHT")));
+			userKey.put("ROTATE", Integer.parseInt(UserSetted.getSetted("ROTATE")));
+			userKey.put("DROP", Integer.parseInt(UserSetted.getSetted("DROP")));
+			userKey.put("DOWN", Integer.parseInt(UserSetted.getSetted("DOWN")));		
+		}
 	}
 			
 	public int getUserKey(String KEY) {
@@ -57,6 +55,7 @@ public class UserSetting {
 	public void changeKey(String Key, int keyCode) {
 		userSettedKey = Boolean.TRUE;
 		userKey.replace(Key, keyCode);
+		UserSetted.writeUserSetting();
 
 		GameInput input = new GameInput();
 		ItemInput itemInput = new ItemInput();
@@ -64,8 +63,7 @@ public class UserSetting {
 	
 	public void checkKey() {
 		boolean exist = ( userKey.containsKey("LEFT") && userKey.containsKey("RIGHT") && userKey.containsKey("ROTATE") && userKey.containsKey("DOWN") && userKey.containsKey("DROP"));
-		if (exist) {
-			
+		if (exist) {		
 		}
 		
 	}
@@ -372,7 +370,8 @@ public class UserSetting {
 	private void colorBlindMode() {
 		if(exist) {}
 		else {
-		colorBlindMode= defaultKey.getDefaultColorBlindMode();}
+
+		colorBlindMode= Boolean.parseBoolean(UserSetted.getSetted("colorBlindMode"));}
 	}
 	
 	public boolean getColorBlindMode() {
@@ -386,16 +385,21 @@ public class UserSetting {
 		else {
 			colorBlindMode = true;
 		}
-	}
+		UserSetted.writeUserSetting();
 
+	}
 	
 
 	private void difficulty_level() {
-		if (exist) {}
+		if(exist) {}
 		else {
-		difficulty_level.put("EASY", Boolean.TRUE);
+
+		difficulty_level.put("EASY", Boolean.FALSE);
 		difficulty_level.put("NORMAL", Boolean.FALSE);
-		difficulty_level.put("HARD", Boolean.FALSE);}
+		difficulty_level.put("HARD", Boolean.FALSE);
+
+		difficulty_level.replace(UserSetted.getSetted("difficultyLevel"), Boolean.TRUE);
+		}
 	}
 	
 	public static String getDifficultyLevel() {
@@ -419,6 +423,8 @@ public class UserSetting {
 		difficulty_level.replace("HARD", Boolean.FALSE);
 
 		difficulty_level.replace(LEVEL, Boolean.TRUE);
+
+		UserSetted.writeUserSetting();
 	}
 
 	public static int getDifficultyIntLevel(){
@@ -441,8 +447,12 @@ public class UserSetting {
 		if(exist) {}
 		else {
 		size.put("SMALL", Boolean.FALSE);
-		size.put("MIDDLE", Boolean.TRUE);
-		size.put("BIG", Boolean.FALSE);}
+		size.put("MIDDLE", Boolean.FALSE);
+		size.put("BIG", Boolean.FALSE);
+		
+		size.replace(UserSetted.getSetted("size"), Boolean.TRUE);
+
+		}
 	}
 	
 	public String getSize() {
@@ -465,7 +475,7 @@ public class UserSetting {
 			return 1;
 		}
 		else if(size.get("MIDDLE")){
-			return 3;
+			return 2;
 		}
 		else if(size.get("BIG")){
 			return 3;
@@ -483,11 +493,16 @@ public class UserSetting {
 		size.replace("BIG", Boolean.FALSE);
 		
 		size.replace(SIZE, Boolean.TRUE);
+		
+
+		UserSetted.writeUserSetting();
 	}
 	
 	
 	public void resetSetting() {
 		userKey.clear();
+		UserSetted.writeDefault();
+		UserSetted.read();
 		UserKey();
 		colorBlindMode();
 		difficulty_level();
