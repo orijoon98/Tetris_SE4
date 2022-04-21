@@ -11,7 +11,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import setting.UserSetting;
-import setting.InputSetting;
 
 public class KeySetting extends Canvas {
 	static UserSetting UserSetting = new UserSetting();	
@@ -71,13 +70,12 @@ public class KeySetting extends Canvas {
         buttonPanel.setLayout(new GridLayout(6, 2));
         
         UserSetting userKey = new UserSetting();
-        InputSetting InputSetting = new InputSetting();
         
-        left = new Button("Left : " + InputSetting.getStringKey("LEFT"));
-        right = new Button("Right : " + InputSetting.getStringKey("RIGHT"));
-        down = new Button("Down : " + InputSetting.getStringKey("DOWN") );
-        rotate = new Button("Rotate : " + InputSetting.getStringKey("ROTATE"));
-        drop = new Button("Drop : "+ InputSetting.getStringKey("DROP"));
+        left = new Button("Left : " + userKey.getStringKey("LEFT"));
+        right = new Button("Right : " + userKey.getStringKey("RIGHT"));
+        down = new Button("Down : " + userKey.getStringKey("DOWN") );
+        rotate = new Button("Rotate : " + userKey.getStringKey("ROTATE"));
+        drop = new Button("Drop : "+ userKey.getStringKey("DROP"));
         backToSetting = new Button("Back to Setting");
         
         
