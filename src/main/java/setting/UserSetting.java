@@ -31,8 +31,7 @@ public class UserSetting {
 		size();
 
     }
-		
-	
+
 	private void UserKey() {
 		if (exist) {
     	}
@@ -466,7 +465,7 @@ public class UserSetting {
 			return 1;
 		}
 		else if(size.get("MIDDLE")){
-			return 2;
+			return 3;
 		}
 		else if(size.get("BIG")){
 			return 3;
