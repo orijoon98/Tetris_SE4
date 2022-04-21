@@ -21,6 +21,7 @@ public enum BlockType {
     private static final Random random = new Random();
     private final int maxOrientations;
     private final Point points[];
+    private final String type="normal";
 
     BlockType(int maxOrientations, Point... points) {
         this.maxOrientations = maxOrientations;
@@ -28,11 +29,11 @@ public enum BlockType {
     }
 
     public static BlockType getRandomBlock() {
-    	BlockProbabilty prob = new BlockProbabilty();
-    	
-    	return BlockType.values()[prob.randomProb()];
+        BlockProbabilty prob = new BlockProbabilty();
+
+        return BlockType.values()[prob.randomProb()];
     }
-    
+
 
     public Point[] getPoints() {
         return points;
@@ -45,5 +46,7 @@ public enum BlockType {
     private static Point p(int x, int y) {
         return new Point(x, y);
     }
+
+    public BlockType getBlockType(return type;)
 
 }
