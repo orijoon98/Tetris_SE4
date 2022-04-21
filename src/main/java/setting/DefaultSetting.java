@@ -59,8 +59,8 @@ public class DefaultSetting {
 	
 	
 	private void defaultSize() {
-		defaultSize.put("SMALL", Boolean.TRUE);
-		defaultSize.put("MIDDLE", Boolean.FALSE);
+		defaultSize.put("SMALL", Boolean.FALSE);
+		defaultSize.put("MIDDLE", Boolean.TRUE);
 		defaultSize.put("BIG", Boolean.FALSE);
 	}
 	
