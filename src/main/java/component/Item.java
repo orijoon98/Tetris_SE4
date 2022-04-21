@@ -211,6 +211,7 @@ public class Item extends Canvas {
         g.drawString("Mode: Item", sizeInt * 5, sizeInt * 10);
         g.drawString(getLevel(), sizeInt * 5, sizeInt * 20);
         g.drawString(getLines(), sizeInt * 5, sizeInt * 30);
+        g.drawString(getDifficultyLevl(),sizeInt * 5,sizeInt * 40);
         g.drawString(getScore(), sizeInt * 10, sizeInt * 50);
     }
 
@@ -247,6 +248,8 @@ public class Item extends Canvas {
     private String getScore() {
         return String.format("Score     %1s", game.getTotalScore());
     }
+
+    private String getDifficultyLevl(){return String.format("Difficulty Level: %1s", UserSetting.getDifficultyLevel());}
 
     private void drawPiecePreviewBox(Graphics2D g) {
         g.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 8));
