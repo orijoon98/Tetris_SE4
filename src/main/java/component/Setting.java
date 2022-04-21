@@ -16,6 +16,10 @@ import org.json.simple.parser.ParseException;
 import setting.UserSetting;
 
 public class Setting extends Canvas {
+	
+	static UserSetting UserSetting = new UserSetting();	
+	private static int sizeInt = UserSetting.getSizeInt();
+
 
     public Frame settingFrame;
     private Panel settingPanel, buttonPanel, titlePanel;
@@ -36,7 +40,7 @@ public class Setting extends Canvas {
 
     private void prepareSettingGUI(Frame homeFrame) {
         settingFrame = new Frame("Seoultech SE4 Tetris");
-        settingFrame.setSize(800, 600);
+        settingFrame.setSize(sizeInt * 400, sizeInt *300);
         settingFrame.setResizable(false);
         settingFrame.setLayout(null);
         settingFrame.addWindowListener(new WindowAdapter() {
@@ -46,21 +50,21 @@ public class Setting extends Canvas {
         });
 
         settingPanel = new Panel();
-        settingPanel.setSize(800, 600);
+        settingPanel.setSize(sizeInt *400, sizeInt *300);
         settingPanel.setBackground(Color.black);
         settingPanel.setLayout(null);
-        settingPanel.setFont(new Font("Dialog", Font.PLAIN, 16));
+        settingPanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt *8));
 
         titlePanel = new Panel();
-        titlePanel.setBounds(250, 100, 300, 80);
-        titlePanel.setFont(new Font("Dialog", Font.PLAIN, 50));
+        titlePanel.setBounds(sizeInt *125, sizeInt *50, sizeInt *150, sizeInt *40);
+        titlePanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt *25));
         Label title = new Label("Setting");
         title.setForeground(Color.RED);
         
         titlePanel.add(title);
 
         buttonPanel = new Panel();
-        buttonPanel.setBounds(200, 220, 400, 250);       
+        buttonPanel.setBounds(sizeInt *100, sizeInt *110, sizeInt *200, sizeInt *125);       
         buttonPanel.setLayout(new GridLayout(4, 2));
         
         UserSetting userSetting = new UserSetting();
@@ -116,6 +120,7 @@ public class Setting extends Canvas {
         
         keySetting.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		reSetting.setLabel("Reset Setting");
         		selected.setForeground(Color.black);
         		selected = keySetting;
         		selected.setForeground(Color.gray);
@@ -130,6 +135,7 @@ public class Setting extends Canvas {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				reSetting.setLabel("Reset Setting");
 				userSetting.changeColorBlindMode();
 				if (userSetting.getColorBlindMode()) {
 		        	color.setLabel("Color Blind Mode : ON");
@@ -146,6 +152,7 @@ public class Setting extends Canvas {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				reSetting.setLabel("Reset Setting");
 				if (userSetting.getDifficultyLevel() == "EASY") {
 					userSetting.changeLevel("NORMAL");
 				}
@@ -167,6 +174,8 @@ public class Setting extends Canvas {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+                reSetting.setLabel("Reset Setting");
+
 				if (userSetting.getSize() == "SMALL") {
 					userSetting.changeSize("MIDDLE");
 				}
@@ -189,8 +198,22 @@ public class Setting extends Canvas {
             public void actionPerformed(ActionEvent e) {
                 try {
                     resetScoreBoard();
+                    
                 } catch (IOException exception) {}
                 scoreBoard.setLabel("Reset Completed");
+            }
+        });
+        
+        reSetting.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 디폴트값이 바뀔경우 같이 바꿔줘야한다.
+                userSetting.resetSetting();
+                reSetting.setLabel("Reset Completed");
+                color.setLabel("Color Blind Mode : OFF");            	
+                difficulty_level.setLabel("Level : EASY" );
+        		size.setLabel("Size : MIDDLE");
+                
             }
         });
    

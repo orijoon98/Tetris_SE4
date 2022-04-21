@@ -1,6 +1,7 @@
 package component;
 
 import input.HomeInput;
+import setting.UserSetting;
 import thread.*;
 
 import java.awt.*;
@@ -12,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends Canvas {
+	static UserSetting UserSetting = new UserSetting();	
+	private static int sizeInt = UserSetting.getSizeInt();
+
 
     public Frame homeFrame;
     private Panel homePanel, titlePanel, buttonPanel;
@@ -66,7 +70,7 @@ public class Home extends Canvas {
 
     private void prepareHomeGUI() {
         homeFrame = new Frame("Seoultech SE4 Tetris");
-        homeFrame.setSize(800, 600);
+        homeFrame.setSize(sizeInt * 400, sizeInt * 300);
         homeFrame.setResizable(false);
         homeFrame.setLayout(null);
         homeFrame.addWindowListener(new WindowAdapter() {
@@ -76,14 +80,14 @@ public class Home extends Canvas {
         });
 
         homePanel = new Panel();
-        homePanel.setSize(800, 600);
+        homePanel.setSize(sizeInt * 400, sizeInt * 300);
         homePanel.setBackground(Color.black);
         homePanel.setLayout(null);
-        homePanel.setFont(new Font("Dialog", Font.PLAIN, 16));
+        homePanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 8));
 
         titlePanel = new Panel();
-        titlePanel.setBounds(250, 100, 300, 80);
-        titlePanel.setFont(new Font("Dialog", Font.PLAIN, 50));
+        titlePanel.setBounds(sizeInt * 125, sizeInt * 50, sizeInt * 150, sizeInt * 40);
+        titlePanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 25));
 
         Label title = new Label("SE4 Tetris");
         title.setForeground(Color.RED);
@@ -91,7 +95,7 @@ public class Home extends Canvas {
         titlePanel.add(title);
 
         buttonPanel = new Panel();
-        buttonPanel.setBounds(150, 220, 500, 300);
+        buttonPanel.setBounds(sizeInt * 75, sizeInt * 110, sizeInt * 250, sizeInt * 150);
         buttonPanel.setLayout(new GridLayout(5, 1));
 
         normal = new Button("Normal Mode");

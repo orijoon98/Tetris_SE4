@@ -31,8 +31,7 @@ public class UserSetting {
 		size();
 
     }
-	
-	
+		
 	
 	private void UserKey() {
 		if (exist) {
@@ -382,11 +381,11 @@ public class UserSetting {
 	}
 	
 	public void changeColorBlindMode() {
-		if (colorBlindMode == false) {
-			colorBlindMode = true;
+		if (colorBlindMode) {
+			colorBlindMode = false;
 		}
 		else {
-			colorBlindMode = false;
+			colorBlindMode = true;
 		}
 	}
 
@@ -442,8 +441,8 @@ public class UserSetting {
 	private void size() {
 		if(exist) {}
 		else {
-		size.put("SMALL", Boolean.TRUE);
-		size.put("MIDDLE", Boolean.FALSE);
+		size.put("SMALL", Boolean.FALSE);
+		size.put("MIDDLE", Boolean.TRUE);
 		size.put("BIG", Boolean.FALSE);}
 	}
 	
@@ -462,6 +461,23 @@ public class UserSetting {
 		}
 	}
 
+	public int getSizeInt() {
+		if(size.get("SMALL")){
+			return 1;
+		}
+		else if(size.get("MIDDLE")){
+			return 2;
+		}
+		else if(size.get("BIG")){
+			return 3;
+		}
+		else {
+			return 2;
+		}
+	
+		
+	}
+
 	public void changeSize(String SIZE) {
 		size.replace("SMALL", Boolean.FALSE);
 		size.replace("MIDDLE", Boolean.FALSE);
@@ -470,5 +486,13 @@ public class UserSetting {
 		size.replace(SIZE, Boolean.TRUE);
 	}
 	
+	
+	public void resetSetting() {
+		userKey.clear();
+		UserKey();
+		colorBlindMode();
+		difficulty_level();
+		size();
+	}
 
 }

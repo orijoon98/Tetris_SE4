@@ -4,6 +4,7 @@ import blocks.BlockType;
 import component.game.BoardCell;
 import component.game.GameSetting;
 import input.ItemInput;
+import setting.UserSetting;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,27 +13,29 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
 public class Item extends Canvas {
+	static UserSetting UserSetting = new UserSetting();	
+	private static int sizeInt = UserSetting.getSizeInt();
 
     public JFrame itemFrame;
     private GameSetting game = new GameSetting();
     private final BufferStrategy strategy;
 
-    private final int BOARD_CORNER_X = 300;
-    private final int BOARD_CORNER_Y = 50;
+    private final int BOARD_CORNER_X = sizeInt * 150;
+    private final int BOARD_CORNER_Y = sizeInt * 25;
 
     private final ItemInput keyboard = new ItemInput();
     private long lastIteration = System.currentTimeMillis();
 
-    private static final int BLOCK_WIDTH = 20;
+    private static final int BLOCK_WIDTH = sizeInt * 10;
 
     public Item() {
         itemFrame = new JFrame("SeoulTech SE4 Tetris");
         
         JPanel panel = (JPanel) itemFrame.getContentPane();
-        panel.setPreferredSize(new Dimension(800, 600));
+        panel.setPreferredSize(new Dimension(sizeInt * 400, sizeInt * 300));
         panel.setLayout(null);
 
-        setBounds(0, 0, 800, 600);
+        setBounds(sizeInt * 0, sizeInt * 0, sizeInt * 400, sizeInt * 300);
         
         panel.add(this);
         
@@ -147,9 +150,9 @@ public class Item extends Canvas {
 
     private void addNewRecordPanel(Home home, int score) {
         home.itemGameOverGUI.contentPanel = new Panel();
-        home.itemGameOverGUI.contentPanel.setBounds(150, 220, 500, 210);
+        home.itemGameOverGUI.contentPanel.setBounds(sizeInt * 75, sizeInt * 110, sizeInt * 250, sizeInt * 105);
         home.itemGameOverGUI.contentPanel.setLayout(new GridLayout(2, 1));
-        home.itemGameOverGUI.contentPanel.setFont(new Font("Dialog", Font.PLAIN, 50));
+        home.itemGameOverGUI.contentPanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 25));
         home.itemGameOverGUI.contentPanel.setForeground(Color.white);
 
         Label textLabel = new Label("New Record " + Integer.toString(score));
@@ -166,9 +169,9 @@ public class Item extends Canvas {
 
     private void addGameOverPanel(Home home, int score) {
         home.itemGameOverGUI.contentPanel = new Panel();
-        home.itemGameOverGUI.contentPanel.setBounds(150, 220, 500, 210);
+        home.itemGameOverGUI.contentPanel.setBounds(sizeInt * 75, sizeInt * 110, sizeInt * 250, sizeInt * 105);
         home.itemGameOverGUI.contentPanel.setLayout(new GridLayout(2, 1));
-        home.itemGameOverGUI.contentPanel.setFont(new Font("Dialog", Font.PLAIN, 50));
+        home.itemGameOverGUI.contentPanel.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 25));
         home.itemGameOverGUI.contentPanel.setForeground(Color.white);
 
         Label textLabel = new Label("Your Score");
@@ -190,47 +193,47 @@ public class Item extends Canvas {
         BoardCell[][] cells = game.getBoardCells();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 20; j++) {
-                drawBlock(g, BOARD_CORNER_X + i * 20, BOARD_CORNER_Y + (19 - j) * 20, getBoardCellColor(cells[i][j]));
+                drawBlock(g, BOARD_CORNER_X + i * sizeInt * 10, BOARD_CORNER_Y + (19 - j) * sizeInt * 10, getBoardCellColor(cells[i][j]));
             }
         }
     }
 
     private void drawEmptyBoard(Graphics2D g) {
         g.setColor(Color.BLACK);
-        g.fillRect(0, 0, 800, 600);
+        g.fillRect(sizeInt * 0, sizeInt * 0, sizeInt * 400, sizeInt * 300);
         g.setColor(Color.GRAY);
-        g.drawRect(BOARD_CORNER_X - 1, BOARD_CORNER_Y - 1, 10 * BLOCK_WIDTH + 2, 20 * BLOCK_WIDTH + 2);
+        g.drawRect(BOARD_CORNER_X - 1, BOARD_CORNER_Y - 1, 10 * BLOCK_WIDTH + sizeInt * 1, 20 * BLOCK_WIDTH + sizeInt * 1);
     }
 
     private void drawStatus(Graphics2D g) {
-        g.setFont(new Font("Dialog", Font.PLAIN, 16));
+        g.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 8));
         g.setColor(Color.RED);
-        g.drawString("Mode: Item", 10, 20);
-        g.drawString(getLevel(), 10, 40);
-        g.drawString(getLines(), 10, 60);
-        g.drawString(getScore(), 20, 100);
+        g.drawString("Mode: Item", sizeInt * 5, sizeInt * 10);
+        g.drawString(getLevel(), sizeInt * 5, sizeInt * 20);
+        g.drawString(getLines(), sizeInt * 5, sizeInt * 30);
+        g.drawString(getScore(), sizeInt * 10, sizeInt * 50);
     }
 
     private void drawGameOver(Graphics2D g) {
-        Font font = new Font("Dialog", Font.PLAIN, 16);
+        Font font = new Font("Dialog", Font.PLAIN, sizeInt * 8);
         g.setFont(font);
         g.setColor(Color.RED);
-        g.drawString("GAME OVER", 350, 550);
+        g.drawString("GAME OVER", sizeInt * 175, sizeInt * 275);
     }
 
     private void drawGamePaused(Graphics2D g) {
-        Font font = new Font("Dialog", Font.PLAIN, 16);
+        Font font = new Font("Dialog", Font.PLAIN, sizeInt * 8);
         g.setFont(font);
         g.setColor(Color.YELLOW);
-        g.drawString("GAME PAUSED", 350, 550);
+        g.drawString("GAME PAUSED", sizeInt * 175, sizeInt * 275);
     }
 
 
     private void drawPlayTetris(Graphics2D g) {
-        Font font = new Font("Dialog", Font.PLAIN, 16);
+        Font font = new Font("Dialog", Font.PLAIN, sizeInt * 8);
         g.setFont(font);
         g.setColor(Color.RED);
-        g.drawString("Play TETRIS !", 350, 500);
+        g.drawString("Play TETRIS !", sizeInt * 175, sizeInt * 250);
     }
 
     private String getLevel() {
@@ -246,26 +249,29 @@ public class Item extends Canvas {
     }
 
     private void drawPiecePreviewBox(Graphics2D g) {
-        g.setFont(new Font("Dialog", Font.PLAIN, 16));
+        g.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 8));
         g.setColor(Color.RED);
-        g.drawString("Next:", 50, 420);
+        g.drawString("Next:", sizeInt * 25, sizeInt * 210);
     }
 
     private void drawHelpBox(Graphics2D g) {
-        g.setFont(new Font("Dialog", Font.PLAIN, 16));
+    	UserSetting UserSetting = new UserSetting();
+    	g.setFont(new Font("Dialog", Font.PLAIN, sizeInt * 8));
         g.setColor(Color.RED);
-        g.drawString("H E L P", 50, 140);
-        g.drawString("F1: New Game", 10, 160);
-        g.drawString("ESC: Pause Game/Continue", 10, 180);
-        g.drawString("UP: Rotate", 10, 200);
-        g.drawString("ARROWS: Move Left/Right/Down", 10, 220);
-        g.drawString("SPACE: Drop", 10, 240);
-        g.drawString("F2: Home", 10, 260);
+        g.drawString("H E L P", sizeInt * 25, sizeInt * 70);
+        g.drawString("F1: New Game", sizeInt * 5, sizeInt * 80);
+        g.drawString("ESC: Pause Game/Continue", sizeInt * 5, sizeInt * 90);
+        g.drawString(UserSetting.getStringKey("ROTATE") +" : Rotate", sizeInt * 5, sizeInt * 100);
+        g.drawString(UserSetting.getStringKey("LEFT") + " : Move Left", sizeInt * 5, sizeInt * 110);
+        g.drawString(UserSetting.getStringKey("RIGHT") + " : Move Right", sizeInt * 5, sizeInt * 120);
+        g.drawString(UserSetting.getStringKey("DOWN")+ " : Move Down", sizeInt * 5, sizeInt * 130);
+        g.drawString(UserSetting.getStringKey("DROP") + " : Drop", sizeInt * 5, sizeInt * 140);
+        g.drawString("F2: Home", sizeInt * 5, sizeInt * 150);
     }
 
     private void drawBlockPreview(Graphics2D g, BlockType type) {
         for (Point p : type.getPoints()) {
-            drawBlock(g, 60 + p.x * BLOCK_WIDTH, 380 + (3 - p.y) * 20, getBlockColor(type));
+            drawBlock(g, sizeInt * 30 + p.x * BLOCK_WIDTH, sizeInt * 190 + (3 - p.y) *sizeInt * 10, getBlockColor(type));
         }
     }
 
@@ -295,7 +301,19 @@ public class Item extends Canvas {
 
     private void drawBlock(Graphics g, int x, int y, Color color) {
         g.setColor(color);
-        g.fillRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH);
+
+        UserSetting UserSetting = new UserSetting();
+
+        if(UserSetting.getColorBlindMode()) {        	
+            g.fill3DRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH, true);
+            if(color == getBlockColor(BlockType.J) || color == getBlockColor(BlockType.S)) {
+            	g.fill3DRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH, false);                	
+            }
+        }
+        else {
+            g.fillRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH);        	
+        }
+        
         g.drawRect(x, y, BLOCK_WIDTH, BLOCK_WIDTH);
     }
 }
