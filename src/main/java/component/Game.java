@@ -30,6 +30,9 @@ public class Game extends Canvas {
     private long lastIteration = System.currentTimeMillis();
 
     private static final int BLOCK_WIDTH = sizeInt * 10;
+    private static final String mode="normal";
+
+    public String getMode(){return mode;}
 
     public Game() {
         gameFrame = new JFrame("SeoulTech SE4 Tetris");

@@ -133,12 +133,21 @@ public class GameSetting {
                 playing = false;
                 gameOver = true;
             } else {
-                dropping = false;
-                board.setCurrentBlock(nextBlock);
-                nextBlock = Block.getRandomBlock();
-                board.setFullLines(board.getFullLines());
-                totalScore += getScore();
-                freeFallIterations = 0;
+                if ((board.getFullLines()%10==0) && (item.getmode().equals("item"))){
+                    dropping = false;
+                    board.setCurrentBlock(nextBlock);
+                    nextBlock = ItemBlock.getRandomBlock();
+                    board.setFullLines(board.getFullLines());
+                    totalScore += getScore();
+                    freeFallIterations = 0;
+                }else{
+                    dropping = false;
+                    board.setCurrentBlock(nextBlock);
+                    nextBlock = Block.getRandomBlock();
+                    board.setFullLines(board.getFullLines());
+                    totalScore += getScore();
+                    freeFallIterations = 0;
+                }
             }
         } else {
             board.moveDown();

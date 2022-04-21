@@ -27,6 +27,9 @@ public class Item extends Canvas {
     private long lastIteration = System.currentTimeMillis();
 
     private static final int BLOCK_WIDTH = sizeInt * 10;
+    private static final String mode="item";
+
+    public String getMode(){return mode;}
 
     public Item() {
         itemFrame = new JFrame("SeoulTech SE4 Tetris");
@@ -269,9 +272,9 @@ public class Item extends Canvas {
         g.drawString("F2: Home", sizeInt * 5, sizeInt * 150);
     }
 
-    private void drawBlockPreview(Graphics2D g, BlockType type) {
+    private void drawBlockPreview(Graphics2D g, ItemBlockType type) {
         for (Point p : type.getPoints()) {
-            drawBlock(g, sizeInt * 30 + p.x * BLOCK_WIDTH, sizeInt * 190 + (3 - p.y) *sizeInt * 10, getBlockColor(type));
+            drawBlock(g, 60 + p.x * BLOCK_WIDTH, 380 + (3 - p.y) * 20, getBlockColor(type));
         }
     }
 
@@ -293,6 +296,23 @@ public class Item extends Canvas {
             case O:
                 return Color.BLUE;
             case S:
+                return Color.GREEN;
+            default:
+                return Color.MAGENTA;
+        }
+    }
+
+    private Color getBlockColor(ItemBlockType blockType) {
+        switch (blockType) {
+            case IL:
+                return Color.RED;
+            case JL:
+                return Color.GRAY;
+            case LL:
+                return Color.CYAN;
+            case Y:
+                return Color.WHITE;
+            case SL:
                 return Color.GREEN;
             default:
                 return Color.MAGENTA;
